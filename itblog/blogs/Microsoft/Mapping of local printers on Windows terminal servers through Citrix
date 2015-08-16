@@ -1,0 +1,22 @@
+<p class="blogheader"><A NAME="SQL_MWC"><u>Mapping of local printers on Windows terminal servers through Citrix</u></A></p>
+<p class="smaller">-24th February 2013<br><br></p>
+<p>	
+	This article will not show you how to set up policies of any kind. It will not show you how to use many of the tools mentioned. A certain level of knowledge is required to benefit from this article. Any information missing to you here might be found through Google and other articles.<br><br>
+	<b>Troubleshooting mapping of local printers when connecting to a Windows terminal server through Citrix:</b>
+	<table><tr><td>
+	<table class="boxedInfoborder"><tr><td>
+	<b>1.</b> Make sure that the service "Citrix Print Manager Service" is running on the terminal servers hosting the published desktop or published application that the user is connecting to. If this service has a tendency to crash you can set it to start every time it fails in its properties. But this should not be an excuse to not troublehoot why it fails.<br><br>
+	<b>2.</b> Make sure the driver for the printer is installed on the terminal server. It must match exactly to the driver that the client uses. If it is not you should in Citrix policies enable "Use universal print driver only if requested driver is not available." This will ensure that the printers real driver will be used if it is available, but in case it is not, the universal print driver will be used instead.<br><br>
+	<b>3.</b> Consider the Citrix Policy "Direct connections to print servers." If this is enabled, printing attempts will be attempted to be directed directly to the print server if it can. However, if you have trouble getting a printer local to a client to work, you should try to disable this policy and thus forcing printing to go through the client at every print attempt.<br><br>
+	<b>4.</b> Consider the Citrix Policy "Auto Create Client Printers." Normally you could set this policy to auto create only the clients default printer, but when troubleshooting a network printer local to the client you can try to set this policy to "Auto Create All Clients Printers."<br><br>
+	<b>5.</b> For further troubleshooting, use printcfg.exe to see what printers the client can see. Also see the event viewer for logged events regarding printer mapping when the client logged on.<br><br>
+	<b>6.</b> Review the ICA-TCP Properties. To find the ICA protocol properties on the terminal server press Start -> Run -> Type tsconfig.msc and press enter. Right click ICA-TCP and choose properties. Choose 'Client Settings' to set up settings for the connecting client. Try enabling LPT port if the printer local to the client is connected through an LPT port.<br><br>
+	<b>7.</b> Check that your policies are not getting overridden by other policies. If you are in Xenapp 6 or later, policies can be defined both in Citrix and in Active Directory. Also check for Citrix policies in the Data Store. Make sure there are not policies in these three places that conflict. Best practice is to keep all Citrix policies in one place. It might be worth while to check for any local security policies as well. Traditionally GPRESULT and RSoP have been used to view group policy results, but these will not by default show Citrix policies. The only way to get the resultant set of policy including the Citrix policies is to use the RSoP-node from the GPMC of a XenApp 6 server.<br>
+	</td></tr></table>
+	<td>
+		<img src="images/CitrixPrinting/ICATCPProperties.png" width="324" height="389">
+	</td></tr></table>
+	<p>
+	<u>Source</u>: Getting started with Citrix Xenapp 6. ISBN 978-1-849681-28-5<br>
+	</p>	
+</p>

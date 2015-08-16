@@ -1,0 +1,36 @@
+<p>
+	<p class="blogheader">
+		<A NAME="LIN_CW7TAN"><u>Copying Windows 7 to a new drive, using Linux</u></A>
+	</p>
+	<p class="smaller">
+		-26th of December 2014<br/>
+	</p>	
+	<div style="width:100%; border: 1px solid; background-color: #E2F5FF; background-image: url(/images/bits.jpg); opacity: 0.4;">
+		<table style="position:relative; margin-left: auto; margin-right: auto; width:440px">
+			<tr>
+				<td>
+					<H2 style="margin-top:0px;margin-left:6px;font-family:"Times New Roman",Georgia,Serif;">Blog article coming..</H2>
+					<div style="margin-left:0px;">
+						<table>
+							<tr>
+								<td style="vertical-align: top; text-align:left; border: 0px;">
+									<b>Awaiting update..</b><br/>
+									<div style="border:1px solid; background-color: #E2F5FF; margin-left: 8px; margin-right: 0px; width:370px;">dd if=/dev/sda of=/dev/sdb bs=446 count=1</div>	
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: top; text-align:center; border: 0px;">
+									<img src="/images/dexter_waiting.gif" width="100%" style="border: 2px solid black;"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br/>
+	<p>
+		<u>Source</u>: Manual pages
+	</p>	
+</p>

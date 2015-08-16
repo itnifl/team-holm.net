@@ -1,0 +1,186 @@
+@font-face {
+ font-family: Messkit;
+ src: url("/fonts/take_out_the_garbage.eot"); /* EOT file for IE */
+}
+@font-face {
+ font-family: Messkit;
+ src: url("/fonts/take_out_the_garbage.ttf"); /* TTF file for CSS3 browsers */
+}
+body {
+	text-align: center;
+}
+
+div#container {
+	margin-left: auto;
+	margin-right: auto;
+	width: 60em;
+	text-align: left;
+}
+
+.backgray {
+    background-color:rgb(192,192,192);
+    color: #000000;
+    margin-top:0;
+    font-weight: bold;
+    background-position: center;
+	text-align: center;
+}
+.headerFont {font-family: Messkit; font-size: 2.4em; color:Beige;}
+.headerLink:link {text-decoration: none; color: black; font-family: Messkit; font-size: 2em;}
+.headerLink:visited {text-decoration: none; color: black; font-family: Messkit; font-size: 2em;}
+.headerLink:active {text-decoration: none; color: black; font-family: Messkit; font-size: 2em;}
+.headerLink:hover {text-decoration: underline overline; color: #039; font-family: Messkit; font-size: 2em;}
+
+.articleLink:link {text-decoration: none; color: grey;}
+.articleLink:visited {text-decoration: none; color: grey;}
+.articleLink:active {text-decoration: none; color: black;}
+.articleLink:hover {text-decoration: underline; color: #039;}
+
+.boxedBorder {
+	width: 110px;
+	background-position: center;
+	text-align: center;
+	vertical-align: top;
+}
+
+.boxedNewsborder {
+  border: 1px solid black;
+}
+
+.bannerButtonUp {
+  z-index: 2;
+  border-width: thin;
+  border-style: outset;
+  Background-Color: silver;
+  background: url(/images/gradient.jpg) 0% 0% repeat-y;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  opacity: 0.8;
+}
+.label {
+  color: black;
+  z-index: 3;
+}
+.bannerButtonDown {
+  border-width: thin;
+  border-style: inset;
+  Background-Color : beige;
+}
+
+.bannerHeader {
+  border-width: thin;
+  border-style: outset;
+  Background-Color: #CCC;
+}
+
+.codeBackGround {
+  border-width: thin;
+  border-style: outset;
+  Background-Color : silver;
+  background: url(/images/gradient.jpg) repeat-y; background-size: 100%;
+}
+
+table.codeTable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.codeTable th {
+	background:#b5cfd2;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	text-decoration:underline;
+}
+table.codeTable td {
+	background:#dcddc0;
+	border-width: 1px;
+	height:14px;
+	border-style: solid;
+	border-color: #999999;
+}
+
+table.codeTableHover {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.codeTableHover th {
+	background:#b5cfd2;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+}
+table.codeTableHover td {
+	background:#dcddc0;
+	border-width: 1px;
+	height:14px;
+	border-style: solid;
+	border-color: #999999;
+}
+
+table.codeTableNoLine {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.codeTableNoLine th {
+	background:#b5cfd2;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+}
+table.codeTableNoLine td {
+	background:#dcddc0;
+	border-width: 1px;
+	height:14px;
+	border-style: solid;
+	border-color: #999999;
+}
+.roundedcornr_box_525768 {
+   background: #ffffff url(/images/roundedcornr_525768_grad.gif) repeat-x top left;
+}
+.roundedcornr_top_525768 div {
+   background: url(/images/roundedcornr_525768_tl.gif) no-repeat top left;
+}
+.roundedcornr_top_525768 {
+   background: transparent url(/images/roundedcornr_525768_tr.gif) no-repeat top right;
+}
+.roundedcornr_bottom_525768 div {
+   background: url(/images/roundedcornr_525768_bl.gif) no-repeat bottom left;
+}
+.roundedcornr_bottom_525768 {
+   background: transparent url(/images/roundedcornr_525768_br.gif) no-repeat bottom right;
+}
+
+.roundedcornr_top_525768 div, .roundedcornr_top_525768,
+.roundedcornr_bottom_525768 div, .roundedcornr_bottom_525768 {
+   width: 100%;
+   height: 40px;
+   font-size: 1px;
+}
+.roundedcornr_content_525768 { margin: 0 40px; }
+
+.packageTableLinks:link {text-decoration: none; color: #7E9193; font-family: Messkit; font-size: 1.2em;}
+.packageTableLinks:visited {text-decoration: none; color: #7E9193; font-family: Messkit; font-size: 1.2em;}
+.packageTableLinks:active {text-decoration: none; color: #7E9193; font-family: Messkit; font-size: 1.2em;}
+.packageTableLinks:hover {text-decoration: underline; color: black; font-family: Messkit; font-size: 1.2em;}
+
+#mainLogoLink {
+    display:none;
+}
+/* if screen size gets wider than 1310 */
+@media screen and (min-width:1210px){
+    #mainLogoLink {
+        display:block;
+    }
+}

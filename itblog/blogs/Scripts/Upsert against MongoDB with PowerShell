@@ -1,0 +1,60 @@
+<p class="blogheader"><A NAME="POWERSHELLMongoDBUPSERT"><u>MongoDB Upsert with PowerShell</u></A></p>
+	<p class="smaller">-18th January 2014<br/><br/></p>
+<p>
+	<table>
+		<tr>
+			<td>
+				<span style="color:blacl;font-size:large">The Story</span><br/>
+				It turned out that I needed to <a href="http://en.wiktionary.org/wiki/upsert" class="articleLink">upsert</a> to a MongoDB database. After a quick Google search I found <a href="http://kowalski.ms/2012/07/04/working-with-mongodb-and-powershell/" class="articleLink">Kristof Kowalski's</a> blog article, that helped me out alot. However, upserting was not explained. How to upsert is no big-brainer, if you just know how to. And when you don't know how, you spend time searching for the solution. Here it is explained without further time needed to be spent.<br/>
+				<br/>
+				Upserting is done by adding the enum type MongoDB.Driver.UpdateFlags.Upsert when calling the update method as the third argument of the collection you have chosen. However, in PowerShell that would not work the way I tried to do it. To remedy that, I would need the values for the corresponding class. By using Visual Studio and creating a new solution, then adding references to the required <a href="https://github.com/mongodb/mongo-csharp-driver/downloads" class="articleLink">DLLs</a> I could browse through to the definitions (see picture on the right). As you can see, upsert is the equivalent to the value 1, so the value 1 is what I want to pass as the third optional argument. See the example code below for a demonstration.<br/>
+			</td>
+			<td>
+				<table class="boxedInfoborder"><tr><td>
+					<img src="/images/PowerShellUpsert/UpdateFlags.png"/>
+				</td></tr></table>
+			</td>
+		</tr>
+	</table>
+
+	<table class="boxedInfoborder" width="100%"><tr><td>
+	<pre class="brush: powershell">
+		Add-Type -Path "C:\bin\MongoDB_Drivers\MongoDB.Bson.dll"
+		Add-Type -Path "C:\bin\MongoDB_Drivers\MongoDB.Driver.dll"
+
+		$databaseName = "database";
+		$MONGO_URL = "mongodb://serverIPorDNS/$databaseName?safe=true;slaveok=true";
+		$vmname="virtualServer"
+
+		$db = [MongoDB.Driver.MongoDatabase]::Create($MONGO_URL)
+		$collection = $db['ourCollection']
+
+		[MongoDB.Bson.BsonDocument] $doc = @{   
+			"_id"= [MongoDB.Bson.ObjectId]::GenerateNewId();
+		    "ServerName"= "$vmname";
+		};
+
+		#We are not doing an insert, we are doing an upsert - the following would be an insert:
+		#$collection.Insert($doc);
+
+		#Here we get ready for the upsert:
+		$updates = @{'$set' = @{'ServerName'= "$vmname"}};
+		$query = @{"ServerName"= $doc['ServerName']}
+		try {
+			#This is where we do the upsert, notice the value 1 at the end of the method call:
+			$collection.Update([MongoDB.Driver.QueryDocument]$query, [MongoDb.Driver.UpdateDocument]$updates, 1);
+		} catch {
+			#Some error handling here
+		}
+		#Example - To remove the vm with that name:
+		#$collection.Remove([MongoDB.Driver.QueryDocument]@{"ServerName"= "$vmname"});
+
+		#Example - o Test the values
+		#$collection.FindAll();
+	</pre>
+	</td></tr></table>
+	<br/>
+	There is also a <a href="http://mosh.codeplex.com/" class="articleLink">PowerShell provider</a> for MongoDB.<br/>
+	<br/>
+	<u>Source</u>: <a href="http://kowalski.ms/2012/07/04/working-with-mongodb-and-powershell/" class="articleLink">Kristof Kowalski</a>, MongoDB C# <a href="http://docs.mongodb.org/ecosystem/drivers/csharp/" class="articleLink">Documentation</a>.
+</p>

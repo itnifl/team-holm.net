@@ -1,0 +1,259 @@
+
+body {
+	text-align: center;
+	  background: url(../images/9451531_xs.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+	/*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/9451531_l.jpg',sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/9451531_l.jpg',sizingMethod='scale')";*/
+	/*-moz-background-size: 100% 100%; /* used for firefox 3.6 */
+	/*-o-background-size: 100% 100%; /* used for opera */
+	/*-webkit-background-size: 100% 100%; /* used for safari and chrome */
+}
+img {  
+  border-style: none;
+}
+div#container {
+	margin-left: auto;
+	margin-right: auto;
+	width: 60em;
+	text-align: left;
+	position:relative;
+}
+.backgray {
+        background-color:SteelBlue;
+        color: #000000;
+        margin-top:0;
+        font-weight: bold;
+        background-position: center;
+		text-align: center;
+}
+.backwhite {
+        background-color: #FFF;
+        color: #000000;
+        margin-top:0;
+}
+.headerFont {font-family: "Beige"; font-size: 1.6em;}
+.headerLink:link {text-decoration: none; color: black; font-family: "Cooper Black"; font-size: 1.6em; text-shadow:2px 2px #FFFFFF; }
+.headerLink:visited {text-decoration: none; color: black; font-family: "Cooper Black"; font-size: 1.6em; text-shadow:2px 2px #FFFFFF; }
+.headerLink:active {text-decoration: none; color: black; font-family: "Cooper Black"; font-size: 1.6em; text-shadow:2px 2px #FFFFFF; }
+.headerLink:hover {text-decoration: underline overline; color: white; font-family: "Cooper Black"; font-size: 1.6em; text-shadow:0px 0px #000000; }
+
+.headerLinkIce:link {text-decoration: none; color: black; font-family: "Cooper Black"; font-weight:bold; font-size: 1.6em; text-shadow:2px 2px #FFFFFF; }
+.headerLinkIce:visited {text-decoration: none; color: black; font-family: "Cooper Black"; font-weight:bold; font-size: 1.6em; text-shadow:2px 2px #FFFFFF; }
+.headerLinkIce:active {text-decoration: none; color: black; font-family: "Cooper Black"; font-weight:bold; font-size: 1.6em; text-shadow:2px 2px #FFFFFF; }
+.headerLinkIce:hover {text-decoration: underline overline; color: #039; font-family: "Cooper Black"; font-weight:bold; font-size: 1.6em; text-shadow:0px 0px #000000; }
+
+.headerLink-white:link {text-decoration: none; color: black; font-family: "Cooper Black"; font-size: 1.6em; text-shadow:2px 2px #FFFFFF; }
+.headerLink-white:visited {text-decoration: none; color: black; font-family: "Cooper Black"; font-size: 1.6em; text-shadow:2px 2px #FFFFFF; }
+.headerLink-white:active {text-decoration: none; color: black; font-family: "Cooper Black"; font-size: 1.6em; text-shadow:2px 2px #FFFFFF; }
+.headerLink-white:hover {text-decoration: underline overline; color: white; font-family: "Cooper Black"; font-size: 1.6em; text-shadow:0px 0px #000000; }
+
+.headerLinkIce-white:link {text-decoration: none; color: black; font-family: "Cooper Black"; font-weight:bold; font-size: 1.6em; text-shadow:2px 2px #FFFFFF; }
+.headerLinkIce-white:visited {text-decoration: none; color: black; font-family: "Cooper Black"; font-weight:bold; font-size: 1.6em; text-shadow:2px 2px #FFFFFF; }
+.headerLinkIce-white:active {text-decoration: none; color: black; font-family: "Cooper Black"; font-weight:bold; font-size: 1.6em; text-shadow:2px 2px #FFFFFF; }
+.headerLinkIce-white:hover {text-decoration: underline overline; color: white; font-family: "Cooper Black"; font-weight:bold; font-size: 1.6em; text-shadow:0px 0px #000000; }
+
+.articleLink:link {text-decoration: none; color: grey;}
+.articleLink:visited {text-decoration: none; color: grey;}
+.articleLink:active {text-decoration: none; color: grey;}
+.articleLink:hover {text-decoration: underline; color: #039;}
+
+.normalLink:link {text-decoration: none; color: blue;}
+.normalLink:visited {text-decoration: none; color: blue;}
+.normalLink:active {text-decoration: none; color: black;}
+.normalLink:hover {text-decoration: underline; color: black;}
+
+.menuLink:link {text-decoration: none; color: black;}
+.menuLink:visited {text-decoration: none; color: black;}
+.menuLink:active {text-decoration: none; color: white;}
+.menuLink:hover {text-decoration: underline; color: white;}
+.centerText {text-align: center; background-position: center;}
+
+.shareLink:link {text-decoration: none; color: SteelBlue; font-family: "Cooper Black"; font-size: 12pt;}
+.shareLink:visited {text-decoration: none; color: SteelBlue; font-family: "Cooper Black"; font-size: 12pt;}
+.shareLink:active {text-decoration: none; color: SteelBlue; font-family: "Cooper Black"; font-size: 12pt;}
+.shareLink:hover {text-decoration: underline; color: Blue; font-family: "Cooper Black"; font-size: 13pt;}
+
+.bannerSelections {
+    background: #EEE; /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(240,240,240,1) 0%, rgba(224,224,224,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(240,240,240,1)), color-stop(100%,rgba(224,224,224,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(240,240,240,1) 0%,rgba(224,224,224,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(240,240,240,1) 0%,rgba(224,224,224,1) 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, rgba(240,240,240,1) 0%,rgba(224,224,224,1) 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#e0e0e0',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, rgba(240,240,240,1) 0%,rgba(224,224,224,1) 100%); /* W3C */
+    padding: 2px 4px 2px 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+#inlineContainer {
+  display: table;
+}
+
+#inlineRow  {
+  display: table-row;
+}
+
+#inlineCell1, #inlineCell2, #inlineCell3 {
+  display: table-cell;
+}
+
+.boxedBorder {
+	width: 110px;
+	background-position: center;
+	text-align: center;
+	vertical-align: top;
+}
+
+.boxed {
+  border: 1px solid black;
+  position:absolute; top:0; left:0; visibility:hidden;
+  Background-Color: silver;
+  color: white;
+  width: 160px;
+}
+
+.boxed3 {
+  border: 1px solid black; border-radius:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;
+  position:absolute; top:123px; left:505px; visibility:hidden;
+  Background-Color: SteelBlue;
+  color: white;
+  width: 160px;
+}
+
+.boxed5 {
+  border: 1px solid black; border-radius:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;
+  position:absolute; top:123px; left:905px; visibility:hidden;
+  Background-Color: SteelBlue;
+  color: white;
+  width: 160px;
+}
+
+.banner {
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #999999;
+  background:#b7d0d4;
+  background-position: center;
+  color: black;
+  width: 220px;
+  height: 24px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.bannerButtonUp_1{  
+  border-width: thin;
+  border-style: outset;
+  Background-Color: SteelBlue;
+  background: url(../images/BannerBlue3a.jpg) repeat-y; background-size: 100%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3a.jpg',sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3a.jpg',sizingMethod='scale')";
+}
+.bannerButtonUp_2 {
+  border-width: thin;
+  border-style: outset;
+  Background-Color: SteelBlue;
+  background: url(../images/BannerBlue3b.jpg) repeat-y; background-size: 100%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3b.jpg',sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3b.jpg',sizingMethod='scale')";
+}
+.bannerButtonUp_3 {
+  border-width: thin;
+  border-style: outset;
+  Background-Color : SteelBlue;
+  background: url(../images/BannerBlue3b.jpg) repeat-y; background-size: 100%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3b.jpg',sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3b.jpg',sizingMethod='scale')";
+}
+.bannerButtonUp_4 {
+  border-width: thin;
+  border-style: outset;
+  Background-Color: SteelBlue;
+  background: url(../images/BannerBlue3d.jpg) repeat-y; background-size: 100%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3d.jpg',sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3d.jpg',sizingMethod='scale')";
+}
+.bannerButtonUp_5 {
+  border-width: thin;
+  border-style: outset;
+  Background-Color: SteelBlue;
+  background: url(../images/BannerBlue3e.jpg) repeat-y; background-size: 100%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3e.jpg',sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3e.jpg',sizingMethod='scale')";
+}
+.bannerButtonDown_1 {
+  border-width: thin;
+  border-style: inset;
+  Background-Color: #8CA5B2;
+  background: url(../images/BannerBlue3a_d.png) repeat-y; background-size: 100%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3a_d.png',sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3a_d.png',sizingMethod='scale')";
+}
+.bannerButtonDown_2 {
+  border-width: thin;
+  border-style: inset;
+  Background-Color: #8CA5B2;
+  background: url(../images/BannerBlue3b_d.png) repeat-y; background-size: 100%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3b_d.png',sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3b_d.png',sizingMethod='scale')";
+}
+.bannerButtonDown_3 {
+  border-width: thin;
+  border-style: inset;
+  Background-Color: #8CA5B2;
+  background: url(../images/BannerBlue3c_d.png) repeat-y; background-size: 100%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3c_d.png',sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3c_d.png',sizingMethod='scale')";
+}
+.bannerButtonDown_4 {
+  border-width: thin;
+  border-style: inset;
+  Background-Color: #8CA5B2;
+  background: url(../images/BannerBlue3d_d.png) repeat-y; background-size: 100%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3d_d.png',sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3d_d.png',sizingMethod='scale')";
+}
+.bannerButtonDown_5 {
+  border-width: thin;
+  border-style: inset;
+  Background-Color: #8CA5B2;
+  background: url(../images/BannerBlue3e_d.png) repeat-y; background-size: 100%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3e_d.png',sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/BannerBlue3e_d.png',sizingMethod='scale')";
+}
+.bannerHeader {
+  border-width: thin;
+  border-style: outset;
+  Background-Color: #CCC;
+}
+table.imagetable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.imagetable th {
+	background:#b5cfd2 url('../images/cell-blue.jpg');
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #999999;
+}
+table.imagetable td {
+	background:#dcddc0 url('../images/cell-grey.jpg');
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #999999;
+}

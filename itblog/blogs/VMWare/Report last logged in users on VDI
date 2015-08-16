@@ -1,0 +1,32 @@
+<p class="blogheader"><A NAME="VDIReporting1"><u>Get last login time for VDI users</u></A></p>
+	<p class="smaller">-18th October 2014<br/><br/></p>
+<p>
+To create a report over all VDI users last login and reconnect time, you can use the following correlated query against the ViewEvent database of the VDI environment. This might be useful
+if you are trying to get an overview of actual VDI usage in case they are still left running and not used/re-used.
+
+<h4>The SQL query for the VDI report:</h4>
+<p>
+	<p class="smaller">
+		<pre class="brush: sql">
+		SELECT a.[ModuleAndEventText]
+			  ,a.[Time]
+			  ,a.[EventType]
+			  ,a.[Source]     
+			  ,a.[Severity]
+			  ,a.[Node]
+			  ,a.[UserSID]
+			  ,a.[DesktopId]
+			  ,a.[MachineId]
+			  FROM [ViewEvent].[dbo].[VE_event] AS a
+		WHERE a.[Time] =
+			  (SELECT MAX(b.[Time]) FROM [ViewEvent].[dbo].[VE_event] AS b WHERE b.[ModuleAndEventText] = a.[ModuleAndEventText])
+		AND
+			  (a.[EventType] = 'BROKER_USERLOGGEDIN' OR a.[EventType] = 'AGENT_RECONNECTED')
+		ORDER BY a.[ModuleAndEventText], a.[Time];</pre>
+	</p>
+	<br/>
+	After this query is executed, the result can be copied and pasted into an excel spreadsheet, and in turn formatted nicely for presentation. 
+	</p>
+		<i><u>Source</u>: My job</i>
+	</p>
+</p>

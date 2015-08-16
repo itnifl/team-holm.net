@@ -1,0 +1,48 @@
+<p class="blogheader"><A NAME="SQL_DDD"><u>SQL 2008 Discovering Database Deadlocks</u></A></p>
+<p class="smaller">-12th January 2013<br><br></p>
+<p>
+	<b>Discovering database deadlocks and how to fix them:</b><br>
+	First of all, it is worth mentioning that SQL 2008 monitors locks in the database and resolves them automatically. If you however would like to investigate locking further, detect theyr presence, or suspect a lock for not being properly handeled by MS SQL, then the following steps can be taken:
+	<br><br>
+	<b class="blogstep">1. Open a new query window and execute the following query:</b>
+	<table class="boxedInfoborder"><tr><td>
+	<b>SELECT</b> session_id, blocking_session_id<br>
+	<b>FROM</b> sys.dm_exec_requests<br>
+	<b>WHERE</b> blocking_session_id <b>&gt;</b> 0
+	</td></tr></table>
+	<br>
+	<b class="blogstep">2. If a lock is found, the results should look something similar to the following:</b><br>
+	<table class="boxedInfoborder"><tr><td>
+	<img src="/images/Deadlocking/sys.dm_exec_requests-result.png"/>
+	</td></tr></table>
+	<br>
+	<b class="blogstep">3. To identify the processes and the user running them, execute:</b>
+	<table class="boxedInfoborder"><tr><td><b>sp_who2</b> 'processnumber'<br>
+	For instance: <b>sp_who2</b> 52</td></tr></table>
+	<br>The result may yield:
+	<table class="boxedInfoborder"><tr><td><img src="/images/Deadlocking/sp_who2-52-result.png"/></td></tr></table>
+	<br>
+	<b class="blogstep">4. The conflicting process can also be found in Activity Monitor:</b>
+	<table class="boxedInfoborder"><tr><td><img src="/images/Deadlocking/Activity_Monitor_Overview.png"/></td></tr></table>
+	<br>
+	<b class="blogstep">5. SQL Profiler can also be used to detect a deadlock:</b>
+	<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class="blogstep">5a. Start Profiler and select a new trace:<br></b>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<table class="boxedInfoborder"><tr><td><img src="/images/Deadlocking/Where_is_SQL_Server_Profiler.png"/></td></tr></table><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class="blogstep">5b. Setup the trace as shown pictured below(both the 'General' tab and the 'Events Selection' tab):<br></b>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<table class="boxedInfoborder"><tr><td><img src="/images/Deadlocking/Trace_Setup_1.png"/></td></tr></table>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<table class="boxedInfoborder"><tr><td><img src="/images/Deadlocking/Trace_Setup_2.png"/></td></tr></table><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class="blogstep">5c. Press Run<br></b>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class="blogstep">5d. View the deadlock in SQL profiler:<br></b>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<table class="boxedInfoborder"><tr><td><img src="/images/Deadlocking/SQL_PROFILER_DEADLOCK.png"/></td></tr></table><br>
+	<br>
+	<b class="blogstep">6. The processes can be dealt with by issuing the kill kommand in the query window:</b>
+	<br><br><table class="boxedInfoborder"><tr><td><b>Kill</b> 'processnumber'<br>
+	For instance: <b>kill</b> 52</td></tr></table>
+	<br>
+	For more information on deadlocking, this <a href="http://msdn.microsoft.com/en-us/library/ms178104(v=sql.105).aspx" class="articleLink">article</a> might be of interest.<br>
+	<p>
+	<u>Sources</u>: SQL 2008 Administration. ISBN: 978-0-470-55420-3<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Microsoft SQL Server 2008 - Implementation and Maintenance. ISBN-13: 978-0-7356-2605-8 
+	</p>	
+</p>

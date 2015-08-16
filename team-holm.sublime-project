@@ -1,0 +1,33 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "itblog"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "lost"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "."
+		},
+		{
+			"follow_symlinks": true,
+			"path": "josef"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "natnaree"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "scripts"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/atle/Desktop/Kode/web-intranett"
+		}
+	]
+}

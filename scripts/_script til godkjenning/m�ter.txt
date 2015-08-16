@@ -1,0 +1,3 @@
+Å finne dns navn:
+Set objRoot = GetObject("LDAP://rootDSE")
+sDC = objRoot.Get("dnshostName")

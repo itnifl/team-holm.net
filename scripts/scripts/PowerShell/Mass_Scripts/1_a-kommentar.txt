@@ -1,0 +1,22 @@
+Dette er alt scripts for masseh&aring;ndtering av diverse ting. Det vil si h&aring;dtering av en st&oslash;rre mengde objekter av gangen.
+<br/>Se kommentarene i scriptene for mer informasjon.
+<table>
+	<tr>
+		<td>
+			<ul>
+				<li><a href="#MassCheckUserStatus.ps1" class="articleLink">MassCheckUserStatus.ps1</a></li>
+				<li><a href="#MassCountEnabledDisabledUsers.ps1" class="articleLink">MassCountEnabledDisabledUsers.ps1</a></li>
+				<li><a href="#MassCreateUsers.ps1" class="articleLink">MassCreateUsers.ps1</a></li>
+				<li><a href="#MassDisableUsers.ps1" class="articleLink">MassDisableUsers.ps1</a></li>
+			</ul>
+		</td>
+		<td>
+			<ul>
+				<li><a href="#MassEnableUsers.ps1" class="articleLink">MassEnableUsers.ps1</a></li>
+				<li><a href="#MassMoveUsers.ps1" class="articleLink">MassMoveUsers.ps1</a></li>
+				<li><a href="#MassRemoveUsers.ps1" class="articleLink">MassRemoveUsers.ps1</a></li>
+				<li><a href="#RemoteMassAdmLocalAdmin.ps1" class="articleLink">RemoteMassAdmLocalAdmin.ps1</a></li>
+			</ul>
+		</td>
+	</tr>
+</table>

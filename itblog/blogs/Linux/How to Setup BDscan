@@ -1,0 +1,53 @@
+<p>
+	<p class="blogheader"><A NAME="LIN_BDSCAN"><u>How to Setup BDScan</u></A></p>
+	<p class="smaller">-22nd of February 2013<br></p>
+	Thought I would share my BDscan setup that I use on my Debian Linux computers.<br><br>
+	<b>Note: </b><i>&gt;#</i><b> represents the command prompt and is not actually a part of the commands shown below:</b><br>
+	<table><tr><td>
+	1. First of all, set up your <a href="http://download.bitdefender.com/repos/" class="articleLink" target="_blank">DEB repositories</a> and install BDScan as is shown in the link.<br>
+	2. Get a <a href="http://www.bitdefender.com/site/Products/ScannerLicense/" target="_blank" class="articleLink">free license</a> for BDScan. The license will last a year, after which you have to get a new one.<br> 
+	3. If you get an error stating segmentation fault when running BDScanner, execute the following line:<br>
+	&nbsp;&nbsp;&nbsp;<i>&gt;#cat /opt/BitDefender-scanner/var/lib/scan/versions.dat.* |awk '/bdcore.so.linux/{print $3}'|while read bdcore_so;do touch /opt/BitDefender-scanner/var/lib/scan/$bdcore_so;bdscan --update;ln -s /opt/BitDefender-scanner/var/lib/scan/$bdcore_so /opt/BitDefender-scanner/var/lib/scan/bdcore.so;done</i><br>
+	4. Set up a cron job that runs a scheduled job to scan your Linux system, as root:<br>
+	&nbsp;&nbsp;&nbsp;<i>&gt;#vi /etc/cron.weekly/run-bdscan</i><br>
+	5. Paste in the code in the box below and give root execute permissions:<br>
+	&nbsp;&nbsp;&nbsp;<i>&gt;#chmod 744 /etc/cron.weekly/run-bdscan</i><br>
+	</td></tr></table>
+	<table><tr><td>
+	<b>Note: you will have to change the paths below to paths that<br> are relevant to your system.</b><br>
+	<table><tr><td>
+	#!/bin/bash<br>
+	if [ -f /mnt/SDD1/bdscan.log ]; then<br>
+    &nbsp;&nbsp;&nbsp;rm /mnt/SDD1/bdscan.log<br>
+	fi<br>
+	<br>
+	bdscan --update<br>
+	bdscan --action=disinfect --log=/mnt/SDD1/bdscan.log /mnt/SDB2<br>
+	bdscan --action=disinfect --log=/mnt/SDD1/bdscan.log /mnt/SDC1<br>
+	bdscan --action=disinfect --log=/mnt/SDD1/bdscan.log /mnt/SDD1<br>
+	<br>
+	if [ -f /mnt/SDD1/bdscan.log ]; then<br>
+    &nbsp;&nbsp;&nbsp;grep infected /mnt/SDD1/bdscan.log >> /mnt/SDD1/infected.log<br>
+    &nbsp;&nbsp;&nbsp;rm /mnt/SDD1/bdscan.log<br>
+	fi<br>
+	</td></tr></table>
+	<td width="467" valign="top">
+	Several other options also exists when seting up a BitDefender scan in Linux. Consult the man pages for information:<br>
+	<i>&gt;#man bdscan</i><br><br>
+	bdscan [--action= disinfect | quarantine | delete | ignore] [--no-archive] [--no-mail] [--no-pack] [--no-recursive] [--follow-link] [--recur
+              sive-level=level] [--archive-level=level] [--ext[=ext1:ext2]] [--exclude-ext[=ext1:ext2]] [--suspect-copy] [--suspect-move] [--quarantine=quaran
+              tine_path] [--conf-file=conf_file] [--log[=file.log]] [--log-overwrite] [--no-list] [--no-warnings] [--verbose] [--update] [--virus-list] [--info]
+              [--version] [--help] [--encode=password] path-to-scan<br>
+			  <br>
+	In adition to this information, more can be found at the <a href="http://www.bitdefender.com/" class="articleLink" target="_top">vendors website</a>.<br>
+	<br>
+	</td>
+	</td><td>
+		<table class="boxedInfoborder" align="center"><tr><td><img src="/images/virusAttack.jpg" height="268" width="244"/></td></tr></table>
+	</td></tr>
+	</table>
+	<p>
+	<u>Sources</u>: No real sources
+	</p>	
+</p>
+

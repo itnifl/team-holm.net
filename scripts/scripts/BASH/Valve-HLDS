@@ -1,0 +1,135 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          service
+# Required-Start:    
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: HLDS initscript
+# Description:       This file should be used to construct scripts to be
+#                    placed in /etc/init.d.
+### END INIT INFO
+#############
+###<Notes>###
+#############
+# This script depends on screen.
+# It is placed underneath /etc/init.d and runs HLDS in screen as user specified below.
+# This script assumes you have set up an Half-Life dedicated server in Linux
+# as described in http://itblog.team-holm.net/index.php?scriptName=Linux&subSection=false
+# If the HLDS installation differs from what is shown in the link abovem this script needs
+# to be edited. The script further depends on a shell script that contains the runtime variables.
+# Here, this script is 'Valve-HLDS' and is defined in the config variable and STARTNAME variable below.
+# It merely contains:
+#	#! /bin/bash
+#	./hlds_run -game valve +ip <ip_of_server> +maxplayers 26 +map <yourmap> +coop 0 +deathmatch 1
+# You have to name the script the same as what you specify as DAEMON name beneath in the defind DAEMON variable:
+# DAEMON=Valve-HLDS
+##############
+###</Notes>###
+##############
+
+#######################
+##Start Configuration##
+#######################
+
+#Do not put a space on either side of the equal signs e.g.
+# user = user 
+# will not work
+# system user to run as
+user="hlds"
+DATE=`date`
+
+# the system group to run as, not implemented, see d_start for beginning implementation
+# group=`id -ng "$user"`
+
+# the full path to the filename where you store your configuration
+config="`su -c 'echo $HOME' $user`/Valve-HLDS"
+
+# set of options to run with
+options=""
+
+# default directory for screen, needs to be an absolute path
+base="`su -c 'echo $HOME' $user`"
+
+# name of screen session
+srnname="hl_valve"
+
+# file to log to (makes for easier debugging if something goes wrong)
+logfile="/var/log/HLValveInit.log"
+#######################
+###END CONFIGURATION###
+#######################
+PATH=/usr/bin:/usr/local/bin:/usr/local/sbin:/sbin:/bin:/usr/sbin:/home/hlds
+DESC="hl_valve"
+STARTNAME=Valve-HLDS
+DAEMON=Valve-HLDS
+SCRIPTNAME=/etc/init.d/$DAEMON
+
+checkcnfg() {
+	exists=0
+	for i in `echo "$PATH" | tr ':' '\n'` ; do
+		if [ -f $i/$STARTNAME ] ; then
+			exists=1
+			break
+		fi
+	done
+	if [ $exists -eq 0 ] ; then
+		echo "${DATE} - cannot find hlds_run binary in PATH $PATH" | tee -a "$logfile" >&2
+		exit 3
+	fi
+	if ! [ -r "${config}" ] ; then 
+		echo "${DATE} - cannot find readable run file ${config}." | tee -a "$logfile" >&2
+		echo "Check that it is there and permissions are appropriate." | tee -a "$logfile" >&2
+		exit 3 
+	fi 
+	if [ `stat -c %s "$logfile"` -gt 500000 ]; then
+	mv "$logfile" "$logfile".1
+	fi
+}
+
+d_start() {
+	[ -d "${base}" ] && cd "${base}"
+	stty stop undef && stty start undef
+	echo -n "Starting $DESC: $DAEMON"
+	su -c "screen -A -m -d -S hlds $config" ${user} 2>&1 1>/dev/null | tee -a "$logfile" >&2 
+	if [ $? != 0 ]; then
+		echo -e "- This was ${DATE}" >> "$logfile"
+	else
+		echo -e "All OK in start at ${DATE}" >> "$logfile"
+	fi
+}
+
+d_stop() {
+	echo -n "Stopping $DESC: $DAEMON"
+	pid=`ps -A | grep .${config##*/} | sed 's/^ *//g' | cut -d ' ' -f 1`
+	if [ $pid ]; then
+		kill -9 ${pid} | tee -a "$logfile" >&2 
+	else
+		echo "\nService is not running"
+	fi
+}
+
+checkcnfg
+
+case "$1" in
+	start)
+		d_start
+		echo "."
+		;;
+	stop)
+		d_stop
+		echo "."
+		;;
+	restart|force-reload)
+		echo -n "Restarting $DESC: $DAEMON"
+		d_stop
+		sleep 1
+		d_start
+		echo "."
+		;;
+	*)
+		echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload}" >&2
+		exit 1
+		;;
+esac
+exit 0

@@ -1,0 +1,41 @@
+<p class="blogheader"><A NAME="ESXi_HTSATD"><u>How to shrink a disk in VMWare vSphere</u></A></p>
+	<p class="smaller">-19th of October 2013<br><br></p>
+	This small collection of notes will act as a guide to shrink a thin disk in VMWare vSphere, and also as a guide on shrinking thick disks.<br/>
+	<br/>
+	<b>Case;</b> reclaim the space usage of a thin provisioned disk:<br/>
+	&nbsp;&nbsp;&nbsp;<b>1.</b> Find the host that the VM with the disk you want to shrink is located on.<br/>
+	&nbsp;&nbsp;&nbsp;<b>2.</b> If the disk is thick, you have to convert it to a thin disk, which is possible in the process of storage vMotion before you continue.<br/>
+	&nbsp;&nbsp;&nbsp;<b>3.</b> Enable SSH on the host via its Configuration Tab -> Security Profile -> Properties in the services section when connected to the host or vCenter with the vSphere Client.<br/>
+	&nbsp;&nbsp;&nbsp;<b>4.</b> Log on the host with SSH (Putty is a good tool for such).<br/>	
+	&nbsp;&nbsp;&nbsp;<b>5.</b> Navigate to the location of the virtual machine. In my case it is located under the path <i><b>/vmfs/volumes/525ba385-79c0fb05-ea04-ac162d78a13c/ROUTER1</b></i><br/>
+	&nbsp;&nbsp;&nbsp;<b>6.</b> Find the vmdk (virtual disk file) that you want to shrink by issuing the <i>'ls'</i> command. In my case it is <i><b>ROUTER1-flat.vmdk</b></i>.<br/>
+	&nbsp;&nbsp;&nbsp;<b>7.</b> Make sure the guest VM is turned off and then issue the command: 
+	<table style="margin-left:25px"><tr><td>
+	<i><b># vmkfstools --punchzero ROUTER1-flat.vmdk</b></i><br/>
+	vmfsDisk: 1, rdmDisk: 0, blockSize: 1048576<br/>
+	Hole Punching: 100% done.
+	</td></tr></table>
+	<br/>
+	<b>Note:</b> you may need to issue the sDelete command in the guest operating system before you issue the command above. See this <a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2004155" class="articleLink" target="_blank">article</a> for more details.<br/>
+	<br/>
+	<b>Case;</b> Shrink a thick provisioned disk:<br/>
+	&nbsp;&nbsp;&nbsp;<b>1.</b> To shrink a thick provisioned disk, you first have to shrink the filesystem on the disk to a size slightly smaller then what you plan the vmdk file to be.<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is important! If you do not resize the filesystem first, the end result will be unusable. You can do this with for instance <a href="http://gparted.org/" class="articleLink" target="_blank">Gparted</a> which can be booted from live.<br/>
+	&nbsp;&nbsp;&nbsp;<b>2.</b> After this is done you have to edit the descriptor file for the disk via ssh on the host with the new size - in my case ROUTER1.vmdk:<br/>	
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>RW 26214400 "VMFS ROUTER1-flat.vmdk"</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The number 26214400 is 26214400 * 512 = 13421772800 bytes = 12.5 GB. If you want a 10GB disk, the the number to write there is 10737418240 bytes / 512 = 20971520.<br/>
+	&nbsp;&nbsp;&nbsp;<b>3.</b> Save the file and issue the following command: 
+		<table style="margin-left:25px"><tr><td>
+	<i><b># vmkfstools -i ROUTER1.vmdk ROUTER1_2.vmdk</b></i><br/>
+	Destination disk format: VMFS thick<br/>
+	Cloning disk ‘ROUTER1.vmdk’…<br/>
+	Clone: 100% done.
+	</td></tr></table>
+	<b>NB! Use this technique at your own risk!</b><br/><br/>
+	&nbsp;&nbsp;&nbsp;<b>4.</b> Detach the first disk from the virtual machine and then attach the new clone with the new size. Then boot the VM.<br/>
+	&nbsp;&nbsp;&nbsp;<b>5.</b> Thats it! Now you can check the new file size by issuing the command <i><b>'ls -al'</b></i> or browsing to the datastore with the vSphere Client.<br/>
+<p>
+	<br>
+	<u>Source</u>: VMWare 5.1
+</p>
+	

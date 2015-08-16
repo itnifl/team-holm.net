@@ -1,0 +1,9 @@
+&aelig; blir æ
+&AElig; blir Æ
+&oslash; blir ø
+&Oslash; blir Ø
+&aring; blir å
+&Aring; blir Å
+&amp; blir &
+&lt; blir <
+&gt; blir >

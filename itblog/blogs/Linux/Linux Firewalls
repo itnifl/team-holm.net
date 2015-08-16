@@ -1,0 +1,82 @@
+<p>
+	<p class="blogheader"><A NAME="LIN_FIREWALLS"><u>Linux Firewalls</u></A></p>
+	<p class="smaller">-13th of January 2013<br></p>
+	
+	<table><tr><td valign="top"><b>When evaluating a network packet</b>, the firewall will read header information in the packet for the corresponding layer in the <a href="http://en.wikipedia.org/wiki/Osi_model#Examples" class="articleLink" id="link" target="_blank">OSI Model</a> 
+	to evaluate this against the rules in a iptables chain. The iptables firewall is capable of handeling network information from all of the network layers, however it is not initially designed to do so. In the examples
+	that will be given below, there will be explained usage of the iptables firewall in conjunction with MAC addresses(Data Link layer), IP addresses(Network layer), and TCP/UDP ports(Transport layer).<br>
+	<br>
+	When sending information over the network, the information is divided into packages that get encapsulated into protocols in the different layers of the OSI model. The packages are always divided into a size
+	specified by the <a href="http://en.wikipedia.org/wiki/Maximum_transmission_unit" class="articleLink" target="_blank" id="link">Maximum Transmission Unit(MTU)</a> of the sending interface. Typically this size is 1500 bytes, but can be up to 9000 bytes and then called <a href="http://en.wikipedia.org/wiki/Jumbo_Frames" class="articleLink" target="_blank" id="link">Jumbo Frames</a>.
+	If the package encounters equipment with a lower MTU than it was originally handeled by, the package will be further divided. Small packages create more protocol overhead but require less data to be re-transmitted if the package is lost. 
+	Thus a small MTU is preferable for a network that is in some sort less reliable. A large MTU requires less overhead and thus more information can be transmitted faster. A large MTU is a good choice for networks that experience low
+	retransmissions and are considered fairly reliable.<br>
+	<br>
+	This protocol overhead that is added to the packages that are to be transmitted has various information essential for the receiving part, or essential for the equipment used to send the package on its way to the destination.
+	This packet to be transferred typically starts its life at the application layer and traverses downwards to the physical layer where it is sent over the medium used for networking.
+	A series of packages typically make up a whole piece of information that is to be received by the receiver, and is put together at the receiving end. When transmitting information with the IP protocol,
+	it is possible to encapsulate it/transmit it over the TCP or UDP protocols on the Transport layer. Each of these represent two different transport mechanisms. TCP establishes a session
+	with a <a href="http://en.wikipedia.org/wiki/Three_way_handshake#Connection_establishment" class="articleLink" target="_blank" id="link">three-way-handshake</a> and ensures that all packages belonging to
+	that session are tagged with sequence numbers and transmitted correctly over the wire. If packages are lost or mangled in the transport process, they are re-requested and re-transmitted.
+	TCP also ensures that the receiver can put the packages together in the correct order. TCP does however have a higher overhead then UDP, wich is a stateless protocol.
+	With UDP no attempt is made to establish a session, the packages are just put on the wire with a destination address hoping that the receiver will receive them and have
+	the necessary applications to handle and interpret the information received. This method of package transmission demands less overhead and is a good choice for realtime
+	communication that needs to arrive at its target fast, but not necessarily in the correct order or at all. Many popular network enhanced games use the UDP protocol when communicating
+	over the network.
+	
+	</td><td><table class="boxedInfoborder" align="center"><tr><td><img src="/images/Iptables/Osi-model.png" width="241" height="332" /></td></tr></table></td></tr></table>
+	
+	<table><tr><td valign="top"><b>The Linux iptables firewall</b> consists of a set of chains with firewall rules that a network packet gets evaluated by in the order that the chains are set up. 
+	As illustrated on the picture to the right, a packet will traverse the PREROUTING chain before it is sent to either the INPUT chain or the FORWARD chain depending on if the packet is intended for this
+	particular host, or if it needs to be forwarded to another network that the receiving host is connected to.
+	To forward network traffic to other networks, the host needs to be configured as a <a href="#LIN_ROUTER" id="link" class="articleLink" target="_blank">router</a>.<br>
+	<br>
+	Examples of iptable rules set by a script or via the terminal:<br>
+	<table width="100%"><tr><td>
+	1. iptables -A INPUT -p icmp -m icmp -m limit --limit 2/second -j ACCEPT<br>
+	2. iptables -A INPUT -i lo -s 127.0.0.1 -j ACCEPT<br>
+	3. iptables -A INPUT -m mac --mac-source 00:20:b0:4b:6f:1b -j ACCEPT<br>
+	4. iptables -A INPUT -p tcp -i eth1 --dport 21 -j ACCEPT<br>
+	5. iptables -A INPUT -p tcp -i eth1 --dport 20 -j ACCEPT<br>
+	<br>
+	6. iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT<br>
+	7. iptables -A INPUT -m state --state INVALID -j DROP<br>
+	8. iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP<br>
+	9. iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP<br>
+	10. iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP<br>
+	11. iptables -A INPUT -p icmp -m icmp --icmp-type address-mask-request -j DROP<br>
+	12. iptables -A INPUT -p icmp -m icmp --icmp-type timestamp-request -j DROP<br>
+	</td></tr></table>
+	<br>
+	Explanation to the rules listed above:
+	<table width="100%"><tr><td>
+	1. Limit the amount of ping packets(icmp) to the input chain to two per second, to avoid icmp flood attacks/DOS attack.<br>
+	2. Allow the loopback interface to communicate with the host. This is often required by several applications that might be running on the host.<br>
+	3. Allow sender with a specified mac source address to pass the INPUT chain. Note that mac addresses can be spoofed.<br>
+	4. Allow packets over the INPUT chain arriving at TCP port 21 to pass. Often required by FTP servers.<br>
+	5. Allow packets over the INPUT chain arriving at TCP port 20 to pass. Often required by FTP clients in active mode.<br>
+	6. Allow packets over the INPUT chain that are a part of a related or already established communication transaction.<br>
+	7. Drop packets that are considered invalid.<br>
+	8. If a packet is considered new and not a part of a already established TCP session, and the syn flag is not set, then drop it.<br>
+	9. If a packet has all the TCP flags set, it is considered invalid and dropped. TCP packets with all the flags set are suspected to be <a href="/index.php?scriptName=Sikkerhet&subSection=false#DOSA" class="articleLink" target="_blank" id="link">Christmastree packets</a>.<br>
+	10. If no TCP flags are set on the TCP packet, it is considered invalid and dropped.<br>
+	11. ICMP(ping) packets that request address mask information are dropped.<br>
+	12. ICMP(ping) packets that request timestamp information are dropped.<br>
+	</td></tr></table>
+	<br>
+	More information regarding various iptables rules that can be applied to iptable chains can be found at various sites on the <a href="http://www.techrepublic.com/blog/10things/10-iptables-rules-to-help-secure-your-linux-box/539" class="articleLink" target="_blank" id="link">internet</a> and is recommended reading.
+	</td><td><table class="boxedInfoborder" align="center"><tr><td><img src="/images/Iptables/iptablesflow.gif" width="380" height="532" /></td></tr></table></td></tr></table>
+	<br>
+	The Linux iptables firewall is often used together with technologies like <a href="http://snort-inline.sourceforge.net/oldhome.html" class="articleLink" target="_blank" id="link">Snort</a>, <a href="http://www.cipherdyne.org/fwsnort/" class="articleLink" target="_blank" id="link">FWSnort</a> and <a href="http://cipherdyne.org/psad/" class="articleLink" target="_blank" id="link">PSAD</a>.
+	<a href="http://www.snort.org/" target="_blank" class="articleLink" id="link">Snort</a> is generally used to monitor and log network traffic to alone form a Intrusion Detection System(IDS).
+	However, when PSAD and FWSnort, or <a href="http://snort-inline.sourceforge.net/oldhome.html" class="articleLink" target="_blank" id="link">Snort</a> is used <a href="http://www.cipherdyne.org/LinuxFirewalls/ch11/" class="articleLink" target="_blank" id="link">together</a> in conjunction with iptables, it forms an Intrusion Prevension System(IPS).
+	A graphical interface to these systems can be set up with several <a href="http://blog.snort.org/2011/01/guis-for-snort.html" class="articleLink" target="_blank" id="link">GUI systems</a>, like BASE or OSSIM.<br>
+	<br>
+	Better yet, the commandline interface that the iptables firewall has, makes it easily scriptable and thus tweakable through various script languages(e.g. Perl, BASH, Python). 
+	Iptables with its capabillities reaching alot further then mentioned here therefore gets to be a nerds dream in a tweakable Linux world.
+	<p>	
+	<u>Sources</u>: Linux Firewalls. ISBN: 978-1-59327-141-1<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drift av lokalnettverk. ISBN: 82-519-2075-2<br>
+	</p>
+</p>
+

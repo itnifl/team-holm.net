@@ -1,0 +1,24 @@
+<p class="blogheader"><A NAME="WIN_Tools"><u>Useful list of Windows tools and commands</u></A></p>
+	<p class="smaller">-1st May 2011<br><br></p>
+	<p>
+	A practical list of Windows tools and commands is listed below, more might be added with time.<br>
+	The followig table mainly displays tools useful for troubleshooting connectivity issues and performance problems.
+	</p>
+	|TableStart
+	<font size="2"><b>Network Services Management Support Tools</b></font>|<font size="1"><a href="http://technet.microsoft.com/en-us/library/cc737782(WS.10).aspx" class="tableLink">http://technet.microsoft.com/en-us/library/cc737782(WS.10).aspx</a></font>
+	<font size="2"><b>Active Directory Management Support Tools</b></font>|<font size="1"><a href="http://technet.microsoft.com/en-us/library/cc738135(WS.10).aspx" class="tableLink">http://technet.microsoft.com/en-us/library/cc738135(WS.10).aspx</a></font>
+	<font size="2"><b>Windows Server 2003 Resource Kit Tools</b></font>|<font size="1"><a href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&id=17657" class="tableLink">http://www.microsoft.com/download/en/details.aspx?displaylang=en&id=17657</a></font>
+	<font size="2"><b>Nslookup, Ping, Tracert</b></font>|<font size="1"><a href="http://technet.microsoft.com/en-us/library/bb490950.aspx" class="tableLink">http://technet.microsoft.com/en-us/library/bb490950.aspx</a><br><a href="http://technet.microsoft.com/en-us/library/bb490968.aspx" class="tableLink">http://technet.microsoft.com/en-us/library/bb490968.aspx</a><br><a href="http://technet.microsoft.com/en-us/library/bb491018.aspx" class="tableLink">http://technet.microsoft.com/en-us/library/bb491018.aspx</a><br></font>
+	<font size="2"><b>Wireshark</b></font>|<font size="1"><a href="http://www.wireshark.org" class="tableLink">http://www.wireshark.org</a></font>
+	<font size="2"><b>Poolmon, Process Monitor, Speedfan</b></font>|<font size="1"><a href="http://technet.microsoft.com/en-us/library/cc737099(WS.10).aspx" class="tableLink">http://technet.microsoft.com/en-us/library/cc737099(WS.10).aspx</a><br><a href="http://technet.microsoft.com/en-us/sysinternals/bb896645" class="tableLink">http://technet.microsoft.com/en-us/sysinternals/bb896645</a><br><a href="http://www.almico.com/speedfan.php" class="tableLink">http://www.almico.com/speedfan.php</a></font>
+	|TableEnd
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<p class="smaller">
+	<b>This is not an attempt of a complete list.</b><br/>
+
+	</p>
+	<p>
+	<u>Source</u>: See URL's above.
+	</p><p></p>
+	

@@ -1,0 +1,24 @@
+<p class="blogheader"><A NAME="ESXi_CACHSS"><u>Configuring and Checking HA Slot Size</u></A></p>
+	<p class="smaller">-20th of January 2013<br><br></p>
+	<table>
+		<tr>
+			<td>
+			<b>The HA slot size</b> determines the amount of VMs that can fail over to a host using High Availability. When all slots are used, the host is considered occupied in regard to the resources the slot size determines as minimum for the guests on it.
+			The HA slot size is calculated as the largest CPU reservation and the highest memory reservation of any given guest. This number divided by the total amount of resources available on the host, picking out the lowest outcome from either the CPU or memory division becomes the amount of slots that the host gets configured with.
+			If admission control is enabled on the cluster, VMWare will honor the amount of slots available on a host and not power on any guests if the slots are all full. To determine the amount of slots available for a cluster, select the cluster in the Hosts and Clusters overview, then select the Summary tab, then the Advanced Runtime Info link.
+			<br><br>
+			<b>To set a custom slot size</b> you can either manually set a reservation to one of the guests that is larger then the other reservations on the host, or you can use the advanced configuration options das.slotMemInMB and das.slotCpuInMHz that are set under Advanced Options under vSphere HA Cluster settings.<br/><br/>
+			<table class="boxedInfoborder" align="center">
+				<tr>
+					<td>
+						<img src="/images/VMWare/AdvancedRuntimeInfo.png" /></td><td><img src="/images/VMWare/HASlotSize.png" width="181" height="197"/>
+					</td>
+				</tr>
+			</table>
+		</td><td>
+			<table class="boxedInfoborder"><tr><td><img src="/images/VMWare/AdmissionControl.png" width="461" height="375"/></td></tr></table>
+	</td></tr></table>
+<p><br>
+	<u>Source</u>: VMWare 5.1
+</p>
+	

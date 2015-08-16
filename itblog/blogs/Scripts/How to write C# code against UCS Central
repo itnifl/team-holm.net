@@ -1,0 +1,283 @@
+<p class="blogheader"><A NAME="UCSCode"><u>How to write C# code against UCS Central</u></A></p>
+	<p class="smaller">-3rd of June 2014<br/><br/></p>
+<p>
+This blog attempt will in short terms to try to describe how to write C# code against UCS Central. Visual Studio 2012 was used to write the code displayed here. It is assumed that you know programming already, and that you are able to fit these pieces of information to your own solution. Not every class and bit of code is shown here, only what is esssential to get the concept across.
+When I first needed to use the UCS Centrals API for automating tasks against it, I had no access to any API documentation. UCS Central uses a web GUI to talk to its backend API through an HTTPS session. Using <a href="http://www.telerik.com/fiddler" class="articleLink">Fiddler</a> to monitor what calls are being made to the API from the web page, you can record so that you can later tweak and recreate these calls from C# to do what you need to do even with missing documentation.
+<br/>
+<h2>1. What is UCS Central and what are we trying to do?</h2>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+				The <a href="http://en.wikipedia.org/wiki/Cisco_Unified_Computing_System" class="articleLink">Cisco Unified Computing system</a> is a system where profiles representining setups of server systems are deployed on to bare metal computer systems. All hardware specifics are fetched from pools or definitions in the UCS system and assigned to these profiles that in turn can be assigned and reassigned to different hardware servers/rack blades/bare metal servers. Take a look at the following <a href="http://cisconokia.com/c/en/us/products/collateral/servers-unified-computing/ucs-central-software/ucs_central_presentation.html" class="articleLink">video representation</a> from Cisco for a good explanation and illustration of the concept.<br/>
+				<br/>
+				The whole system is arranged into domains that are each administered by UCS Managers. These domains and theyr managers are then in turn administered by a central solution called the UCS Central. The documentation for the UCS Managers command line interface, API solutions and PowerShell support is at the time of writing very good. From what I can find at the time being, this is not the case for UCS Central, which leads us to this blog article.<br/>
+				<br/>
+				We will be using Fiddler to get the information we need to talk to the UCS REST API, and then C# to code the talking. To have a real system to talk to and experiment with, I will be using <a href="https://communities.cisco.com/docs/DOC-37827" class="articleLink">Cisco UCS Platform Emulator</a> and then Cisco UCS Central on top of that. These two are set up in a private VMWare lab for this emulation.	
+			</td>
+			<td>
+				<a href="images/UCS/UCS-Illustration-1.jpg" data-lightbox="UCS-Illustrations" title="UCS Illustration"><img src="images/UCS/UCS-Illustration-1.jpg" height="134" width="121" border="0" style="margin:0px;"/></a>
+			</td>
+		</tr>
+	</table>
+<h2>2. Using Fiddler</h2>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+				<a href="http://www.telerik.com/fiddler" class="articleLink">Fiddler</a> can be fetched at <a href="http://www.telerik.com/fiddler" class="articleLink">http://www.telerik.com/download/fiddler</a> and is our first step to get the information we need. Go ahead and download it, then take a look at <a href="http://devs.valence.desire2learn.com/tag/fiddler/" class="articleLink">this guide</a> for more about Fiddler. In our setup we want to capture information going over HTTPS, so we will set the options for Fiddler to handle that traffic (<b>figure 1</b> on the right). To exemplify the usage of Fiddler we log in to UCS Central and watch what calls are being made in Fiddler (<b>figure 2</b> on the right). Here we can see the XML being sent to the API (the upper box), and the headers being used. We also see the reply we get (the lower box) with headers. We will be using both to make a login and check the reply. Here is what we are sending:
+				<p class="smaller">
+					<pre class="brush: xml">
+						<aaaLogin cookie="testCookie" inName="admin" inPassword="TestPassword"></aaaLogin></pre>
+				</p>
+				And we can see in the reply the outCookie that we will be using in further interaction with the UCS Central REST API to identify our session (<b>figure 2</b> on the right).
+			</td>
+			<td>
+				<a href="images/UCS/FiddlerHttpsSetup.png" data-lightbox="Using_Fiddler" title="Figure 1"><img src="images/UCS/tn_FiddlerHttpsSetup.png" height="122" width="121" border="0" style="margin:0px;"/></a>
+			</td><td>
+				<a href="images/UCS/FiddlerExample1.png" data-lightbox="Using_Fiddler" title="Figure 2"><img src="images/UCS/tn_FiddlerExample1.png" height="122" width="121" border="0" style="margin:0px;"/></a>
+			</td>
+		</tr>
+	</table>
+<h2>3. Using the result from Fiddler</h2>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+				From experimenting with Fiddler we know we will be sending the following XML to the API as shown below. The first example does the login which in turn gives us the outCookie as an xml answer that we use in our next step. The other is for our next step to create a VLAN via UCS Central using the outCookie from step 1 to identify our authenticated session. <br/>
+				<br/>
+				<b>3.1 The login:</b>
+				<p class="smaller">
+					<pre class="brush: xml">
+						<aaaLogin cookie="testCookie" inName="admin" inPassword="TestPassord"></aaaLogin></pre>
+				</p>
+				<b>3.2 The creation of a VLAN named 999-XXX-TESTXX with VLAN ID 999:</b>
+				<p class="smaller">
+					<pre class="brush: xml">
+						<configConfMos cookie="1401107667/94d05a39-a271-48e6-af39-1c8944f87900" inHierarchical="false">
+						  <inConfigs>
+						    <pair key="domaingroup-root/fabric/lan/net-999-XXX-TESTXX">
+						      <fabricVlan dn="domaingroup-root/fabric/lan/net-999-XXX-TESTXX" id="999" name="999-XXX-TESTXX" status="created"/>
+						    </pair>
+						  </inConfigs>
+						</configConfMos></pre>
+				</p>	
+				<br/>
+				In our C# code, we first need a piece of code that will send the request to the API and then another piece of code that will interpret the reply. The SendWebRequest class will be doing the sending and the XmlReaderLocal class will do the reply. The XmlReaderLocal class has actually been made to read an xml file which is not what is returned to us from the UCS Central API. I have because of that created a temporary file creator where there is code to create a a temporary file where the XML reply is stored so that the XmlReaderLocal class can read it. The code for the temporary file creator is not included here, but is used in section four 'The half-ready code.' You will have to write your own temporary file creator the way you see fits.<br/>
+				<br/>
+				<b>3.3 The SendWebRequest class to send our request:</b>
+				<p class="smaller">
+					<pre class="brush: csharp">
+					  class SendWebRequest {
+					      private string __apiUrl;
+					      private string __stringData;
+
+					      public SendWebRequest(string apiUrl, string stringData) {
+					         __apiUrl = apiUrl;
+					         __stringData = stringData;
+					      }
+					      public HttpWebResponse execute() {
+					         CookieContainer cookieJar = new CookieContainer();
+					         HttpWebRequest firstRequest = (HttpWebRequest)WebRequest.Create(__apiUrl);
+
+					         ASCIIEncoding encoding = new ASCIIEncoding();
+					         byte[] data = encoding.GetBytes(__stringData);
+
+					         firstRequest.CookieContainer = cookieJar;
+					         firstRequest.KeepAlive = true;
+					         firstRequest.Method = "POST";
+					         firstRequest.ContentType = "application/xml";
+					         firstRequest.ContentLength = data.Length;
+					         firstRequest.Accept = "*/*";
+					         firstRequest.Referer = "https://" + __apiUrl.Split('/')[2] + "/apps/Multi_UCS.swf/[[DYNAMIC]]/4";
+					         firstRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36";
+					         firstRequest.Host = __apiUrl.Split('/')[2];
+
+					         System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+					            delegate(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certificate,
+					                                    System.Security.Cryptography.X509Certificates.X509Chain chain,
+					                                    System.Net.Security.SslPolicyErrors sslPolicyErrors) {
+					                                       return true; // **** Always accept SSL Certificate
+					                                    };
+
+					         Stream newStream = firstRequest.GetRequestStream();
+					         newStream.Write(data, 0, data.Length);
+					         newStream.Close();
+					         return (HttpWebResponse)firstRequest.GetResponse();
+					      }
+					   }</pre>
+				</p>
+				<b>3.4 The XmlReaderLocal class to read the reply from UCS central and the AttributeCollection class to reply our answer:</b><br/>
+				<font size="1" style="margin-left:12px;">Note: I see there are some syntax errors presented in the code by the syntax highlighter. Be sure to check this when you use the code.</font>
+				<p class="smaller">
+					<pre class="brush: csharp">
+public class AttributeCollection {
+  public string NodeName { get; set; }
+  public Dictionary<string, string> Attributes { get; set;}
+
+  public AttributeCollection(string nodeName) {
+     this.NodeName = nodeName;
+     Attributes = new Dictionary<string, string>();
+  }
+}
+public class XmlReaderLocal {
+  XmlTextReader reader;
+  String xmlFil;
+  public XmlReaderLocal(String xmlFil) {
+     this.xmlFil = xmlFil;
+  }
+  /// <summary>
+  ///  Read all attributes occurrences of one named node taken as input
+  /// </summary>
+  public AttributeCollection ReadFirstNodeAttributes(String nodename) {
+     reader = new XmlTextReader(xmlFil);
+     AttributeCollection attrCollection = new AttributeCollection(reader.Name);
+     while (reader.Read()) {            
+        switch (reader.NodeType) {
+           case XmlNodeType.Element:
+              if (reader.Name.ToString() == nodename) {
+                 if (reader.HasAttributes) {
+                    //Console.WriteLine("Attributes of <" + reader.Name + ">");                                                
+                    while (reader.MoveToNextAttribute()) {
+                       attrCollection.Attributes.Add(reader.Name, reader.Value);
+                    }
+                    reader.MoveToElement();                        
+                    reader.Close();                        
+                 }                     
+              }
+              break;
+           case XmlNodeType.Text:
+              break;
+           case XmlNodeType.EndElement:
+              break;
+        }
+     }
+     reader.Dispose();
+     return attrCollection.Attributes.Count > 0 ? attrCollection : null;
+  }
+}</pre>
+				</p>
+			</td>
+		</tr>
+	</table>
+
+<h2>4. The half-ready code</h2>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+			<font size="1"><b>Note:</b> I see there are some syntax errors presented in the code by the syntax highlighter. Be sure to check this when you use the code. This seems to be some sort of bug in the highlighter.</font><br/>
+			<br/>
+				Here is where we will use our code and knowledge that we have this far.	First we demonstrate a login procedure, and then we demonstrate the creation of the VLAN we want to create. Have in mind that this code is not complete and is only intended to show a strain of thought. Simplified versions of the functions GetCookieString and SetUCSVLAN are displayed below, but the whole class is omitted and some depending classes are omitted. You will have to interpret your way through this code and the comments, then implement your own solution for these missing pieces. The strain of thought is still thought to be displayed for tutorial purposes in this article, and thus giving the value intended.<br/>
+				<br/>
+				<b>4.1 Authenticate with UCS Central:</b>
+				<p class="smaller">
+					<pre class="brush: csharp">
+						String errorStatus = "None";
+						string outCookie = "";
+
+						//This class holds the GetCookieString method that authenticates with UCS Central and gets the Cookie String we need for our next step:
+						AuthenticateWithUCS awucs = new AuthenticateWithUCS(); 
+						Dictionary<string, string> returnAttributes = awucs.GetCookieString(uCSServer, username, password);
+						status = returnAttributes.ContainsKey("status") ? returnAttributes["status"] : "None";
+						errorStatus = returnAttributes.ContainsKey("errorStatus") ? returnAttributes["errorStatus"] : "None";
+						outCookie = returnAttributes.ContainsKey("outCookie") ? returnAttributes["outCookie"] : "None";
+
+						Console.WriteLine(Environment.NewLine + "**After authentication: ");
+						Console.WriteLine("JobStatus: " + status);
+						Console.WriteLine("ErrorStatus: " + errorStatus);
+						Console.WriteLine("outCookie: " + outCookie);</pre>
+				</p>
+				<b>4.2 Create VLAN in UCS Central:</b>
+				<p class="smaller">
+					<pre class="brush: csharp">
+						//This class holds the SetUCSVLAN method that creates a VLAN in UCS Central and reads the reply:
+						CreateUCSVLAN cucsvlan = new CreateUCSVLAN();
+			            returnAttributes = cucsvlan.SetUCSVLAN(uCSServer, vlanID, vlanName, outCookie);
+			            status = returnAttributes.ContainsKey("status") ? returnAttributes["status"] : "None";
+			            errorStatus = returnAttributes.ContainsKey("errorStatus") ? returnAttributes["errorStatus"] : "None";
+			            var ucsStatus = returnAttributes.ContainsKey("ucsStatus") ? returnAttributes["ucsStatus"] : "None";
+
+			            Console.WriteLine(Environment.NewLine + "**After VLAN Creation: ");
+			            Console.WriteLine("JobStatus: " + status);
+			            Console.WriteLine("ErrorStatus: " + errorStatus);
+			            Console.WriteLine("ucsStatus: " + ucsStatus);</pre>
+				</p>
+				<b>4.3 GetCookieString example code:</b>
+				<p class="smaller">
+				<pre class="brush: csharp">
+				public Dictionary<string, string> GetCookieString(string uCSServer, string username, string password) {
+					Dictionary<string, string> returnAttributes = new Dictionary<string, string>();
+					var statusArray = Enum.GetValues(typeof(Status));
+					Status status = (Status)statusArray.GetValue(2);
+					string errorStatus = "None";
+					string outCookie = "";
+					string ucsStatus = "None";
+
+					string loginUrl = "https://" + uCSServer + "/xmlIM/mgmt-controller";
+					string stringData = "<aaaLogin cookie=\"testCookie\" inName=\"" + username + "\" inPassword=\"" + password + "\"></aaaLogin>";
+
+					try {
+						//This is the SendWebRequest class in section 3.3 above:
+						SendWebRequest swr = new SendWebRequest(loginUrl, stringData); 
+						//The ReadUCSWebResponse class is not shown in this article, but its usage is obvious:
+						ReadUCSWebResponse rUcsWebRes = new ReadUCSWebResponse(swr, status, errorStatus, ucsStatus, "aaaLogin", "aaaLogin", "GetCookieString", "outCookie"); 
+						Dictionary<string, string> parseAttributes = rUcsWebRes.execute();
+						status = parseAttributes.ContainsKey("status") ? (Status)Enum.Parse(typeof(Status), parseAttributes["status"]) : Status.error;
+						errorStatus = parseAttributes.ContainsKey("errorStatus") ? parseAttributes["errorStatus"] : "None";
+						outCookie = parseAttributes.ContainsKey("ucsStatus") ? parseAttributes["ucsStatus"] : "None";
+					} catch (Exception ex) {
+						status = (Status)statusArray.GetValue(6);
+						errorStatus = "103 in GetCookieString(): " + ex.Message;
+					}
+
+					returnAttributes.Add("errorStatus", errorStatus);
+					returnAttributes.Add("status", status.ToString());
+					returnAttributes.Add("outCookie", outCookie);
+					return returnAttributes;
+			    }</pre>
+				</p>
+				<b>4.4 SetUCSVLAN example code:</b>
+				<p class="smaller">
+					<pre class="brush: csharp">
+					public Dictionary<string, string> SetUCSVLAN(string uCSServer, string vlanid, string vlanName, string cookieString) {
+				         Dictionary<string, string> returnAttributes = new Dictionary<string, string>();
+				         var statusArray = Enum.GetValues(typeof(Status));
+				         Status status = (Status)statusArray.GetValue(2);
+				         string errorStatus = "None";
+				         string ucsStatus = "None";
+
+				         string accessUrl = "https://" + uCSServer + "/xmlIM/resource-mgr";
+				         string stringData = 
+				            "<configConfMos cookie=\"" + cookieString + "\" inHierarchical=\"false\">" +
+				               "<inConfigs>" +
+				                  "<pair key=\"domaingroup-root/fabric/lan/net-" + vlanName + "\">" +
+				                     "<fabricVlan dn=\"domaingroup-root/fabric/lan/net-" + vlanName + "\" id=\"" + vlanid + "\" name=\"" + vlanName + "\" status=\"created\"/>" +
+				                  "</pair>" +
+				               "</inConfigs>" +
+				            "</configConfMos>";
+				         try {
+				         	//This is the SendWebRequest class in section 3.3 above:
+				            SendWebRequest swr = new SendWebRequest(accessUrl, stringData); 
+				            //The ReadUCSWebResponse class is not shown in this article, but its usage is obvious:
+				            ReadUCSWebResponse rUcsWebRes = new ReadUCSWebResponse(swr, status, errorStatus, ucsStatus, "fabricVlan", "configConfMos", "SetUCSVLAN", "status"); 
+				            Dictionary<string, string> parseAttributes = rUcsWebRes.execute();
+				            status = parseAttributes.ContainsKey("status") ? (Status)Enum.Parse(typeof(Status), parseAttributes["status"]) : Status.error;
+				            errorStatus = parseAttributes.ContainsKey("errorStatus") ? parseAttributes["errorStatus"] : "None";
+				            ucsStatus = parseAttributes.ContainsKey("ucsStatus") ? parseAttributes["ucsStatus"] : "None";
+				         } catch (Exception ex) {
+				            status = (Status)statusArray.GetValue(6);
+				            errorStatus = "103 in SetUCSVLAN(): " + ex.Message;
+				         }
+				         returnAttributes.Add("errorStatus", errorStatus);
+				         returnAttributes.Add("status", status.ToString());
+				         returnAttributes.Add("ucsStatus", ucsStatus);
+				         return returnAttributes;
+				    }</pre>
+				</p>
+			</td>
+		</tr>
+	</table>
+	<br/>
+	As mentioned earlier, not every bit of code is included here, but this should get you started. Note that some of the C# code does get displayed with syntax errors that are probably due to bugs in the syntax highlighter that is used on this web page.
+	<br/>
+	<br/>
+	<i><b><u>Source</u>: Fiddler and the imagination.</b></i>
+	</p>
+</p>

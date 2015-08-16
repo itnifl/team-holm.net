@@ -1,0 +1,6 @@
+I denne scriptpakken er det seks Powershell script og to Batch script. Batch scriptene
+brukes av Powershell scriptene til &aring; utf&oslash;re enkelte handlinger. Tre av Powershell scriptene
+er "Check" script som samler informasjon til bruk for "Clean" scriptene, 
+som er de andre tre av de seks Powershell scriptene.
+
+Se kommentarene i scriptene for mer informasjon.

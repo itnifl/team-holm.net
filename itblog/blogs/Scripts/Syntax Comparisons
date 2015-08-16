@@ -1,0 +1,36 @@
+<p class="blogheader"><A NAME="SYNTAXCOMP"><u>Syntax Comparisons</u></A></p>
+	<p class="smaller">-3rd August 2012<br/><br/></p>
+<p>
+This short description displays a comparison of syntax between Bash, Perl and Powershell. Nice to have when scripting in multiple languages.
+<div id="syntaxComparrisonSpan">
+|TableStart
+	<span class="blogTableHeader"><b>BASH</b></span>|<span class="blogTableHeader"><b>PERL</b></span>|<span class="blogTableHeader"><b>POWERSHELL</b></span>
+	if [ ! $A ]&#59; then<br/>&nbsp;&nbsp;&nbsp;&nbsp;echo "No A."<br/>elif [ $A ]&#59; then<br/>&nbsp;&nbsp;&nbsp;echo "Theres an A."<br/>else<br/>&nbsp;&nbsp;&nbsp;echo "Dunno."<br/>fi<br/>|if (not exists $var) {<br/>&nbsp;&nbsp;&nbsp;[...]<br/>} elsif ($var){<br/>&nbsp;&nbsp;&nbsp;[...]<br/>} else {<br/>&nbsp;&nbsp;&nbsp;[...]<br/>}|If (!$var) {<br/>&nbsp;&nbsp;&nbsp;[...]<br/>} elseif ($var){<br/>&nbsp;&nbsp;&nbsp;[...]<br/>} else {<br/>&nbsp;&nbsp;&nbsp;[...]<br/>}
+	for item in variabel<br/>do<br/>&nbsp;&nbsp;&nbsp;[...]<br/>done<br/>|foreach $i (@array) {<br/>&nbsp;&nbsp;&nbsp;[...]<br/>}|Foreach ($i in $array) {<br/>&nbsp;&nbsp;&nbsp;[...]<br/>}
+	While [ $var –lt 4 ]<br/>Do<br/>&nbsp;&nbsp;&nbsp;[...]<br/>done<br/>|Do {<br/>&nbsp;&nbsp;&nbsp;[...]<br/>} While ($var);|Do<br/>{<br/>&nbsp;&nbsp;&nbsp;[...]<br/>} While ($var)
+	While [ ..betingelser.. ]<br/>do<br/>&nbsp;&nbsp;&nbsp;[...]<br/>done<br/>|While ($var ne $string) {<br/>&nbsp;&nbsp;&nbsp;[...]<br/>}|While ($var –ne $string) {<br/>&nbsp;&nbsp;&nbsp;[...]<br/>}
+	for (( i = 1 ; i &lt; 6 ; i++ ))<br/>do<br/>&nbsp;&nbsp;&nbsp;[...]<br/>done<br/>|For ($x =1; $&lt;10; $x++) {&nbsp;&nbsp;&nbsp;[...]<br/>}|for ( $x=0; $x -ne 10; $x++) { <br/>&nbsp;&nbsp;&nbsp;[...]<br/> }
+	<b>String comparisons:</b><br/>Binary operator are used; > and > and <= etc, =<br/><b>Binary comparisons:</b><br/>Word operator are used; -lt and -gt and -eq etc.<br/>|<b>String comparisons:</b><br/>Word operatosr are used; lt and gt and eq etc.<br/><b>Binary comparisons:</b><br/>Binary operators are used.<br/>|<b>String comparisons:</b><br/>Word operator are used; -lt og -gt og -eq osv.<br/><b>Binary comparisons:</b><br/>Word operator are used; -lt og -gt og -eq osv.<br/>
+	<b>Declaration:</b><br/>Function function_name() {}<br/><b>Usage:</b><br/>Function_name $var<br/>|<b>Declaration:</b><br/>Sub function_name {}<br/><b>Usage:</b><br/>&function_name($var);<br/>|<b>Declaration:</b><br/>Function function_name() {}<br/><b>Usage:</b><br/>Function_name $varName value<br/>
+	Case “$var” in<br/>Case_1)<br/>&#59;&#59;&<br/>Case_2)<br/>&#59;&#59;<br/>Case_3)<br/>&#59;&#59;<br/>*)<br/>&#59;&#59;<br/>esac<br/>|SWITCH: for ($choice) {<br/>&nbsp;&nbsp;&nbsp;$_ == 1 && die "You chose number one\n";<br/>&nbsp;&nbsp;&nbsp;$_ == 2 && print "You chose number two\n";<br/>&nbsp;&nbsp;&nbsp;$_ == 3 && do { "You chose number three\n";<br/>&nbsp;&nbsp;&nbsp;Last SWITCH;<br/>};<br/>#Default<br/>&nbsp;&nbsp;&nbsp;Warn ”message”;<br/>}<br/>|Switch ($var) {<br/>&nbsp;&nbsp;&nbsp;Case_1 {&nbsp;&nbsp;&nbsp;[...]&nbsp;&nbsp;&nbsp;}<br/>&nbsp;&nbsp;&nbsp;Case_2 {&nbsp;&nbsp;&nbsp;[...]&nbsp;&nbsp;&nbsp;}<br/>&nbsp;&nbsp;&nbsp;Case_3 {&nbsp;&nbsp;&nbsp;[...]&nbsp;&nbsp;&nbsp;}<br/>&nbsp;&nbsp;&nbsp;Default {&nbsp;&nbsp;&nbsp;[...]&nbsp;&nbsp;&nbsp;}<br/>}<br/>
+	Array = (one two three)<br/>|%hash = (navn =&gt; "Atle Holm",adresse => "Skogveien 14");<br/>@array = ("Atle Hom", "Skogvegen 14");<br/>@array = qw(one two three);<br/>|$hash = @{"navn" = "Atle Holm"; "adresse" = "Skogveien 14"};<br/>$array = @("Atle Holm", "Skogvegen 14");
+|TableEnd
+</div>
+<br/>
+<br/>
+<b>Various relevant informational links:</b><br/>
+<div style="margin-left:15px; width:430px;column-width:210px;-moz-column-width:210px;-webkit-column-width:210px;-webkit-column-count: 2;-moz-column-count: 2;column-count: 2;">
+	<li><a href="http://tecadmin.net/xargs-command-in-linux-with-example/" target="_blank" class="articleLink">Xargs command in Linux examplified</a></li>
+	<li><a href="http://www.calpoly.edu/~rasplund/script.html" target="_blank" class="articleLink">Bourne shell scripting</a></li>
+</div>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+	<u>Source</u>: Collection over time
+	</p>
+</p>
+<script type="text/javascript">	
+	$('#syntaxComparrisonSpan table tr:gt(0)').find('td').css("background", "white");
+	$('#syntaxComparrisonSpan table tr:eq(0)').find('td').css("background", "#F0F0F0");
+</script>

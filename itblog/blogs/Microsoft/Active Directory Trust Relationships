@@ -1,0 +1,68 @@
+<p class="blogheader"><A NAME="ADTRUSTHOWTO"><u>Active Directory Trust Relationships</u></A></p>
+<p class="smaller">-26th of October 2013<br/></p>
+<p>	
+	<table width="95%" style="margin-left:25px;margin-right:25px;">
+		<tr><th>Configure DNS before setting up trusts.</th></tr>
+		<tr><td>
+			For the two forests to be able to trust each other, they have to be able to resolve each others domain names. Here follows a quick simplified quide on how to set this up.<br/>
+			<b>1.</b> Open up DNS manager in the first domain controller in the first domain(sccmlab.local here).<br/>
+			<b>2.</b> Right click forward lookup zones and choose new zone.<br/>
+			<b>3.</b> In the wizard that appears("Welcome to The New Zone Wizard"):<br/> 
+			&nbsp;&nbsp; <b>a)</b> choose Stub Zone for Zone Type<br/>
+			&nbsp;&nbsp; <b>b)</b> the dns suffix for the other domain to trust under the Zone Name page (ad4.local here)<br/>
+			&nbsp;&nbsp; <b>c)</b> and the IP-address of the Master DNS Server(192.168.1.10 here).<br/>
+			<b>4.</b> Select the "Use The Above List Of Servers To Create A Local List of Master Servers" check box when that option appears.<br/>
+			<table style="margin-left:35px;"><tr>
+			<td><a href="images/ADTrusts/sccmlab2ad4stub1.png" data-lightbox="sccmlab2ad4stub" title="Creating Stub Zone"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4stub1.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			<td><a href="images/ADTrusts/sccmlab2ad4stub2.png" data-lightbox="sccmlab2ad4stub" title="Creating Stub Zone"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4stub2.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			<td><a href="images/ADTrusts/sccmlab2ad4stub3.png" data-lightbox="sccmlab2ad4stub" title="Creating Stub Zone"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4stub3.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			<td><a href="images/ADTrusts/sccmlab2ad4stub4.png" data-lightbox="sccmlab2ad4stub" title="Creating Stub Zone"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4stub4.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			</tr></table>
+		</td></tr><tr><td>
+			On the other domain controller in the other domain(ad4.local here):<br/>
+			<b>1.</b> Open up DNS manager.<br/>
+			<b>2.</b> Right click the Conditional Forwarders folder, and choose New Conditional Forwarder. <br/>
+			<b>3.</b> In the wizard that appears; <br/>
+			&nbsp;&nbsp; <b>a)</b> type the domain name of the first domain in the DNS Domain box(here sccmlab.local)<br/>
+			&nbsp;&nbsp; <b>b)</b> add the IP of the DNS Server/AD Controller where this is applicable<br/>
+			&nbsp;&nbsp; <b>c)</b> then select "Store this Conditional Forwarder in Active Directory, And Replicate It As Follows." Choose "All DNS Servers in Forest" and then click OK.<br/>
+			<table style="margin-left:35px;"><tr>
+			<td><a href="images/ADTrusts/ad42sccmlabconditionalforwarder.png" data-lightbox="ad42sccmlabconditionalforwarder" title="Creating a Conditional Forwarder"><img src="images/ADTrusts/thumbs/tn_ad42sccmlabconditionalforwarder.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			</tr></table>
+		</td></tr>
+	</table>
+	<br/>
+	<table width="95%" style="margin-left:25px;margin-right:25px;">
+		<tr><th>Create a Trust Relationship</th></tr>
+		<tr><td>			
+			<b>1.</b> Open up Active Directory Domains and Trusts in the first domain controller in the first domain(here sccmlab.local).<br/>
+			<b>2.</b> Right click sccmlab.local and choose properties. Then click the Trusts tab, New Trust, Next, in the Name Box enter "AD4.local."<br/>
+			<b>3.</b> Select Forest Trust, click Next, <br/>
+			&nbsp;&nbsp; <b>a)</b> select "Two-way" and click next, <br/>
+			&nbsp;&nbsp; <b>b)</b> select "Both this domain and the specified domain" and click next, <br/>
+			&nbsp;&nbsp; <b>c)</b> fill in the credentials to authenticate to the other domain and click next, <br/>
+			&nbsp;&nbsp; <b>d)</b> select "Forest-wide authentication" and click next, <br/>
+			&nbsp;&nbsp; <b>e)</b> select "Forest-wide authentication" again and click next, <br/>
+			&nbsp;&nbsp; <b>f)</b> continue the wizard until you can choose "Yes, Confirm the outgoing trust" and click next, <br/>
+			&nbsp;&nbsp; <b>g)</b> select "Yes, Confirm the incoming trust" and click next, <br/>
+			&nbsp;&nbsp; <b>h)</b> then click Finish. <br/>
+			&nbsp;&nbsp; <b>i)</b> You can now see the new trust in the sccmlab.local Properties box.<br/>
+			<b>4.</b>  You can now see the new trust in the ad4.local Properties box in Active Directory Domains and Trusts on the ad4.local domain controller as well.<br/>
+			<table style="margin-left:35px;"><tr>
+			<td><a href="images/ADTrusts/sccmlab2ad4trust1.png" data-lightbox="sccmlab2ad4trust" title="Setting up Trust Relationships"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4trust1.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			<td><a href="images/ADTrusts/sccmlab2ad4trust2.png" data-lightbox="sccmlab2ad4trust" title="Setting up Trust Relationships"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4trust2.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			<td><a href="images/ADTrusts/sccmlab2ad4trust3.png" data-lightbox="sccmlab2ad4trust" title="Setting up Trust Relationships"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4trust3.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			<td><a href="images/ADTrusts/sccmlab2ad4trust4.png" data-lightbox="sccmlab2ad4trust" title="Setting up Trust Relationships"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4trust4.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			<td><a href="images/ADTrusts/sccmlab2ad4trust5.png" data-lightbox="sccmlab2ad4trust" title="Setting up Trust Relationships"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4trust5.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			<td><a href="images/ADTrusts/sccmlab2ad4trust6.png" data-lightbox="sccmlab2ad4trust" title="Setting up Trust Relationships"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4trust6.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			<td><a href="images/ADTrusts/sccmlab2ad4trust7.png" data-lightbox="sccmlab2ad4trust" title="Setting up Trust Relationships"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4trust7.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			<td><a href="images/ADTrusts/sccmlab2ad4trust8.png" data-lightbox="sccmlab2ad4trust" title="Setting up Trust Relationships"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4trust8.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			<td><a href="images/ADTrusts/sccmlab2ad4trust9.png" data-lightbox="sccmlab2ad4trust" title="Setting up Trust Relationships"><img src="images/ADTrusts/thumbs/tn_sccmlab2ad4trust9.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			<td><a href="images/ADTrusts/ad42sccmlabtrust10.png" data-lightbox="sccmlab2ad4trust" title="Setting up Trust Relationships"><img src="images/ADTrusts/thumbs/tn_ad42sccmlabtrust10.png" border="0" height="30" width="70" style="margin:2px;"/></td>
+			</tr></table>
+		</td></tr>
+	</table>
+	<br>
+	<br>
+	<u>Source</u>: Configuring Windows Server 2008 Active Directory. ISBN: 978&#45;0&#45;470&#45;22509&#45;7
+</p>

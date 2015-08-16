@@ -1,0 +1,22 @@
+<p class="blogheader"><A NAME="LANSEC"><u>Local Network Security Actions</u></A></p>
+    <p class="smaller">-16th of September 2009<br><br></p>
+	<p>
+	<span class="blogHeader">When considering local network security, take into account the four following points in the planning and configuration:</span>
+	<table style="border:0px;">
+		<tr style="border:0px;">
+			<td style="border:0px;">
+				<table class="boxedInfoborder"><tr><td><img src="/images/ns_small.jpg" /></td></tr></table>
+			</td>
+			<td style="border:0px;">
+				<b>1</b>. Make sure the packages leaving your network to the internet are leaving with the same source address as the network it is leaving from. Implement a blocking of all suspicous packages with phony source addresses, to help protect the outside world from possibly owned/infected or taken over computer systems on your network.<br><br>
+				<b>2.</b> Block incomming packages from the internet that are addressed to broadcast addresses on the internal network. There is no reason why external clients or devices should be allowed to broadcast on your internal network.<br><br>
+				<b>3.</b> Turn off the Direct Broadcast capability of your internet router, unless it is absolutely essential. This will hinder potential attackers from the outside to broadcast various types of attacks into your network. See for instance the blog on <a href="http://localhost/index.php?scriptName=Sikkerhet&subSection=false#DOSA" class="articleLink">DoS attacks</a> for some examples.<br/><br/>
+				<b>4.</b> Block all packages arriving from the internet that have source addresses that are within the non-routable spectre defined by RFC1918. These are 10.0.0.0/8, 172.16.0.0/12 and 192.168.0.0/16. These addresses are set by RFC1918 to be private and non-routable on the internet. Routers on the internet will drop these by default. If you receive packages from the internet with source addresses in these address spaces, it should be seen as suspicious activity.<br/><br/> 
+				<br/><br/><br/><br/>				
+			</td>
+		</tr>
+	</table>
+	<br/>
+	<u>Source</u>: Computer Security Handbook, 5th Edition. ISBN: 978-0-470-32722-7 
+	<br/><br/>
+</p>

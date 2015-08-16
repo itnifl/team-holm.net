@@ -1,0 +1,69 @@
+<p>
+	<header>
+		<p class="blogheader"><A NAME="LIN_SEDAWK"><u><b>Sed, Cut and Awk</b></u></A></p>
+		<p class="smaller"><i>-20th of January 2013</i></p>
+		<div style="width:900px;margin-left:5px;">	
+			<i>These are over simplified examples, which are good for getting started with an simple overview. <br/>
+			The commands are executed in the Linux shell or terminal, and exemplify common ways to parse data.	</i> 			
+		</div>
+	</header>
+	<br/>
+	<article>
+		<table id="sedCutAwkTable" style="width:1050px;margin-left:auto;margin-right:auto;">
+			<tr>
+				<td style="background-color:rgb(240, 240, 240);">
+					<h3 style="margin-top:0px;">Usages of sed:</h3>
+					<ul name="triangle">					
+						<li name="triangle">Example:</li>
+						<pre class="brush: bash;">sed 's&#47;&lt;find&gt;&#47;&ltreplacement&gt;&#47;&lt;option&gt;'</pre>
+						<br/>
+						<li name="triangle">Showing &#47;etc&#47;passwd in tab delimited style instead of semicolon delimited style:</li>
+						<pre class="brush: bash;">more &#47;etc&#47;passwd &#124; sed 's&#47;&#92;:&#47;&#92;t&#47;g'</pre>
+						<br/>
+						<li name="triangle"> Disabling all yum repos in /etc/yum.repos.list:</li>
+						<pre class="brush: bash;">
+						for i in /etc/yum.repos.d/*; do
+							cat $i | sed 's/enable=1/enabled=0/g' > $i
+						done</pre>	
+					</ul>	
+					</td>
+				</tr>
+				<tr>
+					<td style="background-color:rgb(240, 240, 240);">
+					<h3 style="margin-top:0px;">Usages of cut:</h3>
+					Issue the command 'man cut' for more information.<br>
+					<ul name="triangle">							
+						<li name="triangle"> Filtering only the first and sixth field, and delimiting with two tabs:</li>
+						<pre class="brush: bash;">more &#47;etc&#47;passwd &#124; cut -d: -f1,6 &#124; sed 's&#47;&#92;:&#47;&#92;t&#92;t&#47;g'</pre>
+						<li name="triangle"> List how much free memory is on the system:</li>
+						<pre class="brush: bash;">echo 'Free megabytes of memory:' `free -m &#124; tr -s ' ' &#124; sed '&#47;^Mem&#47;!d' &#124; cut -d" " -f4`</pre>
+					</ul>
+					</td>
+				</tr>
+				<tr>
+					<td style="background-color:rgb(240, 240, 240);">
+					<h3 style="margin-top:0px;">Usages of awk:</h3>
+					Awk is more than a command, it borders to a programming language. Examples given here are only teasers.<br>
+					<ul name="triangle">
+						<li name="triangle">Print all lines longer then 50 characters:</li>
+						<pre class="brush: bash;">awk 'length($0) &gt; 50' &#47;etc&#47;passwd</pre>
+						<li name="triangle">Print columns one and six using &#47;etc&#47;passwd and : as a delimiter, sum column 3 and 4:</li>
+						<pre class="brush: bash;">awk -F":" '{print $1,$6 " - Sum of column 3 and 4, " $3 " + " $4 ": " $3 + $4}' &#47;etc&#47;passwd</pre>
+						<li name="triangle">Print all columns using stdin:</li>
+						<pre class="brush: bash;">awk ' {print $0} '</pre>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</article>
+	<br/>
+	<br/>
+	<b>Various relevant informational links:</b><br/>
+	<div style="margin-left:15px; width:430px;column-width:205px;-moz-column-width:205px;-webkit-column-width:205px;-webkit-column-count: 2;-moz-column-count: 2;column-count: 2;">
+		<li><a href="http://mylinuxbook.com/20-interesting-and-extremely-helpful-linux-command-line-tricks/" target="_blank" class="articleLink">Linux command line tricks.</a></li>
+	</div>
+	<br/>
+	<p>
+		<u>Sources</u>: Google, <a href="http://itfag.hist.no" target="_blank" id="link">H&oslash;gskolen i S&oslash;r-Tr&oslash;ndelag</a>.
+	</p>	
+</p>

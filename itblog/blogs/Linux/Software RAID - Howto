@@ -1,0 +1,16 @@
+<p class="blogheader"><A NAME="LIN_SRAID"><u>Software RAID - Howto</u></A></p>	
+<p class="smaller">-15th of August 2011<br><br></p>	
+This short article describes how to set up an software RAID in Linux. The command that we will use is:<br/>	
+&nbsp;&nbsp;&nbsp;<b><i># mdadm [mode] raid-device [options] component-devices</i></b>
+<br/>
+<br/>
+1. To build a mirrored RAID 1, we will issue for instance this command:<br/>	
+&nbsp;&nbsp;&nbsp;<b><i># mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1</i></b>
+<br/>
+<br/>	
+2. After this is done, you have to create a filesystem on the raid array:<br/>	
+&nbsp;&nbsp;&nbsp;<b><i># mkfs -t ext4 /dev/md0</i></b>
+<br/>
+<br/>	
+You can now mount the filesystem as you normally would(<b><i>mount /dev/md0 /mnt/raidDisk</i></b> or mount via /etc/fstab). Further more you can treat the RAID device as a normal disk, for instance using fdisk to subdivide the RAID further.		
+<p>	<u>Source</u>: LPIC-2 Study Guide. ISBN: 978-1-118-00015-1	</p>

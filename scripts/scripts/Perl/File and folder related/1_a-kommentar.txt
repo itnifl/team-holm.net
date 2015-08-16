@@ -1,0 +1,2 @@
+Har mest brukt Perl til egen lek, og det blir derfor bare noen f&aring; Perl scripts her.
+Disse brukte jeg privat til eget bruk. De er med p&aring; scriptsiden mest for variasjon og syntaksen sin del.

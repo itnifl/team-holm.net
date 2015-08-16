@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- File Name: shareContent.xsd -->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:annotation>
+	<xsd:documentation>Information about shared information</xsd:documentation>
+</xsd:annotation>
+
+<xsd:element name="shareContent">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="shareResource" type="shareType" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+
+<xsd:complexType name="shareType">
+	<xsd:sequence>
+		<xsd:element name="title" type="xsd:string" minOccurs="1" maxOccurs="1" />
+		<xsd:element name="description" type="xsd:string" maxOccurs="1"/>
+		<xsd:element name="source" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+		<xsd:element name="link" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+</xsd:schema>

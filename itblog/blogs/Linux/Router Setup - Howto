@@ -1,0 +1,63 @@
+<p>
+	<header>
+		<p class="blogheader"><A NAME="LIN_ROUTER"><u>Router Setup - Howto</u></A></p>
+		<p class="smaller">-17th of August 2011<br><br></p>
+	</header>
+	<article>
+		<b>When configuring Linux as an router</b>, there are two main aspects to consider. Those are enabling the <a href="http://en.wikipedia.org/wiki/Routing" id="link" class="articleLink" target="_blank">routing</a> at the linux server and determining the routes between the networks. The routes between the networks 
+		describe what path to take, or where to send the network packets next to get the packets on their way to the destination. The routes between the networks are either manually configured static routes or 
+		<a href="http://en.wikipedia.org/wiki/Routing_protocols" id="link" class="articleLink" target="_blank">dynamically</a> configured. Static routes are configured by entering the route information in the terminal prompt manually. Dynamically 
+		configured routes are communicated between routers with a routing protocol such as RIP, OSPF, IGRP, EGRP, IS-IS or BGP. Applications used for configuring Linux to handle dynamic routing protocols as those mentioned are for
+		example routed, gated and <a href="http://www.quagga.net/" class="articleLink" id="link" target="_blank">quagga</a>. The advantage of dynamically configured routing is that dynamic changes in the network will not bring a network path between two points down as logn as other paths exist. If a path is broken, another route will be communicated
+		between the routers by using the routing protocol. Another tool used in routing is the <a href="http://en.wikipedia.org/wiki/Iptables" id="link" class="articleLink" target="_blank">iptables</a> firewall often used in the Linux system. With this firewall you can control traffic as it flows through the router, 
+		denying or allowing it, re-routing it, manipulating it in other ways or NAT'ing it.<br/><br/>
+		
+		The following steps describe the enabling of routing for forwarding network packets in Linux:<br/>
+		<i>&gt;# echo "1" &gt; /proc/sys/net/ipv4/ip_forward</i>
+		<br/><br/>However, after reboot, this setting will be reset and forwarding turned off again.<br/>In most systems this setting can be set permanently by editing /etc/sysctl.conf, where the line to be added should be:<br/>
+		<i>net.ipv4.ip_forward=1</i></br></br>
+		The configuration is then loaded into the running system by the terminal command:<br/>
+		<i>&gt;# sysctl -p</i>.<br/><br/>
+		
+		<b>Listing and adding static routes:</b><br/>
+		<div class="boxedNewsborder" style="background-color:rgb(240, 240, 240);">
+		<i>&gt;# route<br/><br/>
+		<center><b>Kernel IP routing table</b></center>
+		|TableStart
+	    Destination|Gateway|Genmask|Flags|Metric|Ref|Use|Iface
+	    10.0.0.0|*|255.255.255.0|U|0|0|0|eth1
+	    192.168.1.0|*|255.255.255.0|U|0|0|0|eth2
+	    172.16.11.0|*|255.255.255.0|U|0|0|0|tap0
+	    default|10.0.0.1|0.0.0.0|UG|0|0|0|eth1
+	    |TableEnd
+		</i>
+		<br/><i>&gt;# route add -net 192.168.55.0 netmask 255.255.255.0 gw 192.168.1.254 dev eth2</i><br/>
+	    <i>&gt;# route<br/><br/>
+		<center><b>Kernel IP routing table</b></center>
+	|TableStart
+Destination|     Gateway|         Genmask|         Flags| Metric| Ref|    Use| Iface
+192.168.55.0|    192.168.1.254|   255.255.255.0|   UG|    0|      0|        0| eth2
+10.0.0.0|        *|               255.255.255.0|   U|     0|      0|        0| eth1
+192.168.1.0|     *|               255.255.255.0|   U|     0|      0|        0| eth2
+172.16.11.0|     *|               255.255.255.0|   U|     0|      0|        0| tap0
+default|         10.0.0.1|        0.0.0.0|         UG|    0|     0|        0| eth1
+    |TableEnd
+	</i><br/>
+	    </div>
+		<br/>
+		<b>Examples of iptables:</b><br/>
+		<div class="boxedNewsborder" style="background-color:rgb(240, 240, 240);">
+		The following makes sure that nothing on port 22(usually SSH) gets more than 4 attempts to connect to the port every 60 seconds. This prevents, or at least hinders, brute force attacks.<br/>
+		<i>
+		<br/>iptables -N SSH_CHECK
+		<br/>iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j SSH_CHECK
+		<br/>iptables -A SSH_CHECK -m recent --set --name SSH
+		<br/>iptables -A SSH_CHECK -m recent --update --seconds 60 --hitcount 4 --name SSH -j DROP
+		<br/>
+		</i>
+		</div>
+	<article>
+	<p>
+	<u>Source</u>: LPIC-2 Study Guide. ISBN: 978-1-118-00015-1
+	</p>
+</p>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<translations>
+    <translation id="introContainer">
+    	<no><![CDATA[ 
+    		<br/><div align="center" style="font-size: 1.5em;"></div>
+			<br/><div class="roundedcornr_box_525768"><div class="roundedcornr_top_525768"><div></div></div><div class="roundedcornr_content_525768">
+			Bloggene p&aring; denne siden vil v&aelig;re skrevet p&aring; bare engelsk. Noen av innleggene ble skrevet opprinnelig p&aring; engelsk, og det har ikke v&aelig;rt n&aelig;rliggende &aring; utgi artiklene p&aring; flere spr&aring;k 
+			eller begynne med artikler p&aring; andre spr&aring;k p&aring; grunn av dette. Bloggene er skrevet 
+			av egen interesse, for &aring; repetere gammelt stoff, og for &aring; bedre l&aelig;re meg stoff jeg har interesse av &aring; lese. Dette er ogs&aring; et oppslagsverk jeg selv bruker ved anledning. Finner en viss glede i &aring; dele dette med omverdenen av samme 
+			grunn som at jeg synes det er g&oslash;y &aring; finne slike sm&aring; skriblerier av interesse p&aring; nettet. Personlig liker jeg &aring; lese kortfattede artikler, s&aring; disse artiklene vil som oftest bli skrevet kortfattet.
+			&Aring; lese en mengde oppbl&aring;st tekst som er ment &aring; leie leseren gjennom de mest selvforklarende ting og som ikke trengs for &aring; f&aring; frem informasjon eller skape kunnskap 
+			oppleves oftest av meg som et frustrerende hinder frem til m&aring;let. Noen ganger er det bedre og raskere &aring; sette sammen kunnskapen p&aring; egenh&aring;nd n&aring;r denne er innlysende. Noen av artiklene forventer derfor et visst
+			niv&aring; av kunnskap fra tidligere, men legger ikke opp til dette selv. Alt som her er skrevet er skrevet med inspirasjon fra et eller annet, og derfor er kilder alltid 
+			oppgitt, om de finnes - <a href="mailto:atle@team-holm.net" border="0" class="articleLink">atle@team-holm.net</a>
+			</div><div class="roundedcornr_bottom_525768"><div></div></div></div>
+			<center><h1>Nyheter</h1></center>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>02.04.2015 - Hyper-V og Linux update:</b></div>
+				&nbsp;&nbsp;&nbsp;Har v&aelig;rt lite med oppdateringer hittil i &aring;r. Legger en artikkel i denne oversikten som ikke har v&aelig;rt lagt til, men som har v&aelig;rt tilgjengelig fra for en stund side; Creating a template and auto <a href="index.php?scriptName=Hyper-V&subSection=false#HYPER_GCRFBTS" class="articleLink">deploying Centos</a> i SCVMM 2012R2/Hyper-V.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>26.12.2014 - Hyper-V, VMWare og Linux:</b></div>
+				&nbsp;&nbsp;&nbsp;Stadig flere g&aring;r over til &aring; bruke Hyper-V i stedet for VMWare grunnet lisensfordeler. I den sammenheng har det v&aelig;rt nyttig for meg &aring; <a href="index.php?scriptName=Hyper-V&subSection=false#HYPER_GSWH" class="articleLink">notere en del enkle &quot;How-To's&quot;</a> p&aring; hvordan utf&oslash;re enkle dagligdagse gj&oslash;rem&aring;l i Hyper-V som man var vant med &aring; gj&oslash;re i VMWare. I tillegg legger jeg ved en enkel beskrivelse p&aring; hvordan hente ut <a href="index.php?scriptName=VMWare&subSection=false#VDIReporting1" class="articleLink">siste login tidspunkt</a> for VDI brukere i VMWare. Til slutt har vi en kort artikkel om <a href="index.php?scriptName=Linux&subSection=false#LIN_CW7TAN" class="articleLink">hvordan klone en bootbar Windows OS partisjon</a> over fra en disk til en annen, feks fra en vanlig HDD til en SSD.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>15.08.2014 - Siden sist oppdatering av nyheter har det v&aelig;rt lagt til fem artikler:</b></div>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?tagName=Linux#LIN_MTAO" class="articleLink">Make targets - an overview</a> er en kort og enkel oversikt over vanlige make targets og deres betydning. Noen nyttige linker er ogs&aring; lagt til for &aring; videre kunne se p&aring; dette.
+				<a href="index.php?tagName=Scripts#JsEssentials" class="articleLink">JavaScript Essentials</a> er enkle jsfiddles som lar deg eksperimentere med grunnleggende JavaScript konsepter. 
+				<a href="index.php?tagName=SQL%202008#SQL_PSSPT" class="articleLink">SQL 2008 Performing an SQL Server Performance Trace</a> tar deg med p&aring; en liten guide om hvordan tune SQL 2008 for ytelse.
+				<a href="index.php?scriptName=Microsoft&subSection=false#SQL_CVNCW" class="articleLink">Change and verify the NTP client in Windows</a> er en praktisk og kort guide som beskriver hvorfan h&aring;ndtere Windows NTP klienten.
+				S&aring; til slutt har vi en liten artikkel <a href="index.php?scriptName=Scripts&subSection=false#UCSCode" class="articleLink">How to write C# code against UCS Central</a> hvor fullstendig kode ikke er vist, men hvordan man kan muligens g&aring; frem og utf&oslash;re det som trengs er vist. V&aelig;r oppmerksom p&aring; at syntax highlighter'n ikke helt klarer &aring; vise koden helt rett her, s&aring; noe syntax feil er &aring; forvente.
+			</div>
+			<br/>
+			<div class="boxedNewsborder">
+				<div style="font-family: Georgia, serif;"><b>22.01.2014 - oppdatering oppdatering:</b></div>
+					&nbsp;&nbsp;&nbsp;Siden siste oppdatering har sidene blitt pusset opp litt, kommentering er n&aring; mulig, kode snutter vises med bedre syntax highlighting og et par nye blog artikler har blitt skapt. Blandt disse er en ved navn <a href="index.php?tagName=Commands#LIN_NNNNT" class="articleLink">Netcat, Nmap, Netstat and TCPDump</a> som skulle ha v&aelig;rt ferdig skrevet for lenge siden,
+					og ogs&aring; noen notater om <a href="index.php?scriptName=Scripts&subSection=false#POWERSHELLMongoDBUPSERT" class="articleLink">MongoDB Upserting med Powershell</a> har v&aelig;rt lagt til.				
+				</div>
+			<br/>
+			<div class="boxedNewsborder">
+				<table>
+					<tr>
+						<td style="vertical-align:text-top;">
+							<div style="font-family: Georgia, serif;"><b>26.10.2013 - Her er en liste over nye artikler siden sist oppdatering:</b></div>
+							&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Microsoft&subSection=false#ADTRUSTHOWTO" class="articleLink">Active Directory Trust Relationships</a><br/>
+							&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Microsoft&subSection=false#SQL_HTRLSAP" class="articleLink">SQL 2008 How to reset lost SA account password</a><br/>
+							&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Microsoft&subSection=false#SQL_UTQ" class="articleLink">SQL 2008 Useful TSQL queries</a><br/>					
+							&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=VMWare&subSection=false#ESXi_HTSATD" class="articleLink">How to shrink a thin disk in VMWare vSphere</a><br/>
+							&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=VMWare&subSection=false#ESXi_GLORDM" class="articleLink">General links on Raw Device Mapping</a><br/>
+						</td>
+						<td width="400">
+							<img src="/images/Spaceship-01.png" style="float:right;"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>18.10.2013 - Siden sist oppdatering av nyheter har det v&aelig;rt lagt til tre artikler:</b></div>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Linux&subSection=false#LIN_LVMExtend" class="articleLink">LVM - How to expand a logical volume</a><br/>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Scripts&subSection=false#SQLSelectLimiting" class="articleLink">SQL Select Limiting</a><br/>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Scripts&subSection=false#SQL_LFT" class="articleLink">SQL 2008 How to trunc a log file</a>
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>29.06.2013 - oppdaterer med ny artikkel i dag:</b></div>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=VMWare&subSection=false#ESXi_CVPIDS" class="articleLink">Virtual Patching in Deep Security 9</a>
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>24.02.2013 - lagt inn en rekke artikler denne helgen, disse listes nedenfor:</b></div>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Microsoft&subSection=false#SQL_MWC" class="articleLink">Mapping of local printers on Windows terminal servers through Citrix</a><br/>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Microsoft&subSection=false#WIN_Cleanup" class="articleLink">How to Clean up a Windows System Drive</a><br/>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Linux&subSection=false#LIN_IMG2ISO" class="articleLink">How to convert IMG to ISO</a><br/>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Linux&subSection=false#LIN_BDSCAN" class="articleLink">How to Setup BDScan</a>
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>17.02.2013 - kodet inn et tagsystem p&aring; bloggen</b></div>
+				&nbsp;&nbsp;&nbsp;Da har jeg koda inn et taggsystem p&aring; bloggen i dag, slik at man kan bla gjennom bloggene via overlappende emner om disse har samme tagger.<br/>
+				Har ikke lykkes med &aring; vise tagger tilh&oslash;rende en blogg sammen med bloggen grunnet at teksten for dette p&aring; magisk vis alltid ender p&aring; toppen av sida. Koden for dette fungerer likevel, men er satt p&aring; is av f&oslash;rnevnte grunner. <img src="/images/CrashTestSign.png" /> Tester videre. <img src="/images/CrashTestSign.png" />
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>27.01.2013 - litt Half-Life under Linux seksjonen i dag</b></div>
+				&nbsp;&nbsp;&nbsp;Har skribla litt om &aring; sette opp en dedikert <a href="index.php?scriptName=Linux&subSection=false#LIN_HLLINDED" class="articleLink">Half-Life server</a> i Linux under Linux seksjonen. Fant ikke en full, dekkende, og oppdatert guide p&aring; nettet, s&aring; laget en egen.<br/>
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>20.01.2013 - enda igjen nytt under VMWare, SQL Server og Linux</b></div>
+				&nbsp;&nbsp;&nbsp;En ny artikkel under VMWare om <a href="index.php?scriptName=VMWare&subSection=false#ESXi_CACHSS" class="articleLink">HA Slot Size</a> er lagt til, noen ord om <a href="index.php?scriptName=Microsoft&subSection=false#SQL_TDSF" class="articleLink">Troubleshooting and Diagnosing Service Failures</a> i SQL 2008 server er lagt til under Microsoft seksjonen, og Linux kommandoene <a href="index.php?scriptName=Linux&subSection=false#LIN_SEDAWK" class="articleLink">Sed, Cut and Awk</a> er omtalt under Linux seksjonen.<br/>
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>13.01.2013 - nytt under VMWare og SQL Server seksjonen, samt noe om Linux brannvegg</b></div>
+				&nbsp;&nbsp;&nbsp;En ny seksjon for <a href="index.php?scriptName=VMWare&amp;subSection=false" class="articleLink">VMWare</a> er opprettet, et skribleri om <a href="index.php?scriptName=Microsoft&subSection=false#SQL_DDD" class="articleLink">deadlocks</a> i SQL server er lagt til under Microsoft seksjonen, og <a href="index.php?scriptName=Linux&subSection=false#LIN_FIREWALLS" class="articleLink">Linux brannvegg</a> innlegget er fullf&oslash;rt.<br/>
+				&nbsp;&nbsp;&nbsp;<img src="/images/CrashTestSign.png" /><img src="/images/CrashTestSign.png" /><img src="/images/CrashTestSign.png" /> Flere innslag kommer i fremtiden. <img src="/images/CrashTestSign.png" /><img src="/images/CrashTestSign.png" /><img src="/images/CrashTestSign.png" />
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>02.01.2013 - oppdaterte fargevalg, bakgrunner og st&oslash;rrelser</b></div>
+				&nbsp;&nbsp;&nbsp;I et fors&oslash;k p&aring; &aring; gj&oslash;re siden noe mer harmonisk har fargevalget blitt valgt noe mer samh&oslash;rende. Nye blogger kommer etter hvert.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>05.08.2012 - bugs og nytt skribleri</b></div>
+				&nbsp;&nbsp;&nbsp;Problemer med at knapperaden p&aring; venstre side endrer st&oslash;rrelse ved bruk er rettet, utf&oslash;rt. Det er lagt til nytt skribleri om SQL Joins under Scripts.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>04.08.2012 - bugs</b></div>
+				&nbsp;&nbsp;&nbsp;Det er litt problemer med at knapperaden p&aring; venstre side endrer st&oslash;rrelse ved bruk. Dette arbeides det med.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>03.08.2012 - enda mer blogger.</b></div>
+				&nbsp;&nbsp;&nbsp;En scripts seksjon er lagt til.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>13.08.2011 - mer blogger.</b></div>
+				&nbsp;&nbsp;&nbsp;Da er det lagt til en Linux seksjon som snart f&aring;r innhold, og det er lagt til et par innlegg p&aring; Microsoft seksjonen.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>22.05.2011 - litt pynt.</b></div>
+				&nbsp;&nbsp;&nbsp;Har gjort et lite fors&oslash;k p&aring; &aring; pynte litt p&aring; nettsida.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>04.03.2011 - itblog.team-holm.net er oppe.</b></div>
+				&nbsp;&nbsp;&nbsp;Det er lagt til fire blogginnslag. Disse omhandler grunnleggende kryptografi, Active Directory skoger og domener, DoS angrep og sikkerhetstiltak for sm&aring; lokale nettverk.
+			</div><br/>
+    	]]></no>
+        <en><![CDATA[ 
+    		<br/><div align="center" style="font-size: 1.5em;"></div>
+			<br/><div class="roundedcornr_box_525768"><div class="roundedcornr_top_525768"><div></div></div><div class="roundedcornr_content_525768">
+			The blog articles on this website will be written in english only. Some of the first articles were written in english, and I have seen no reason to write articles or translate these into other languages because of this.
+			These blogs are written out of peronal interest, to repeat old curriculum, and to better learn and understand information I enjoy reading. These articles are also a quick lookup for myself when I find this option handy. 
+			The articles are for the most part written as short and concise as possible. That form of reading is my personal preference, since I usually find bloated text distracting from the actuall stuff I focusing on. Some times 
+			information is more easily learned by just seeing the bits and pieces and then connecting this in an indepent manner rather then reading an endless amount of text that attempts to walk one through absolutely every self-explanatory 
+			piece of information. I also find joy writing this for the same reason as I find joy reading other blogs and articles on the internet. Mostly everything here written is written with inspiration from something, so sources are always mentioned (if any exist).
+			- <a href="mailto:atle@team-holm.net" border="0" class="articleLink">atle@team-holm.net</a>
+			</div><div class="roundedcornr_bottom_525768"><div></div></div></div>
+			<center><h1>News</h1></center>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>02.04.2015 - Hyper-V and Linux update:</b></div>
+				 &nbsp;&nbsp;&nbsp;Updates this far have been few. Adding a missing update to the list of blog articles that can be found here;<br/>Creating a template and auto <a href="index.php?scriptName=Hyper-V&subSection=false#HYPER_GCRFBTS" class="articleLink">deploying Centos</a> in Hyper-V.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>26.12.2014 - Hyper-V, VMWare and Linux:</b></div>
+				 &nbsp;&nbsp;&nbsp;Hyper-V is taking over parts of the market where VMWare used to be dominant. This has made it practical for me to create <a href="index.php?scriptName=Hyper-V&subSection=false#HYPER_GSWH" class="articleLink">a simple how-to list</a> on practical stuff that I am used to do in VMWare. Also there is an article added that describes how to get the <a href="index.php?scriptName=VMWare&subSection=false#VDIReporting1" class="articleLink">last login time for VDI users</a> in VMWare. We wrap it up with a guide on <a href="index.php?scriptName=Linux&subSection=false#LIN_CW7TAN" class="articleLink">how to clone a Windows 7 operating system partition</a> from one disk to another, for example from a normal HDD to a SSD.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>15.08.2014 - since last update of this feed there has been added five new articles:</b></div>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?tagName=Linux#LIN_MTAO" class="articleLink">Make targets - an overview</a> shows a simple table overview of common make targets with relevant links for further research. 
+				<a href="index.php?tagName=Scripts#JsEssentials" class="articleLink">JavaScript Essentials</a> are simple jsfiddles to demonstrate basic javascript concepts that are commented in the code.
+				<a href="index.php?tagName=SQL%202008#SQL_PSSPT" class="articleLink">SQL 2008 Performing an SQL Server Performance Trace</a> shows how to make an SQL trace for performance tuning.
+				<a href="index.php?scriptName=Microsoft&subSection=false#SQL_CVNCW" class="articleLink">Change and verify the NTP client in Windows</a> is a useful and compact guide to handle the Windows NTP client.
+				Finally we explore <a href="index.php?scriptName=Scripts&subSection=false#UCSCode" class="articleLink">How to write C# code against UCS Central</a>, which does not offer full finished code, but guides you to a start on how to proceed. The syntax highlighter has some problems displaying the code correctly, so be aware that some syntax errors are to be expected in the demonstration code. 
+			</div>
+			<br/>
+			<div class="boxedNewsborder">
+				<div style="font-family: Georgia, serif;"><b>22.01.2014 - update update:</b></div>
+				&nbsp;&nbsp;&nbsp;Since last update there has been some remaking to the web pages, commenting is now available, code snippets are now shown with better syntax highlighting and a couple of new blog articles have been created. Among these is one about <a href="index.php?tagName=Commands#LIN_NNNNT" class="articleLink">Netcat, Nmap, Netstat and TCPDump</a> that was supposed to have been written a long time ago,
+				and also some notes on <a href="index.php?scriptName=Scripts&subSection=false#POWERSHELLMongoDBUPSERT" class="articleLink">MongoDB Upserting with Powershell</a> have been added.				
+			</div>
+			<br/>
+			<div class="boxedNewsborder">
+				<table>
+					<tr>
+						<td style="vertical-align:text-top;">
+						<div style="font-family: Georgia, serif;"><b>26.10.2013 - Here is a list of articles since last update:</b></div>
+							&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Microsoft&subSection=false#ADTRUSTHOWTO" class="articleLink">Active Directory Trust Relationships</a><br/>
+							&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Microsoft&subSection=false#SQL_HTRLSAP" class="articleLink">SQL 2008 How to reset lost SA account password</a><br/>
+							&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Microsoft&subSection=false#SQL_UTQ" class="articleLink">SQL 2008 Useful TSQL queries</a><br/>					
+							&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=VMWare&subSection=false#ESXi_HTSATD" class="articleLink">How to shrink a thin disk in VMWare vSphere</a><br/>
+							&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=VMWare&subSection=false#ESXi_GLORDM" class="articleLink">General links on Raw Device Mapping</a><br/>						
+						</td>
+						<td width="500">
+							<img src="/images/Spaceship-01.png" style="float:right;"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>18.10.2013 - Since last update of this news list there has been added three articles:</b></div>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Linux&subSection=false#LIN_LVMExtend" class="articleLink">LVM - How to expand a logical volume</a><br/>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Scripts&subSection=false#SQLSelectLimiting" class="articleLink">SQL Select Limiting</a><br/>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Scripts&subSection=false#SQL_LFT" class="articleLink">SQL 2008 How to trunc a log file</a>
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>29.06.2013 - updating with a new article today:</b></div>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=VMWare&subSection=false#ESXi_CVPIDS" class="articleLink">Virtual Patching in Deep Security 9</a>
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>24.02.2013 - added a few articles this weekend, these are listed below:</b></div>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Microsoft&subSection=false#SQL_MWC" class="articleLink">Mapping of local printers on Windows terminal servers through Citrix</a><br/>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Microsoft&subSection=false#WIN_Cleanup" class="articleLink">How to Clean up a Windows System Drive</a><br/>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Linux&subSection=false#LIN_IMG2ISO" class="articleLink">How to convert IMG to ISO</a><br/>
+				&nbsp;&nbsp;&nbsp;<a href="index.php?scriptName=Linux&subSection=false#LIN_BDSCAN" class="articleLink">How to Setup BDScan</a>		
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>17.02.2013 - created a tagsystem on this blog</b></div>
+				&nbsp;&nbsp;&nbsp;Spent some time creating a code system on this blog today, so that one can browse articles based on tag names.<br/>
+				All changes are not entirely done - <img src="/images/CrashTestSign.png" /> doing further testing. <img src="/images/CrashTestSign.png" />
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>27.01.2013 - a little Half-Life under the Linux section today</b></div>
+				&nbsp;&nbsp;&nbsp;Have written a bit about setting up a dedicated <a href="index.php?scriptName=Linux&subSection=false#LIN_HLLINDED" class="articleLink">Half-Life server</a> in Linux under the Linux section. Did not find a full, covering, and updated guide on the net, so I made my own.<br/>
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>20.01.2013 - once again new stuff under VMWare, SQL Server and Linux</b></div>
+				&nbsp;&nbsp;&nbsp;A new article under VMWare about <a href="index.php?scriptName=VMWare&subSection=false#ESXi_CACHSS" class="articleLink">HA Slot Size</a> is added, some few words about <a href="index.php?scriptName=Microsoft&subSection=false#SQL_TDSF" class="articleLink">Troubleshooting and Diagnosing Service Failures</a> in SQL 2008 server is added under the Microsoft section, and the Linux commands <a href="index.php?scriptName=Linux&subSection=false#LIN_SEDAWK" class="articleLink">Sed, Cut and Awk</a> are evaluated shortly under the Linux section.<br/>
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>13.01.2013 - new stuff under VMWare and the SQL Server section. Also an article on the Linux Iptable firewall</b></div>
+				&nbsp;&nbsp;&nbsp;A new section for <a href="index.php?scriptName=VMWare&amp;subSection=false" class="articleLink">VMWare</a> is created, some words about <a href="index.php?scriptName=Microsoft&subSection=false#SQL_DDD" class="articleLink">deadlocks</a> is added tagged as SQL server under the Microsoft section, and the <a href="index.php?scriptName=Linux&subSection=false#LIN_FIREWALLS" class="articleLink">Linux firewalls</a>  blog article is done.<br/>
+				&nbsp;&nbsp;&nbsp;<img src="/images/CrashTestSign.png" /><img src="/images/CrashTestSign.png" /><img src="/images/CrashTestSign.png" /> More coming in the future. <img src="/images/CrashTestSign.png" /><img src="/images/CrashTestSign.png" /><img src="/images/CrashTestSign.png" />
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>02.01.2013 - updated  color choices, backgrounds and sizing</b></div>
+				&nbsp;&nbsp;&nbsp;Updated the design a little bit, not my strongest side, but attempts are being made. New blog articles later.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>05.08.2012 - bugs and new writings</b></div>
+				&nbsp;&nbsp;&nbsp;Some design problems regarding buttons on the left side were fixed. Added some writing about SQL Joins under the Scripts section.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>04.08.2012 - bugs</b></div>
+				&nbsp;&nbsp;&nbsp;Some design problems with the button rows on the left side changing size when used. Work in progress.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>03.08.2012 - a few more blog articles.</b></div>
+				&nbsp;&nbsp;&nbsp;A scripts section is added.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>13.08.2011 - more blogs.</b></div>
+				&nbsp;&nbsp;&nbsp;Added a Linux section that soon will get more content, and a few articles are added under the Microsoft section.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>22.05.2011 - a little garnish added.</b></div>
+				&nbsp;&nbsp;&nbsp;Did some few attempts to update the looks of the page.
+			</div>
+			<br/>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>04.03.2011 - itblog.team-holm.net is up.</b></div>
+				&nbsp;&nbsp;&nbsp;Four blog articles are added. These are about basic cryptography, Active Directory forests and domains, DoS attacks and security measures for small local networks.
+			</div><br/>
+    	]]></en>
+    </translation>
+</translations>

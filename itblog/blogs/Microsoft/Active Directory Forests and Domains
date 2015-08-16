@@ -1,0 +1,67 @@
+<p class="blogheader"><A NAME="ADNOTES"><u>Notes about Active Directory Forests and Domains</u></A></p>
+	<p class="smaller">-13th of August 2009<br><br></p>
+	<p>
+	This text will contain notes and links to sources for further reading. It touches the subject of forest and domain structures for Active Directory, considerations for planning, and considerations for managing and administrating delegation in the domain. These notes are created to make a simple overview of these topics. Further reading is recommended for a deeper study.
+	<table class="boxedInfoborder"><tr><td>
+	<b>1. When considering the active directory structure's forests and domains for a company, the following considerations should be considered:</b><br>
+	<br>
+	*Organizational structural requirements<br>
+	*Operation requirements<br>
+	*Legal Requirements<br>
+	*Limited connectivity requirements<br>
+	<br>
+	A understanding of these requirements are essential to the forest and domain structure of Active Directory.<br>
+	<a href="http://technet.microsoft.com/en-us/library/cc730924(WS.10).aspx" target="_blank" class="articleLink">-&gt;More about this subject.</a>
+	</td>
+	<td width="300" rowspan="3">
+		<img src="/images/walkingQuestionMark.jpg" width="300" height="400"/>
+	</td></tr>
+	<tr><td>
+	<b>2. Isolation and autonomy requirements are also important aspects when considering forest and domain structures. This aspect breakes into four different categories:</b><br><br>
+	*Service Autonomy - non-exclusive service control<br>
+	*Data Autonomy - non-exclusive data control<br>
+	*Service Isolation - exclusive service control for intended individuals<br>
+	*Data Isolation - exclusive data control for intended individuals<br>
+	<br>
+	With these four areas of consideration, follows the question of how many <a href="http://technet.microsoft.com/en-us/library/cc731528(WS.10).aspx" target="_blank" class="articleLink">forests</a> that are required.<br>
+	<a href="http://technet.microsoft.com/en-us/library/cc770331(WS.10).aspx" target="_blank" class="articleLink">-&gt;More about this subject.</a>
+	</td></tr>
+	<tr><td>
+	<b>3. When the above information is collected and considered, the forest model will be the next thing to evaluate. We have three forest models defined by Microsoft as listed here:</b><br><br>
+	*Organizational forest model - service autonomy, service isolation and data isolation<br>
+	*Resource forest model - service and resource isolation<br>
+	*Restricted access forest model - data isolation<br>
+	<br>
+	In deciding the forest model, many aspects should be considered.<br>
+	<a href="http://technet.microsoft.com/en-us/library/cc770439(WS.10).aspx" target="_blank" class="articleLink">-&gt;More about this subject.</a>
+	</b>
+	</td></tr>
+	<tr><td>
+	<b>4. In addition, when considering administrative delegation, a list of areas of focus when planning for Active Directory should be as follows:</b><br><br>
+        *Organizational structure requirements<br>
+        *Operational requirements<br>
+        *Legal requirements<br>
+        *Administrative requirements<br>
+        *Organization size<br>
+        *Consideration of service management<br>
+        *Consideration of data management<br>
+        *Consideration of the geographical infrastructure<br>
+        *Consideration of the business infrastructure<br>
+        *Consideration of the technical infrastructure<br>
+	<br>
+	Relevant information is noted here, but for a deeper understanding it is recommended to follow the links in the text to more sources that cover the subjects.
+	</td><td valign="top">
+	<b>5. Eventually we get to evaluate the domain model and the number of domains that are required. For the domain model, we have defined by Microsoft two models:</b>
+	<br>
+	<br>
+	*Single domain model<br>
+	*Regional domain model<br>
+	<br>
+    In these domain models, the <a href="http://technet.microsoft.com/en-us/library/cc732201(WS.10).aspx" target="_blank" class="articleLink">number of domains</a> to implement is a question that will rise. Whether to upgrade or deploy new domains, and decide to have a dedicated forest root domain or a regional forest <a href="http://technet.microsoft.com/en-us/library/cc731174(WS.10).aspx" class="articleLink" target="_blank">root</a> domain. Forest and domain functional levels also have to be considered.<br>	
+	<a href="http://technet.microsoft.com/en-us/library/cc731718(WS.10).aspx" target="_blank" class="articleLink">-&gt;More about this subject.</a>
+	</td></tr>
+	</table> 
+	<br>
+	<br>
+	<u>Source</u>: Windows Server Enterprise Administration. ISBN: 9780735625099
+</p>

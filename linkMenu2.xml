@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<shareContent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="shareContent.xsd">
+	<shareResource>
+		<title>myMovieApi</title>
+		<description>This API uses omdbapi.com to fetch information about movies, thank you omdbapi.com! The movie names that it uses to fetch information with are files and folder names in a given source directory set in configuration. The API will show favourite movies both as a list made in JSON and as html that can be used or embedded. See: https://github.com/itnifl/myMovieApi</description>
+		<source>atle@team-holm.net</source>
+		<link>https://github.com/itnifl/myMovieApi</link>
+	</shareResource>
+	<shareResource>
+		<title>MovieLister</title>
+		<description>Perl scripts to list your local movies on a web page with all relevant information and graphics, tested on Ubuntu. Caches information in a mysql database. Instructions for usage and installation are included. Newer versions (see below) are with more content and functions. Older version may contain bugs. Version 0.8.1 is as of now unuseable. Last release: 19.08.2013. See: https://github.com/itnifl/movieLister</description>
+		<source>Atle Holm - report bugs to atle@team-holm.net</source>
+		<link>/code/movieListerPackage-v.0.1.0b.tar.7z</link>
+		<link>/code/movieListerPackage-v.0.0.8.1.tar.gz</link>
+		<link>/code/movieListerPackage-v.0.0.1.tar.gz</link>
+		<link>/code/movieLister.0.0.0.pre-version.zip</link>
+	</shareResource>
+	<shareResource>
+		<title>Folder-Watcher</title>
+		<description>C# written application that is designed to be installed as a service on a windows platform to perform surveilance of a folder path configured in a configuration file. The file system events are then logged to a database. The system can be configured with a configuration file for individual needs. See: https://github.com/itnifl/Folder-Watcher</description>
+		<source>Atle Holm</source>
+		<link>/code/Folder-Watcher-v1.0.0.rar</link>
+	</shareResource>
+	<shareResource>
+		<title>Baccess</title>
+		<description>At the time this was created, there was no way to authenticate users to give them access to handle their own Bacula jobs. This simple script aims to authenticate an LDAP user and give him access to only the jobs he has access to. This small system is at its very beginning, and could be improved greatly. This is no attempt to provide a full corporate solution, but rather share an idea. Tested in Linux.</description>
+		<source>Atle Holm</source>
+		<link>/code/BaccessPackage-v.0.0.1.tar.gz</link>
+	</shareResource>
+	<shareResource>
+		<title>ChatSystem</title>
+		<description>Systemet er skrevet i Java og er tilgjengelig med versjonsnavnet "Flaky." Gjør med koden som du ønsker, den er mest en rotesuppe delt for moro skyld. Koden er skrevet som et eksperiment for lek og gøy. Koden eventuelt gjenbrukes for mer lek.</description>
+		<source>Atle Holm</source>
+		<link>/code/chatSystem.zip</link>
+	</shareResource>
+</shareContent>

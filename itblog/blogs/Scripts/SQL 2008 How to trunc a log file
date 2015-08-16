@@ -1,0 +1,43 @@
+<p class="blogheader"><A NAME="SQL_LFT"><u>SQL 2008 How to trunc/shrink a log file</u></A></p>
+<p class="smaller">-23rd July 2013<br><br></p>
+<p>
+<table style="margin-left: auto; margin-right: auto;"><tr><td>
+<b>How to truncate a log file with TSQL:</b><br/>
+Every once in a while log files can grow too large and need to be truncated and/or shrinked in order to save valuable disk space. The steps below will guide you, given that you know the database name and log name. These can be found via the database properties and then selecting "Files."<br/>
+<br/>
+Normally, taking transaction log backups will truncate the transaction log. The space used on the disk will not shrink, but more space inside the log file is freed to be available for future use. Transaction logs should be handled as a part of the backup routine. To actually shrink the log file, the steps below will make that happen.<br/>
+<br/>
+<b class="blogstep">1. The following code will set TestDb to simple recovery mode, then shrink it, and finally set it back to full recovery mode:</b>
+	<br/>
+	<table class="boxedInfoborder" style="width: 100%;"><tr><td style="background-color:white;">
+		<font style="color: Black;font-weight:bold;">USE</font> [TestDb]<br/>
+		<font style="color: Black;font-weight:bold;">GO</font><br/>
+		<font style="color: Black;font-weight:bold;">ALTER DATABASE</font> [TestDb] <font style="color: Black;font-weight:bold;">SET</font> RECOVERY SIMPLE <font style="color: Black;font-weight:bold;">WITH</font> NO_WAIT<br/>
+		<font style="color: Black;font-weight:bold;">DBCC</font> SHRINKFILE(TestDbLog, 1)<br/>
+		<font style="color: Black;font-weight:bold;">ALTER DATABASE</font> [TestDb] <font style="color: Black;font-weight:bold;">SET</font> RECOVERY FULL <font style="color: Black;font-weight:bold;">WITH</font> NO_WAIT<br/>
+		<font style="color: Black;font-weight:bold;">GO</font><br/>
+	</td></tr>
+	</table>
+	<br/>
+	<b class="blogstep">2a. To list the placement of all instance databases for viewing, then the following SQL query might be of use:</b><br>
+	<table class="boxedInfoborder" style="width: 100%;"><tr><td style="background-color:white;">
+		<font style="color: Black;font-weight:bold;">SELECT</font> DB_NAME(dbid),* <font style="color: Black;font-weight:bold;">FROM</font> sys.sysaltfiles;
+	</td></tr></table><br/>
+
+	<b class="blogstep">2b. Alternatively, this query wich also lists all the instance log file locations might be of use:</b><br/>
+	<table class="boxedInfoborder" style="width: 100%;"><tr><td style="background-color:white;">
+		<font style="color: Black;font-weight:bold;">SELECT</font> name, physical_name <font style="color: Black;font-weight:bold;">AS</font> current_file_location <font style="color: Black;font-weight:bold;">FROM</font> sys.master_files;
+	</td></tr></table>
+</td><td style="vertical-align:text-top;">
+	<table class="boxedInfoborder" style="margin-left: auto; margin-right: auto; border: 0px;">
+		<tr style="border: 0px;">
+			<td style="border: 0px;">
+				<img src="/images/18684281_s.png" width="200" height="240"/>
+			</td>
+		</tr>
+	</table>
+</td></tr>
+</table>
+<br/><br/>
+<u>Source</u>: N/A
+</p>

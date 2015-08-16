@@ -1,0 +1,24 @@
+<header>
+	<p class="blogheader"><A NAME="SQL_CVNCW"><u>Change and verify the NTP client in Windows</u></A></p>
+	<p class="smaller">-17th of April 2014<br><br></p>
+</header>
+<p>
+	<article>
+		<b>In the command prompt running as administrator or in a bat file, <br/>
+		set the NTP client to fetch its time from for instance the following list of time servers(</b>the example here is with Norwegian time servers<b>):</b>
+		<pre class="brush: bash">
+			@echo off
+			w32tm /config /manualpeerlist:0.no.pool.ntp.org,3.no.pool.ntp.org,2.no.pool.ntp.org /syncfromflags:manual /reliable:yes /update
+			net stop w32time && net start w32time
+			w32tm /resync</pre>
+		<br/>
+		<b>Optionally verify the configuration with the following set of commands:</b>
+		<pre class="brush: bash">
+			w32tm /query /configuration
+			w32tm /query /status</pre>
+	</article>
+	<br/>
+	<p>
+		<u>Sources</u>: Microsoft<br/>
+	</p>	
+</p>

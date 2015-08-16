@@ -1,0 +1,94 @@
+<p>
+	<p class="blogheader"><A NAME="LIN_LVMExtend"><u>LVM - How to expand a logical volume</u></A></p>
+	<p class="smaller">-18th of October 2013<br></p>
+	This article will briefly describe how to expand a logical volume that is part of a LVM.<br><br>
+	<b>Note: </b><i>&gt;#</i><b> represents the command prompt and is not actually a part of the commands shown below:</b><br>
+	<table><tr><td>
+		<b>Before we start the following needs to be summarized:</b><br/>
+		&nbsp;&nbsp;&nbsp;a. A partition on a disk is made a <i>'Physical Volume.'</i><br/>
+		&nbsp;&nbsp;&nbsp;b. This <i>'Physical Volume.'</i> will then be added to a <i>'Volume Group.'</i><br/>
+		&nbsp;&nbsp;&nbsp;c. In the end we have a <i>'Logical Volume'</i> that the <i>'Volume Group'</i> is a part of, and that is mounted to the file system.<br/>
+	</td><td>
+		<b>Notes:</b><br/>
+		This howto can be performed on most Linux distributions. It will have to be done by issuing the commands in order on a terminal command prompt. You will most likely need root privileges, either by sudo or by logging in as root. How to use the terminal, sudo or login as root will not be explained here. 
+		For extending swap space, use the guide below and see <a href="https://www.centos.org/docs/5/html/5.1/Deployment_Guide/s2-swap-extending-lvm2.html" class="articleLink" target="_blank">here</a>.
+	</td></tr><tr><td width="50%">
+		<b>So here we go:</b><br/>
+		&nbsp;&nbsp;&nbsp;<b>1.</b> Add the disk to the physical computer or virtual machine(if that is the case).<br/>
+		&nbsp;&nbsp;&nbsp;<b>2.</b> Boot the machine. Some say a rescan will be enough, I had to boot.<br/>
+		&nbsp;&nbsp;&nbsp;<b>3.</b> List the disk with: fdisk -l<br/>
+		<table style="margin-left:15px;"><tr><td>
+		<b>Disk /dev/sdc: 8589 MB</b>, 8589934592 bytes<br/>
+		255 heads, 63 sectors/track, 1044 cylinders<br/>
+		Units = cylinders of 16065 * 512 = 8225280 bytes<br/>
+		Sector size (logical/physical): 512 bytes / 512 bytes<br/>
+		I/O size (minimum/optimal): 512 bytes / 512 bytes<br/>
+		Disk identifier: 0x00000000
+		</td></tr></table>
+		&nbsp;&nbsp;&nbsp;<b>4.</b> Make a partition on this disk:<br/>
+		&nbsp;&nbsp;&nbsp;<b># fdisk /dev/sdc</b><br/>
+		> Then press 'n' to add a new partition.<br/>
+		> Then press 't' change the partition type. Choose 8e(Linux LVM).<br/>
+		> Then press 'w' to write the partition table.<br/>
+		<br/>
+		&nbsp;&nbsp;&nbsp;<b>5.</b> List the disk again with: fdisk -l<br/>
+		<table style="margin-left:15px;"><tr><td>
+		Disk /dev/sdc: 8589 MB, 8589934592 bytes<br/>
+		255 heads, 63 sectors/track, 1044 cylinders<br/>
+		Units = cylinders of 16065 * 512 = 8225280 bytes<br/>
+		Sector size (logical/physical): 512 bytes / 512 bytes<br/>
+		I/O size (minimum/optimal): 512 bytes / 512 bytes<br/>
+		Disk identifier: 0xa0d940fd<br/>
+		<br/>
+		Device Boot&nbsp;&nbsp;&nbsp;Start&nbsp;&nbsp;&nbsp;End&nbsp;&nbsp;&nbsp;Blocks&nbsp;&nbsp;&nbsp;Id&nbsp;&nbsp;&nbsp;System<br/>
+		<b>/dev/sdc1&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;1044&nbsp;&nbsp;&nbsp;8385898+&nbsp;&nbsp;&nbsp;8e&nbsp;&nbsp;&nbsp;Linux LVM</b>
+		</td></tr></table>
+		&nbsp;&nbsp;&nbsp;<b>6.</b> Make a Physical Volume out of /dev/sdc1: <br/>
+		&nbsp;&nbsp;&nbsp;<b># pvcreate /dev/sdc1</b><br/>
+		&nbsp;&nbsp;&nbsp;After this is done, I would want to know what Volume Group to place my Physical Volume. To find that, I would start by finding the name of the Logical Volume that is mounted on the filesystem, and see what Volume Group it is using. In my case the mount point /mnt/syslogs is full, so I type <b>mount</b> in the console to get a list of mounts on the filesystem and see what is mounted on /mnt/syslog:<br/>
+		&nbsp;&nbsp;&nbsp;<i><b>/dev/mapper/vgLogDisks-lvSysLogs on /mnt/syslogs type ext4 (rw)</b></i><br/>
+		</td><td width="50%">
+		From this I know that the Logical Volume I am looking for is 'lvSysLogs.' I will then use the command <b>lvdisplay</b> to list information about logical volumes on the system. By this I find '/dev/vgLogDisks/lvSysLogs', with:<br/>
+		&nbsp;&nbsp;&nbsp;VG Name&nbsp;&nbsp;&nbsp;&nbsp;vgLogDisks<br/>
+		<br/>
+		I can verify the existence of this group by using the command <b>vgdisplay</b>.<br/>
+		<br/>
+		&nbsp;&nbsp;&nbsp;<b>7.</b> I will add our Physical Volume to vgLogDisks judging by the information above:<br/>
+		<table><tr><td>
+		<b># vgextend vgLogDisks /dev/sdc1</b><br/>
+		Volume group "vgLogDisks" successfully extended
+		</td></tr></table>
+		&nbsp;&nbsp;&nbsp;<b>8.</b> Our Logical Volume that makes out /mnt/syslog is still no larger despite its Volume Group getting a new disk. We therefore ectend our Logical Volume by the new disk:<br/>
+		<table><tr><td>
+		<b># lvextend /dev/vgLogDisks/lvSysLogs /dev/sdc1</b><br/>
+		Extending logical volume lvSysLogs to 17.99 GiB<br/>
+		Logical volume lvSysLogs successfully resized<br/>
+		</td></tr></table>
+		&nbsp;&nbsp;&nbsp;<b>9.</b> After this is done it is time to extend the filesystem to fit the Logical Volume:<br/>
+		<table><tr><td>
+		<b># resize2fs /dev/vgLogDisks/lvSysLogs</b><br/>
+		resize2fs 1.41.12 (17-May-2010)<br/>
+		Filesystem at /dev/vgLogDisks/lvSysLogs is mounted on /mnt/syslogs; on-line resizing required<br/>
+		old desc_blocks = 1, new_desc_blocks = 2<br/>
+		Performing an on-line resize of /dev/vgLogDisks/lvSysLogs to 4715520 (4k) blocks.<br/>
+		The filesystem on /dev/vgLogDisks/lvSysLogs is now 4715520 blocks long.<br/>
+		</td></tr></table>
+		&nbsp;&nbsp;&nbsp;<b>10.</b> Finally, we verify that the disk has all its new space:<br/>
+		<table>
+			<tr>
+				<td>
+					<b># df</b><br/>
+					Filesystem&nbsp;&nbsp;&nbsp;&nbsp;1K-blocks&nbsp;&nbsp;&nbsp;&nbsp;Used&nbsp;&nbsp;&nbsp;&nbsp;Available&nbsp;&nbsp;&nbsp;&nbsp;Use%&nbsp;&nbsp;&nbsp;&nbsp;Mounted on<br/>
+					/dev/mapper/vgSystem-lvRoot&nbsp;&nbsp;&nbsp;&nbsp;10014648&nbsp;&nbsp;&nbsp;&nbsp;1967016&nbsp;&nbsp;&nbsp;&nbsp;7538912&nbsp;&nbsp;&nbsp;&nbsp;21%&nbsp;&nbsp;&nbsp;&nbsp;/<br/>
+					tmpfs&nbsp;&nbsp;&nbsp;&nbsp;1962520&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;1962520&nbsp;&nbsp;&nbsp;&nbsp;0%&nbsp;&nbsp;&nbsp;&nbsp;/dev/shm<br/>
+					/dev/sda1&nbsp;&nbsp;&nbsp;&nbsp;297485&nbsp;&nbsp;&nbsp;&nbsp;67833&nbsp;&nbsp;&nbsp;&nbsp;214292&nbsp;&nbsp;&nbsp;&nbsp;25%&nbsp;&nbsp;&nbsp;&nbsp;/boot<br/>
+					/dev/mapper/vgSystem-lvLog&nbsp;&nbsp;&nbsp;&nbsp;2064208&nbsp;&nbsp;&nbsp;&nbsp;85584&nbsp;&nbsp;&nbsp;&nbsp;1873768&nbsp;&nbsp;&nbsp;&nbsp;5%&nbsp;&nbsp;&nbsp;&nbsp;/var/log<br/>
+					<b>/dev/mapper/vgLogDisks-lvSysLogs&nbsp;&nbsp;&nbsp;&nbsp;18565884&nbsp;&nbsp;&nbsp;&nbsp;9709504&nbsp;&nbsp;&nbsp;&nbsp;7913792&nbsp;&nbsp;&nbsp;&nbsp;56%&nbsp;&nbsp;&nbsp;&nbsp;/mnt/syslogs</b><br/>
+				</td>
+		</tr>
+		</table>
+	</td></tr></table>
+	<p>
+	<u>Sources</u>: LPIC-2 Study Guide: ISBN: 978-1-118-00015-1
+	</p>	
+</p>

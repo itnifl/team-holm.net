@@ -1,0 +1,86 @@
+<p class="blogheader"><A NAME="DOSA"><u>DoS Attacks</u></A></p>
+    <p class="smaller">-14th of November 2009<br><br></p>
+	<p>
+	<table style="border:0px;">
+		<tr style="border:0px;">
+			<td style="border:0px;" width="650">
+				This piece of text will summarize some DoS attacks. There propably new invented all the time, so this is not an attempt of a full complete list.
+				Denial of Service Attacks(DoS) are defined easily by the following three lines:
+				<br><br>
+				<b>1.</b> Extensive overuse and abuse of resources that leads to downtime and instabillity of services.<br/>
+				<b>2.</b> Physical attacks on infrastructure.<br/>
+				<b>3.</b> Change or destruction of system configuration.<br/>
+			</td>		
+			<!--<td style="border:0px;">
+				<img src="/images/DenialOfServiceButton.jpg" />
+			</td>-->
+		</tr>
+	</table>
+	<br/>
+	<table style="border:0px;">
+		<tr style="border:0px;">
+			<td style="border:0px;">
+				<div class="blogHeader">Various forms of DOS attacks:</div><br/>
+				*<b>SYN attack:</b> This attack occurs when the attacker floods the victim with TCP SYN packets(the first step in a <a href="http://en.wikipedia.org/wiki/Three_way_handshake#Connection_establishment" class="articleLink">three way handshake</a>). This opens a TCP session, the victim
+				replies with a TCP SYN-ACK reply, but gets no reply from the initiator. The source address of the TCP SYN packets are often spoofed, and that is why
+				the host that receives the TCP SYN-ACK reply does not recognize the session and ignores it. There might not even be a valid source
+				address in the TCP SYN packet, resulting in the TCP SYN-ACK packet to be dropped somewhere in the network.<br>
+				<br/>
+				When the victim receives a flood if TCP SYN requests, this can result in a buffer overflow. The memory used to store initiated TCP sessions
+				is overrun before the sessions time out. This results in the victim not being able to answer more TCP request, and therefore
+				seems unresponsive to other clients. This attack can be prevented in several ways, including shortening timeout intervals for TCP sessions,
+				incresing the TCP buffer, setting up a firewall to recognize TCP SYN attacks, and installing Intrusion Detection / Intrusion Prevention Systems(IDS/IPS).<br/>
+				<br/>
+				*<b>Ping of death:</b> Fragmented ICMP ping packets are sent to the victim, bypassing MTU, overriding the 65 535 byte limit of a ICMP packetand when the fragments are reassembled. This causes a buffer overflow that can result in DoS or other unforseen behaviour.
+				This attack can be prevented by properly configured firewalls.<br>
+				<br/>
+				*<b>Teardrop:</b> Fragmented IP packets are sent to the victim. As the firewall only checks the first packet in the fragmented
+				seqence, the following packets will overwrite the destination information and maybe also the source address information. This results in a 
+				completely different receiver of the packet, and maybe also a different source address then the firewall first thought. And thus
+				bypassing the firewall completely.<br/>
+				<br/>
+			</td>
+			<td style="border:0px;">
+				<br/><br/><br/>
+				<table class="boxedInfoborder"><tr><td><img src="/images/DenialOfServiceButton.jpg" /></td></tr></table>
+			</td>
+		</td>
+		<tr style="border:0px;">
+			<td style="border:0px;" colspan="2">
+				*<b>Smurf Attack:</b> This is a broadcast of ICMP packets with a spoofed source address. The receiver of the ICMP broadcast packets and also the source address receiving the replies will be under a DoS attack through flooding and excessive resource usage. 
+				Prevention against Smurf attacks include blocking of ICMP broadcasts in a firewall. <br/>
+				<a href="http://www.nordu.net/articles/smurf.html" target="_blank" class="articleLink">&gt;More info.</a><br>
+				<br/>
+				*<b>Fraggle Attack: </b>The same as the Smurf Attack, but then with UDP brodcasts and not ICMP broadcasts. Prevention of UDP broadcast attacks, include blocking of UDP broadcasts in a firewall. Much the same as the Smurf Attack.<br/>
+				<br/>
+				*<b>Spoofing:</b> Setting a fake source address on a transmitted package. <br/>
+				<a href="http://en.wikipedia.org/wiki/Spoofing_attack" target="_blank" class="articleLink">&gt;More info.</a><br>
+				<br/>
+				*<b>Session Hijacking:</b> Take over one side of a communicating session, or both sides. 
+				Session-Hijacking can be done through listening to the communication between two parties and steal the session by
+				answering a part of the communication with the correct session ID. This results in the host answering to the hijacker,
+				and dropping the correct client. The correct client will perseve the incident as just a lost connection to the host. Since the 
+				client no longer has the correct session ID(it is incremented in the session), the client can not rejoin the communication automatically.
+				If the client wants the session back, he would have to hijack it back. Another way to get the session ID, would be to brute force for a session ID(more likely to be detected). 
+				<a href="http://en.wikipedia.org/wiki/Session_hijacking" target="_blank" class="articleLink">&gt;More info.</a><br>
+				<br/>
+				*<b>Land.c :</b> The victim receives a packet with the same source address as destination address. The victim will then try to reply to itself, resulting in a loop. This attack can easily be prevented by blocking all packets that have the same source address as destination address.<br/>
+				<br/>
+				*<b>Christmastree packets:</b> The victim receives a TCP packet with all the flags set. The response is analyzed for further attacks. Can be prevented by properly configuring firewalls.<br/>
+				<br/>
+				*<b>Buffer Overflow:</b> Excessive overrun and flooding of a victims resources, resulting in DoS(Denial Of Service).<br/>
+				<br/>
+				*<b>Factory standardized configuration of equipment:</b> Can lead to unauthorized access, resulting in a security breach and possibly DoS.<br/><br/>
+				*<b>E-mail bombs.</b> Excessive sending of e-mail, often as a result of a trojan or a virus. Consequences are DoS of mail or network services. <br/>
+				<a href="http://en.wikipedia.org/wiki/E-mail_bomb" target="_blank" class="articleLink">&gt;More info.</a><br/>
+				<br/>
+			</td>					
+		</tr>
+	</table>
+	Aditionally, other dangers have always been rootkits, phishing, trojans, viruses, and other malware. These can ultimately end in a DoS attack. General
+	precoutions against DoS or DDoS attacks are installing IDS/IPS systems, make agreements with ISP's for further protection, keep an eye on vulnerabilities,
+	and keep you system patched and up to date.
+	<br/>
+	<br/>
+	<u>Source</u>: <a href="http://itfag.hist.no/public/fag/enkeltFag.jsp?fagkode=LN479D" target="_blank" class="articleLink">H&oslash;gskolen i S&oslash;r-Tr&oslash;ndelag</a>
+</p>

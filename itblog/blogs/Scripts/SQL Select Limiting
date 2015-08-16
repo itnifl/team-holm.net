@@ -1,0 +1,103 @@
+<p class="blogheader"><A NAME="SQLSelectLimiting"><u>SQL Select Limiting</u></A></p>
+	<p class="smaller">-14th September 2013<br><br></p>
+	The following article is a collection of example queries and theyr explanations regarding select limiting. It is assumed that the reader has at least basic knowledge of SQL queries and how to use them before attempting to make use of this short form article.
+<p>
+<!--<table class="boxedInfoborder" style="position:abolute;top:0px;left:0px;" width="200" height="300"><tr><td>
+</td></tr></table>-->
+<h2>Single row select limiting</h2>
+	<p class="smaller">	
+	<pre class="brush: sql">
+		# Example:
+		1. SELECT * FROM TABLE WHERE COLUMN1 = COLUMN2;
+		2. SELECT * FROM TABLE WHERE COLUMN1 &lt; COLUMN2;
+		3. SELECT * FROM TABLE WHERE COLUMN1 BETWEEN 3000 AND 4000;
+		4. SELECT * FROM TABLE WHERE COLUMN1 IN (1000, 2000, 3000);
+		5. SELECT * FROM TABLE WHERE COLUMN1 = COLUMN2 AND COLUMN1 != 4000;
+		6a. SELECT * FROM TABLE WHERE COLUMN1 = COLUMN2 AND COLUMN1 != 4000 OR COLUMN3 &lt; 2000;
+		6b.	Interpreted as: SELECT * FROM TABLE WHERE (COLUMN1 = COLUMN2 AND COLUMN1 != 4000) OR (COLUMN3 &lt; 2000);
+		7. SELECT * FROM TABLE WHERE COLUMN1 LIKE '%STRING%';
+		8. SELECT * FROM TABLE WHERE COLUMN1 LIKE '%STRING_REST'; # character _ is a wildcard for one sign.
+		9. SELECT * FROM TABLE WHERE COLUMN1 LIKE '%STRING\_REST' ESCAPE '\'; # character _ is now not a wild card.
+		10. SELECT * FROM TABLE WHERE COLUMN1 IS NULL;
+		11. SELECT * FROM TABLE WHERE COLUMN1 LIKE '%STRING%' OR NOT COLUMN2 < 0,35;
+		12. SELECT * FROM TABLE WHERE COLUMN1 ORDER BY COLUMN2;<br/>
+		13. SELECT * FROM TABLE WHERE COLUMN1 ORDER BY COLUMN2, 3 DESC, 4 NULLS FIRST | LAST; ASC ER DEFAULT
+		14. SELECT * FROM TABLE WHERE &VARIABLE ORDER BY COLUMN2;
+	</pre>
+	<br/>
+	<b>To handle variables:</b><br/>
+	<pre class="brush: sql">
+		# Example: 
+		DEFINE VARIABLE='TEST';
+		UNDEFINE VARIABLE;
+	</pre>
+	<b>Disallow defining:</b> SET DEFINE OFF;<br/>
+	<b>Allow defining:</b> SE DEFINE ON;<br/>
+	<b>Show input to variables on screen?</b> SET VERIFY ON | OFF;<br/>
+	</p>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+				<b>Query 1</b> selects everything from TABLE where COLUMN1 is the same as COLUMN2.<br/>
+				<b>Query 2</b> selects everything from TABLE where COLUMN1 is less then COLUMN2.<br/>
+				<b>Query 3</b> selects everything from TABLE where COLUMN1 is between the values 3000 and 4000.<br/>
+				<b>Query 4</b> selects everything from TABLE where COLUMN1 is either 1000, 2000 or 3000.<br/>
+				<b>Query 5</b> selects everything from TABLE where COLUMN1 is the same as COLUMN2, and COLUMN2 is not 4000.<br/>
+				<b>Query 6</b> selects everything from TABLE where COLUMN1 is the same as COLUMN2 and COLUMN1 is not 4000. If that condition is no true, rows from the table will be selected if COLUMN3 is less then 3000.<br/>
+				<b>Query 7</b> selects everything from TABLE where COLUMN1 has the word STRING in it.<br/>
+				<b>Query 8</b> selects everything from TABLE where COLUMN1 has the word STRING in it, followed by an arbitrary character, followed by the word REST.<br/>
+				<b>Query 9</b> selects everything from TABLE where COLUMN1 has the word STRING in it, followed by an underscore character, followed by the word REST.<br/>
+				<b>Query 10</b> selects everything from TABLE where COLUMN1 is NULL.<br/>
+				<b>Query 11</b> selects everything from TABLE where COLUMN1 contains the word STRING or where COLUMN2 is less then 0,35.<br/>
+				<b>Query 12</b> selects everything from TABLE where COLUMN1 and orders the result by COLUMN2.<br/>
+				<b>Query 13</b> selects everything from TABLE where COLUMN1 and orders the result by COLUMN2, sets third column in descending order and puts nulls first in fourth column.<br/>
+				<b>Query 14</b> selects everything from TABLE where where predefined variable contains the cinditions and orders by COLUMN2.<br/>
+			</td>
+		</tr>
+	</table>
+<h2>Multiple row select limiting</h2> 
+	<p class="smaller">
+	1. <b>HAVING and GROUP BY:</b> <br/>
+	<pre class="brush: sql">
+	# Examples:
+	SELECT COUNT(*), SUM(LIST_PRICE), product_status FROM PRODUCT_INFORMATION 
+		WHERE LOWER(PRODUCT_STATUS) &lt;&gt; 'orderable' 
+		GROUP BY PRODUCT_STATUS HAVING SUM(LIST_PRICE) &gt; 4000;
+	</pre>
+	2. <b>IN, NOT IN:</b> <br/>
+	<pre class="brush: sql">
+	# Examples:
+	SELECT LAST_NAME FROM EMPLOYEES WHERE DEPARTMENT_ID IN
+		(SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME LIKE 'IT%') AND 
+		SALARY > (SELECT AVG(SALARY) FROM EMPLOYEES);
+	</pre>
+	3. <b>ANY, ALL:</b> <br/>
+	<pre class="brush: sql">
+		# Example:
+		SELECT LAST_NAME FROM EMPLOYEES WHERE SALARY > ALL
+			(SELECT SALARY FROM EMPLOYEE WHERE LAST_NAME = 'Taylor') ORDER BY LAST_NAME;
+	</pre>
+	</p>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+				<b>Query 1:</b> The functions <i>COUNT()</i> and <i>SUM()</i> are multiple row functions. <i>GROUP BY PRODUCT_STATUS</i> states that the multiples of rows fed to these functions are in groups of the column <i>PRODUCT_STATUS</b>. The <i>HAVING</i> clause limits these groups to only include rows where the <i>SUM</i> of <i>LIST_PRICE</i> is larger then 4000. Thus <i>GROUP BY </i> and <i>HAVING </i> are both used in multiple row limiting.<br/>
+				<b>Query 2:</b> This example shows a query with a subquery where the result is limited to contain only rows where <i>DEPARTMENT_ID</i> is <i>IN</i> the result of the subquery that follows the <i>IN</i> clause. The <i>IN</i> clause is used here because the subquery returns multiple rows.<br/>
+				<b>Query 3:</b> Here the result is limited by the clause <i>'&gt; ALL'</i> followed by a subquery that returns multiple rows. This would select <i>LAST_NAME</i> from the <i>EMPLOYEES</i> table where the <i>SALARY</i> is more then the highest <i>SALARY</i> returned by the subquery.<br/>
+			</td>
+		</tr>
+	</table>
+	<br/>	
+	<b>Below is an explanation to the various forms of these clauses: </b><br/><br/>
+	|TableStart
+		<b>&lt; ANY</b>|Less then the largest
+		<b>&gt; ANY</b>|More then the smallest
+		<b>= ANY</b>|IN
+		<b>&lt; ALL</b>|Less then the smalles - the opposite of "more then the smallest(&gt; ANY)"
+		<b>&gt; ALL</b>|More then the largest - the opposite of "less then the biggest(&lt; ANY)"
+	|TableEnd
+	<br/>
+	<br/>
+	<i><b><u>Source</u>: OCA Oracle Database 11g SQL Fundamentals I Exam Guide. ISBN: 9780071597869</b></i>
+	</p>
+</p>

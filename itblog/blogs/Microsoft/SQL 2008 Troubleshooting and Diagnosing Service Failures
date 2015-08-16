@@ -1,0 +1,45 @@
+<p class="blogheader"><A NAME="SQL_TDSF"><u>SQL 2008 Troubleshooting and Diagnosing Service Failures</u></A></p>
+<p class="smaller">-19th January 2013<br><br></p>
+<p>
+	<b>Troubleshooting and Diagnosing Service Failures:</b><br>
+	In order to troubleshoot service failures, a clear picture of what prerequisites a successfully running service needs to be made.
+	<br>
+	<table><tr><td>
+	<b class="blogstep">1. The SQL Server service account's password should not be changed directly but through SQL Server Configuration Manager. The service master key is encrypted by the service account and password, and both are only updated via the Configuration Manager.</b><br>
+	<br>
+	<b class="blogstep">2. Make sure the service is in the right startup mode. It should always be set to manual for clustered installations. Service start failures should be troubleshooted firstly via Event Viewer and the SQL server error logs. The location of the SQL Server error logs can be found by running the following TSQL in a query window:</b><br>
+	<table class="boxedInfoborder"><tr><td style="background-color:white;">
+		<font style="color: Black;font-weight:bold;">SELECT</font> SERVERPROPERTY(‘ErrorLogFileName’);
+	</td></tr></table>
+	<br>
+	<b>It should output something like the following:</b><br>
+	<table class="boxedInfoborder">
+		<tr>
+			<td style="background-color:white;">
+				C:\Program Files\Microsoft SQL Server\MSSQL.1\MSSQL\LOG\ERRORLOG<br>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<b class="blogstep">3. The SQL server service account specified to run the service must not be locked out, deleted, disabled, expired or the service set with a wrong password.</b><br>
+	<br>
+	<b class="blogstep">4. The SQL server service account must have read and write access to folders that hold data/log files and system databases, R/W permissions to SQL server registry keys, have Log on As Service authority, and Sysadmin authority inside the SQL Server instance.</b><br>
+	<br>
+	<b class="blogstep">5. The storage system holding the system databases must be online, the folder holding the system database exist and path to it has to be correct. Check the service in configuration manager to see what startup parameters it is configured with. This will tell you where the system databases are placed, an thus where to check paths and permissions.</b><br>
+	<br>
+	<b class="blogstep">6. The Master database for the instance must not be corrupt. It can be repaired via the SQL server setup -> Maintenance Page -> Repair Wizard. The Master database can be checked with the TSQL command <a href="http://technet.microsoft.com/en-us/library/ms176064(v=sql.100).aspx" class="articleLink">DBCC CHECKDB</a>.</b><br>
+	</td><td>
+		<table class="boxedInfoborder"><tr><td>
+			<img src="/images/ServiceTroubleshooting/ServiceInConfigurationManager.png" width="316" height="347"/>
+		</td></tr></table>
+	</td></tr></table>	
+	<br>
+	<b class="blogstep">PS. If your instance is up and running and you want to list the placement of all its databases for troubleshooting theyr location, then the following SQL Query might be of use:</b><br>
+	<table class="boxedInfoborder"><tr><td style="background-color:white;">
+		<font style="color: Black;font-weight:bold;">SELECT</font> DB_NAME(dbid),* <font style="color: Black;font-weight:bold;">FROM</font> sys.sysaltfiles;
+	</td></tr></table>	
+	<br>
+	<p>
+	<u>Sources</u>: SQL 2008 Administration. ISBN: 978-0-470-55420-3<br>
+	</p>	
+</p>

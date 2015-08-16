@@ -1,0 +1,41 @@
+<p>
+	<header>
+		<p class="blogheader"><A NAME="LIN_IMG2ISO"><u>How to convert IMG to ISO</u></A></p>
+		<p class="smaller">-22nd of February 2013<br></p>
+	</header>
+	<article>
+		<table>
+			<tr>
+				<td>
+					Thought I would share my notes on converting IMG files to ISO in Linux.<br><br>
+					<b>Note: </b><i>&gt;#</i><b> represents the command prompt and is not<br>
+					actually a part of the commands shown below:</b><br>
+					<table width="100%">
+						<tr>
+							<td style="background-color:rgb(240, 240, 240);">
+								<b>Option 1.</b> <i>&gt;#ccd2iso file.img file.iso</i><br>
+								<b>Option 2.</b> <i>&gt;#mount -o loop &lt;img file&gt; &lt;mountpoint&gt;</i><br> 
+								&nbsp;&nbsp;&nbsp;<i>&gt;#mkisofs -dvd-video -o &lt;iso output file&gt; &lt;mountpoint&gt;</i><br> 
+								&nbsp;&nbsp;&nbsp;mkisofs is the same as genisoimage in Debian.<br> 
+								<b>Option 3.</b> Just rename the img file to an iso file :)<br>
+							</td>
+						</tr>
+					</table>
+					<br/><br/><br/>
+				<td width="260">
+					<b>IMG and ISO file formats</b> is usually a file image of a CD, DVD or BD. The entire contents of the disk is contained within the ISO or IMG file. 
+					With various tools, an ISO can be set to contain any set of files to later be used as a image for the creation of CD's, DVD's or such. Both the
+					ISO and IMG files need to be mounted on a mountpoint or virtual drive to be read and used by the operating system. When mounted, they will act as a real CD, DVD or such to the operating system.
+					<br/><br/><br/>
+				</td>
+				<td>
+					<img src="/images/blueHardDrive.jpg" width="400" height="180">
+				</td>
+			</tr>
+		</table>
+	</article>
+	<p>
+	<u>Sources</u>: No real sources
+	</p>	
+</p>
+

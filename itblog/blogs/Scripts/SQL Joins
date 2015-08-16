@@ -1,0 +1,97 @@
+<p class="blogheader"><A NAME="SQLJoins"><u>SQL Joins</u></A></p>
+	<p class="smaller">-4th August 2012<br/><br/></p>
+<p>
+This blog attempt will in short terms try to describe various joins available in Oracle.<br/>
+<br/>
+<h2>Natural Join</h2>
+	<p class="smaller">
+		<pre class="brush: sql">
+			# Example:
+			1. SELECT REGION_NAME FROM REGIONS NATURAL JOIN COUNTRIES WHERE COUNTRY_NAME='Canada';
+			2. SELECT REGION_NAME FROM REGIONS JOIN COUNTRIES USING (REGION_ID) WHERE COUNTRY_NAME='Canada';
+			3. SELECT COUNTRY_NAME FROM COUNTRIES JOIN REGIONS ON (COUNTRIES.REGION_ID=REGIONS.REGION_ID) WHERE REGION_NAME='Americas';
+		</pre>
+	</p>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+				<b>Query 1</b> joins the table REGION with the table COUNTRIES assuming a common relationship between the two(primary key->foreign key relationship).<br/>
+				<b>Query 2</b> specifies specificly what common column those two tables should join on.<br/>
+				<b>Query 3</b> specifies two columns, one in each table, that should be used in the join. Those need not have the same name.<br/>
+			</td>
+		</tr>
+	</table>
+<h2>Outer Joins</h2>
+	The examples below are for displaying syntax only. The data that is selected from is not checked to see if it is usable for this example. 
+	<p class="smaller">
+		<pre class="brush: sql">
+			# Example:
+			1. SELECT LAST_NAME, DEPARTMENT_NAME FROM EMPLOYEES, DEPARTMENTS WHERE EMPLOYEES.DEPARTMENT_ID (+) = DEPARTMENTS.DEPARTMENT_ID;
+			2. SELECT LAST_NAME, DEPARTMENT_NAME FROM EMPLOYEES RIGHT OUTER JOIN DEPARTMENTS ON(EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID);
+			3. SELECT LAST_NAME, DEPARTMENT_NAME FROM EMPLOYEES, DEPARTMENTS WHERE EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID (+);
+			4. SELECT LAST_NAME, DEPARTMENT_NAME FROM EMPLOYEES LEFT OUTER JOIN DEPARTMENTS ON(EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID);
+			5. SELECT LAST_NAME, DEPARTMENT_NAME FROM EMPLOYEES FULL OUTER JOIN DEPARTMENTS ON(EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID);
+		</pre>
+	</p>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+				<b>Query 1</b> retrieves all rows from the employees and departments tables with matching department_id's, and also includes those rows that do not match in the employees table.<br/>
+				<b>Query 2</b> is the same as query 1. Retrieves all rows from the employees and departments tables with matching department_id's, and also includes those rows that do not match in the employees table<br/>
+				<b>Query 3</b> retrieves all rows from the employees and departments tables with matching department_id's, and also includes those rows that do not match in the departments table.<br/>
+				<b>Query 4</b> is the same as query 3. Retrieves all rows from the employees and departments tables with matching department_id's, and also includes those rows that do not match in the departments table<br/>
+				<b>Query 5</b> retrieves all rows from the employees and departments tables with matching department_id's, and also includes those rows that do not match in the employees table and those who do not match in the departments table.<br/>
+			</td>
+		</tr>
+	</table>
+	<br/>
+<h2>Cartesian Joins / Cross Joins</h2>
+	<p class="smaller">
+		<pre class="brush: sql">
+			# Example:
+			1. SELECT * FROM REGIONS, COUNTRIES;
+		</pre>
+	</p>
+	The above query will select all rows from the regions table and match them with all rows in the countries table without considering any match condition. If there are 10 rows in each table, the result will be 100 rows after the join.
+	This is done to simply perform a join, or to simulate a reasonable amount of data.
+<br/>
+<h2>Self join</h2>
+	<p class="smaller">
+		<pre class="brush: sql">
+			# Example:
+			1. SELECT f1.name Dad, f2.name child FROM family f1 JOIN family f2 ON (f1.id=f2.father_id)
+		</pre>
+	</p>
+	The above query will join a table to itself, using the imaginary table family as en axample. The relationship between a father and a child can be displayed this way.
+	<br/>
+	<h2>Semijoins</h2>
+	<p class="smaller">
+		<pre class="brush: sql">
+			# Example:
+			SELECT * FROM departments
+				WHERE EXISTS
+				(SELECT * FROM employees
+					WHERE departments.department_id = employees.department_id
+					AND employees.salary > 2500)
+			ORDER BY department_name;
+		</pre>
+	</p>
+	Semijoins are joins that use EXISTS / IN in join as shown above.
+	<br/>
+	<h2>Antijoins</h2>
+	<p class="smaller">
+	<pre class="brush: sql">
+		# Example:
+		SELECT * FROM employees<br/> 
+			WHERE department_id NOT IN<br/>
+			(SELECT department_id FROM departments<br/>
+				WHERE location_id = 1700)<br/>
+		ORDER BY last_name;<br/>
+	</pre>
+	</p>
+	Antijoins are joins that use NOT IN / NOT EXISTS in join as shown above.
+	<br/>
+	<br/>
+	<i><b><u>Source</u>: OCA Oracle Database 11g SQL Fundamentals I Exam Guide. ISBN: 9780071597869</b></i>
+	</p>
+</p>

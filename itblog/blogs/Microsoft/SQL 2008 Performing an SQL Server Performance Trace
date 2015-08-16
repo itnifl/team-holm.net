@@ -1,0 +1,131 @@
+<header>
+	<p class="blogheader"><A NAME="SQL_PSSPT"><u>SQL 2008 Performing an SQL Server Performance Trace</u></A></p>
+	<p class="smaller">-17th of April 2014<br/></p>
+</header>
+<article>		
+	<table class="boxedInfoborder">
+		<tr>
+			<td style="background-color:rgb(245, 245, 245);width:350px;" rowspan="4">
+				<pre class="brush: sql">
+					/****************************************************/
+					/* Created by: SQL Server 2008 R2 Profiler          */
+					/****************************************************/
+					
+					-- Create a Queue
+					declare @rc int
+					declare @TraceID int
+					declare @maxfilesize bigint
+					set @maxfilesize = 500
+
+					-- Please replace the text InsertFileNameHere, with an appropriate
+					-- filename prefixed by a path, e.g., c:\MyFolder\MyTrace. The .trc extension
+					-- will be appended to the filename automatically. If you are writing from
+					-- remote server to local drive, please use UNC path and make sure server has
+					-- write access to your network share
+
+					exec @rc = sp_trace_create @TraceID output, 0, N'F:\MSSQL\InsertFileNameHere', @maxfilesize, NULL 
+					if (@rc != 0) goto error
+
+					-- Client side File and Table cannot be scripted
+
+					-- Set the events
+					declare @on bit
+					set @on = 1
+					exec sp_trace_setevent @TraceID, 10, 1, @on
+					exec sp_trace_setevent @TraceID, 10, 3, @on
+					exec sp_trace_setevent @TraceID, 10, 11, @on
+					exec sp_trace_setevent @TraceID, 10, 35, @on
+					exec sp_trace_setevent @TraceID, 10, 12, @on
+					exec sp_trace_setevent @TraceID, 10, 13, @on
+					exec sp_trace_setevent @TraceID, 45, 1, @on
+					exec sp_trace_setevent @TraceID, 45, 3, @on
+					exec sp_trace_setevent @TraceID, 45, 11, @on
+					exec sp_trace_setevent @TraceID, 45, 35, @on
+					exec sp_trace_setevent @TraceID, 45, 12, @on
+					exec sp_trace_setevent @TraceID, 45, 28, @on
+					exec sp_trace_setevent @TraceID, 45, 13, @on
+					exec sp_trace_setevent @TraceID, 12, 1, @on
+					exec sp_trace_setevent @TraceID, 12, 3, @on
+					exec sp_trace_setevent @TraceID, 12, 11, @on
+					exec sp_trace_setevent @TraceID, 12, 35, @on
+					exec sp_trace_setevent @TraceID, 12, 12, @on
+					exec sp_trace_setevent @TraceID, 12, 13, @on
+
+
+					-- Set the Filters
+					declare @intfilter int
+					declare @bigintfilter bigint
+
+					set @bigintfilter = 50000
+					exec sp_trace_setfilter @TraceID, 13, 0, 4, @bigintfilter
+
+					exec sp_trace_setfilter @TraceID, 35, 0, 6, N'tmsng'
+					-- Set the trace status to start
+					exec sp_trace_setstatus @TraceID, 1
+
+					-- display trace id for future references
+					select TraceID=@TraceID
+					goto finish
+
+					error: 
+					select ErrorCode=@rc
+
+					finish: 
+					go</pre>
+			</td>
+			<td style="background-color:rgb(245, 245, 245);width:350px;height:35px;">
+				<pre class="brush: sql">
+					-- To stop the trace, here with Id 2:    
+					exec sp_trace_setstatus 2, 0     
+					-- To find traceID if is unknown:
+					-- SELECT traceid FROM fn_trace_getinfo(default) 
+					--				where traceid > 1</pre>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color:rgb(245, 245, 245);width:350px;height:35px;">
+				<pre class="brush: sql"> 
+				-- To deleta a trace race:
+				exec sp_trace_setstatus 2, 2     
+				-- To delete the trace you first have to stop it. 
+				-- This will close the trace file being written to.</pre>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color:rgb(245, 245, 245);width:350px;height:60px;">
+				<pre class="brush: sql">
+				-- As an alternative to the above commands the 
+				-- 		following code will also work:
+				declare @tracenr int
+				SELECT @tracenr = MAX(traceid) 
+					FROM fn_trace_getinfo(default) where traceid > 1
+				exec sp_trace_setstatus @tracenr, 0
+				exec sp_trace_setstatus @tracenr, 2</pre>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<b>Firstly we need</b> start our trace and store the results in a file that we can analyze later. Use the script on the left hand side created by SQL Server 2008 R2 Profiler and change the path and filename in 'InsertFileNameHere' to a real path on your system. You can run it in SQL Server Management Studio, this will start the trace that collects the data we need. See comments in the script for further instructions.<br/>
+				<br/>
+				<b>Let the trace run</b> for a day or two, or at least a few hours where you know the system is under strain. To stop the trace use the stored procedure shown in the first box at the top of this column on the right hand side. The trace Id was returned to you when you started the trace, but if you have forgotten or missed it, you will find a query to find it for you in the same box at the top of this column.<br/>
+				<br/>
+				<b>When you are all done</b>, it might be a good idea to clean up after yourself and delete the trace you created from the system. You will find commands to do that in the second box fron the top in this column. Alternatively you can use the code in the third box from the top of this column to make your day.<br/>
+				<br/>
+				<b>Now that you have your data</b> collected in the trace file you created, you can start Database Engine Tuning Advisor and load the trace in there for analysis. Specify the file name and the database you want to evaluate as shown in <b>figure 1</b>, and start the analysis with the "Start Analysis" button.<br/>
+				<br/>			
+				<table style="float: left;">
+					<tr>
+						<td width="70">
+							<b>Figure 1:</b><br/>
+							<a href="images/SQLServer2008Tracing/StartDatabaseEngineTuningAdvisor.png" data-lightbox="SQL_Tracing" title="Database Engine Tuning Advisor"><img src="images/SQLServer2008Tracing/tn_StartDatabaseEngineTuningAdvisor.png" border="0" height="30" width="70" style="margin:2px;" /></a>
+						</td>
+					</tr>
+				</table>
+				<b>This blog article will be updated</b> later with more information on Database Engine Tuning Advisor and how to use it with what you have seen so far. In the meanwhile, you are off to a start with this small guide. The next steps should be intuitive. For a closer look take a look at <a href="http://blogs.technet.com/b/sql_server_isv/archive/2011/04/08/fundamentals-running-database-engine-tuning-advisor-and-selecting-indexes.aspx" class="articleLink" target="_blank">Ken Lassesen's guide</a> and jump down to the "Apply the Recommendations" section. You have already performed all the rest above that section when reading and following this guide, thus simplifying the process of doing this greatly.
+			</td>
+		</tr>
+	</table>
+</article>
+<p>
+	<u>Sources</u>: Gurus at my work<br/>
+</p>	

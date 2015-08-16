@@ -1,0 +1,24 @@
+<p class="blogheader"><A NAME="ESXi_GLORDM"><u>General links on Raw Device Mapping</u></A></p>
+	<p class="smaller">-19th of October 2013<br><br></p>
+	<div style="margin-left:85px;margin-right:85px;"><b>When re-checking</b> information about Raw Device Mappings, I found some  links that I liked and thought to gather here and share. Guess these are easy to find on for instance Google, 
+	but here they are served and ready without the need of further searching. If you are already acquainted with VMware vSphere, then the YouTube video embedded below will summarize an "how-to" pretty quickly.</div>
+	<br/>
+	<br/>
+	<br/>
+	<table style="margin-left:auto;margin-right:auto;" width="620">
+		<tr><th>RDM links</th></tr>
+		<tr><td>
+			<ul>
+				<li><b><a href="http://www.vmware.com/pdf/esx25_rawdevicemapping.pdf" target="_blank" class="articleLink">Raw Device Mappings summarized</a></b>
+				<li><b><a href="http://blogs.vmware.com/vsphere/2013/01/vsphere-5-1-vmdk-versus-rdm.html" target="_blank" class="articleLink">VMDK vs RDM</a></b>
+			</ul>
+		</td></tr>
+	</table>
+	<br/>
+	<iframe style="display:block;margin-left:auto;margin-right:auto;" width="620" height="315" src="//www.youtube.com/embed/LF-aNjxtOhk" frameborder="0" allowfullscreen></iframe>
+	
+	<br/>
+<p>
+	<br>
+	<u>Source</u>: VMware.com and YouTube(obviously).
+</p>

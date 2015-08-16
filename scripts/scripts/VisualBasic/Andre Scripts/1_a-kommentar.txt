@@ -1,0 +1,18 @@
+<div align="center">Lister diverse VisualBasic script som kan komme til god nytte. Scriptene forklares med kommentarer i starten.</div>
+<table align="center">
+	<tr>
+		<td>
+			<ul>
+				<li><a href="#dateSticker.vbs" class="articleLink">dateSticker.vbs</a></li>
+				<li><a href="#pathChecker.vbs" class="articleLink">pathChecker.vbs</a></li>
+				<li><a href="#replaceFileIfNewer.vbs" class="articleLink">replaceFileIfNewer.vbs</a></li>
+			</ul>
+		</td>
+		<td>
+			<ul>
+				<li><a href="#replaceFile.vbs" class="articleLink">replaceFile.vbs</a></li>
+				<li><a href="#restartService.vbs" class="articleLink">restartService.vbs</a></li>
+			</ul>
+		</td>
+	</tr>
+</table>

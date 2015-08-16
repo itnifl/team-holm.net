@@ -1,0 +1,252 @@
+<p class="blogheader"><A NAME="HYPER_GSWH"><u>Getting started with Hyper-V for the VMWare Admin</u></A></p>
+  <p class="smaller">-16th of December 2014<br/></p>
+    <table width="100%">
+    <tr>
+      <td>
+        <h3 style="margin-top:0px;margin-bottom:0px;">Table of contents:</h3>
+		<div style="margin-left:12px;margin-top:2px;">
+			<b>A. Getting started</b>
+			<div style="margin-left:16px;">
+				<a href="#A1" style="margin-left:12px;" class="articleLink">1. How to create a cluster with two or more Hyper-V hosts</a><br/>
+				<a href="#A2" style="margin-left:12px;" class="articleLink">2. How to install VMM</a><br/>
+				<a href="#A3" style="margin-left:12px;" class="articleLink">3. How to setup WSUS for VMM</a>
+			</div>
+		</div>
+		<div style="margin-left:12px;margin-top:4px;margin-bottom:4px;">		
+			<b>B. Nice to know</b>
+			<div style="margin-left:16px;">
+				<a href="#B1" style="margin-left:12px;" class="articleLink">1. How to search for a VM guest based on its IP or MAC address</a><br/>
+				<a href="#B2" style="margin-left:12px;" class="articleLink">2. How register an existing Hyper-V virtual machine on to a Hyper-V host</a><br/>
+				<a href="#B3" style="margin-left:12px;" class="articleLink">3. How to set the first boot device(here the CD-ROM) on Generation 2 VM guests</a><br/>
+				<a href="#B4" style="margin-left:12px;" class="articleLink">4. How to create NIC on VM and also set static IP-adress from a static IP-Pool defined in VMM</a><br/>
+				<a href="#B5" style="margin-left:12px;" class="articleLink">5. How to find addresses in a IP-Pool</a><br/>
+				<a href="#B6" style="margin-left:12px;" class="articleLink">6. How to get the fillingdegree on a datastore</a><br/>
+				<a href="#B7" style="margin-left:12px;" class="articleLink">7. How to find what VM's are running on a datastore</a><br/>
+				<a href="#B8" style="margin-left:12px;" class="articleLink">8. How to find orphaned disks</a><br/>
+				<a href="#B9" style="margin-left:12px;" class="articleLink">9. Hyper-V equivalents to SDRS and DRS in VMWare</a><br/>
+				<a href="#B10" style="margin-left:12px;" class="articleLink">10. Access rights in VMM</a><br/>
+				<a href="#B11" style="margin-left:12px;" class="articleLink">11. Hyper-V vs VMWare vSphere</a><br/>
+				<a href="#B12" style="margin-left:12px;" class="articleLink">12. More on Hyper-V and VMM</a>
+			</div>
+		</div>		
+      </td>
+    </tr>
+  </table>
+  <table width="100%">
+    <tr>
+      <td>
+        <h3 style="margin-top:0px;margin-bottom:0px;">A. Getting started:</h3><br/>
+        <b><a name="A1">1. How to create a cluster with two or more Hyper-V hosts:</a></b>  <br/>
+           <a href="http://technet.microsoft.com/en-us/library/jj863389.aspx" style="margin-left:12px;" class="articleLink" target="_blank">http://technet.microsoft.com/en-us/library/jj863389.aspx</a><br/>
+		<br/>
+        <span style="margin-left:6px;">Especially in this process: To add a disk in Available Storage to CSV(Cluster Shared Volumes):</span><br/>
+           <a href="http://technet.microsoft.com/library/jj612868" style="margin-left:12px;" class="articleLink" target="_blank">http://technet.microsoft.com/library/jj612868</a><br/>
+		<br/>
+        <b><a name="A2">2. How to install VMM:</a></b> <br/>
+           <a href="http://technet.microsoft.com/en-us/library/bb740755.aspx" style="margin-left:12px;" class="articleLink" target="_blank">http://technet.microsoft.com/en-us/library/bb740755.aspx</a><br/>
+        <br/>
+		<b><a name="A3">3. How to setup WSUS for VMM:</a></b> <br/>
+           <a href="http://technet.microsoft.com/en-us/library/gg675084.aspx" style="margin-left:12px;" class="articleLink" target="_blank">http://technet.microsoft.com/en-us/library/gg675084.aspx</a><br/>
+        <br/>
+      </td>
+    </tr>
+  </table>
+    <table>
+    <tr>
+      <td>
+        <h3 style="margin-top:0px;margin-bottom:0px;">B. Nice to know:</h3>
+        <b><a name="B1">1. How to search for a VM guest based on its IP or MAC address:</a></b><br/>
+		<div style="margin-left:12px;">
+			<pre class="brush: powershell">Get-Vm |Get-VirtualNetworkAdapter |Where {$_.IPv4Addresses -like "192.168.123*"} | Select Name, IPv4Addresses</pre>
+			<pre class="brush: powershell">Get-Vm |Get-VirtualNetworkAdapter |Where {$_.MACAddress -like "00:15:5D:*"} | Select Name, MACAddress</pre>
+			It seems not to be possible to search for VM guests based on theyr IP address ussing the graphical user interface in VMM.<br/>
+			And getting host names based on MAC address:<br/>
+			<pre class="brush: powershell">Get-VMHost | %{ get-scvmhostnetworkadapter -VMHost $_ | where-object {$_.PhysicalAddress -like "00:25:B5*" }} | Select VMHost, PhysicalAddress</pre>
+			<br/>
+		</div>
+		<b><a name="B2">2. How register an existing Hyper-V virtual machine on to a Hyper-V host:</a></b><br/>
+		<div style="margin-left:12px;">
+			<pre class="brush: powershell">
+				$VMHost = Get-SCVMHost -ComputerName "HyperVHostName"
+				Register-SCVirtualMachine -VMHost $VMHost -Path "C:\ClusterStorage\MyVM"</pre>
+			It seems not to be possible to search for VM guests based on theyr IP address ussing the graphical user interface in VMM.<br/>
+			<br/>
+		</div>
+        <b><a name="B3">3. How to set the first boot device(here the CD-ROM) on Generation 2 VM guests:</a></b><br/>
+		<div style="margin-left:12px;">
+			<br/>
+			<b>From the following:</b><br/>
+			<img style="margin-left:12px;" src="/images/Getting_started_with_Hyper-V_for_the_VMWare_Admin/image000.png" />
+			<br/>
+			<br/>
+			<b>We will get this in PowerShell:</b><br/>
+			<pre class="brush: powershell">Set-SCVirtualMachine -VM "VMName" -FirstBootDevice "SCSI,0,1"</pre>
+			
+			<b>To set the first boot device to be a NIC using PXE boot:</b><br/>
+			<pre class="brush: powershell">Set-SCVirtualMachine -VM (Get-VM "VMName") -FirstBootDevice "NIC,0"</pre>
+		
+			<b>You can also start Cluster Manager -> Nodes -> choose VM and set boot device there. It is not possible to do this on Generation 2 virtual guests in the GUI via VMM. It is however possible on Generation 1 virtual guests(it has to be powered off, here it is powered on):</b><br/>
+			<br/>
+			<img style="margin-left:12px;" src="/images/Getting_started_with_Hyper-V_for_the_VMWare_Admin/image001.png" />
+			<br/>
+			<br/>
+			<b>As a comparrison, a generation 2 virtual machine guest looks like this in the same menu area:</b><br/>
+			<br/>
+			<img style="margin-left:12px;" src="/images/Getting_started_with_Hyper-V_for_the_VMWare_Admin/image002.png" />
+			<br/>
+			<br/>
+			Please see: <a href="http://technet.microsoft.com/library/dn440675.aspx" style="margin-left:12px;" class="articleLink" target="_blank">http://technet.microsoft.com/library/dn440675.aspx</a><br/>
+			<i>"Because of underlying differences between generation 1 and generation 2 virtual machines, the startup order (boot order) for different devices (such as a hard disk or CD) is not handled the same way in the two generations. To customize the startup order for a generation 2 virtual machine in System Center 2012 R2, you must use a Windows PowerShell command that specifies the first boot device, rather than an ordered list of boot devices."</i>
+			<br/>
+			<br/>
+		</div>
+		<b><a name="B4">4. How to create NIC on VM and also set static IP-adress from a static IP-Pool defined in VMM:</a></b><br/>
+		<div style="margin-left:12px;">			
+			<br/>
+			<pre class="brush: powershell">
+			$VMNetwork = Get-SCVMNetwork -VMMServer vmmServerFQDN -Name "VLAN 127 Network" 
+			$VMSubnet = Get-SCVMSubnet -VMMServer vmmServerFQDN -Name "VLAN 127 Network_Subnet"
+
+			New-SCVirtualNetworkAdapter -VM "VMNameHere" -MACAddress "00:00:00:00:00:00" -MACAddressType Static `
+			-Synthetic -EnableVMNetworkOptimization $false -EnableMACAddressSpoofing $false `
+			-EnableGuestIPNetworkVirtualizationUpdates $false -IPv4AddressType Static -IPv6AddressType Dynamic `
+			-VMSubnet $VMSubnet -VMNetwork $VMNetwork
+
+			#Then choose either alternative 1 or alternative 2:
+			#Alternative 1:
+			$IPPool = Get-SCStaticIPAddressPool | where-object {$_.VMSubnet.name -eq $VMSubnet.Name}
+			Grant-SCIPAddress -StaticIPAddressPool $IPPool -GrantToObjectType VirtualNetworkAdapter  `
+			-GrantToObjectID ((Get-SCVirtualNetworkAdapter -VM "VMNameHere"))[0].ID
+					
+			#Alternative 2:
+			$Adapter =(Get-SCVirtualNetworkAdapter -VM "VMNameHere" | where  {$_.VLanID -eq "127"})
+			Set-SCVirtualNetworkAdapter -IPv4AddressType Static -VirtualNetworkAdapter $Adapter -IPv4Addresses "IPv4 Adresse Her" 
+			#In alternative 2 VMM will automatically findthe IP pool for $VMNetwork if it exists
+			</pre>
+			<br/>
+		</div>
+		<b><a name="B5">5. How to find addresses in a IP-Pool:</a></b><br/>
+		<div style="margin-left:12px;">			
+			Find used/assigned addresses:<br/>
+			<pre class="brush: powershell">Get-SCIPAddress -Assigned -StaticIPAddressPool (Get-SCStaticIPAddressPool -Name "AddressPoolName")</pre>
+			
+			<br/>
+			Find all assigned addresses that are not in use any more:<br/>
+			<pre class="brush: powershell">Get-SCIPAddress -UnAssigned -StaticIPAddressPool (Get-SCStaticIPAddressPool -Name "AddressPoolName")</pre>
+			<br/>
+			Unassigne all IP's from a IP-pool:<br/>
+			<pre class="brush: powershell">Revoke-SCIPAddress -AllocatedIPAddress (Get-SCIPAddress -Assigned -StaticIPAddressPool (Get-SCStaticIPAddressPool -Name "IP Pool Name"))</pre>
+			<br/>
+		</div>
+		<b><a name="B6">6. How to get the fillingdegree on a datastore:</a></b><br/>
+		<div style="margin-left:12px;">			
+			<br/>
+			<img style="margin-left:12px;" src="/images/Getting_started_with_Hyper-V_for_the_VMWare_Admin/image003.jpg" /><br/>
+			<br/>
+			The same thing can also be done in Failover Cluster Manager:<br/>
+			<br/>
+			<img style="margin-left:12px;" src="/images/Getting_started_with_Hyper-V_for_the_VMWare_Admin/image004.jpg" /><br/>
+			<br/>
+		</div>
+		<b><a name="B7">7. How to find what VM's are running on a datastore:</a></b><br/>
+		<div style="margin-left:12px;">			
+			<pre class="brush: powershell">Get-Cluster "ClusterName" | Get-ClusterNode | Foreach {Get-VM -ComputerName $_.Name | Where {$_.Path -match "Volume1"}}</pre>
+			<br/>
+		</div>
+		<b><a name="B8">8. How to find orphaned disks:</a></b><br/>
+		<div style="margin-left:12px;">
+			Paste the following into a ps1 file and run it after switching "ClusterNameHere" with the correct name of the cluster.<br/>
+			<pre class="brush: powershell">
+			[CmdletBinding(ConfirmImpact='High',SupportsShouldProcess=$true)]
+			PARAM (
+				   [string]$ClusterName = "ClusterNameHere",
+				   [string]$LocalClusterStoragePath = "C:\\ClusterStorage",
+				   [string]$ClusterStorageUNCTail = "C$\ClusterStorage",
+				   [string[]]$Extensions = @( '*.vhdx', '*.vhd', '*.iso' )
+			)
+
+			BEGIN {
+				   #Get all disks registered in Hyper-V:
+				   if ($host.Name -eq "ConsoleHost") {Write-Host -Foregroundcolor Yellow "Using the following parameters: "}
+				   $baseHost = (get-VMHostGroup | % {$_.AllChildClusters | where-object {$_.ClusterName -eq $ClusterName}  `
+				   		| get-vmhost})[0];
+				   if ($host.Name -eq "ConsoleHost") {Write-Host -Foregroundcolor Yellow "   baseHost: $baseHost"}
+				   $baseHostname = $baseHost.Name.Split(".")[0];
+				   if ($host.Name -eq "ConsoleHost") {Write-Host -Foregroundcolor Yellow "   baseHostname: $baseHostname"}
+				   $baseCluster = (get-VMHostGroup | % {$_.AllChildClusters | where-object {$_.ClusterName -eq $ClusterName}});
+				   if ($host.Name -eq "ConsoleHost") {Write-Host -Foregroundcolor Yellow "   baseCluster: $baseCluster"}
+				   $uncBase = [string]$("\\"+$baseHostname+"\"+$ClusterStorageUNCTail); 
+				   if ($host.Name -eq "ConsoleHost") {Write-Host -Foregroundcolor Yellow "   uncBase: $uncBase"}
+				   $disks = $baseCluster | get-vmhost | Get-Vm | `
+				   Foreach-Object {$_.virtualdiskdrives | % {[String]($_.VirtualHardDisk.Location) `
+				      -replace $LocalClusterStoragePath, $uncBase}}
+				   
+				   $List = @($Extensions | ForEach-Object {
+						 $extension = $_;
+						 if ($host.Name -eq "ConsoleHost") {Write-Host -Foregroundcolor Yellow "- Filtering extension: $extension"}
+						 dir -Path $uncBase | % {
+								dir -Path $uncBase\$_ | %{
+									   dir -Path $($uncBase+"\"+($_).Parent.Name+"\"+$_) -Filter $extension | `
+									   		Select-Object -ExpandProperty FullName                             
+								}
+						 }
+				   }) | Where-Object { 
+						 $_ -notin $disks 
+				   } | Select-Object -Unique
+				   if ($host.Name -eq "ConsoleHost") {Write-Host -Foregroundcolor Yellow $("`n**Found " + $List.count + " files..")}
+				   $List
+			}
+			</pre>
+			<br/>
+		</div>
+        <b><a name="B9">9. Hyper-V equivalents to SDRS and DRS in VMWare:</a></b><br/>
+		<div style="margin-left:12px;">	
+			Distributed Resource Scheduler in VMWare os <i>"Dynamic Optimization"</i> in System Center Virtual Machine Manager 2012 R2.<br/>
+			Choose the fabric pane in VMM and right click the site where yoiu want to adjust the settings, and choose properties.<br/>
+			<br/>
+			<img style="margin-left:12px;" src="/images/Getting_started_with_Hyper-V_for_the_VMWare_Admin/image005.png" /><br/>
+			<br/>
+		</div>
+		<b><a name="B10">10. Access rights in VMM:</a></b><br/>
+		<div style="margin-left:12px;">				
+			Requires to create a Tenant Administrator or Application Administrator in a Private Cloud.<br/>
+			<br/>
+			1. Settings -> Create User Role:<br/>
+			<br/>
+			<img style="margin-left:12px;" src="/images/Getting_started_with_Hyper-V_for_the_VMWare_Admin/image006.png" /><br/>
+			<br/>
+			2. Attach the role to a Private Cloud and delegate what objects can be administrated.<br/>
+			<br/>
+			<img style="margin-left:12px;" src="/images/Getting_started_with_Hyper-V_for_the_VMWare_Admin/image007.png" />
+			<br/>
+		</div>
+		<br/>
+		<b><a name="B11">11. Hyper-V vs VMWare vSphere:</a></b>
+		<div style="margin-left:12px;">	
+			Drawbacks with Hyper-V compared to VMWare vSphere:<br/>
+			<li>It is not possible to list what virtual machines are on a storage device via the GUI.</li>
+			<li>A virtual guest has to be powered off so that a NIC can be added to it.</li>
+			<li>The IP-addresses of the hosts are not shown in VMM. Powershell has to be used.</li>
+			<li>The handeling of access rights is not as granulated and straight forward to handle as in VMWare.</li>
+			<li>VMWare vSphere has more GUI options for doing various administrative tasks easily.</li>
+			<li>Hyper-V and SCVMM do not have a full equivalent to VMware's Storage DRS.</li>
+			<li>Live migrations of storage in SCVMM seems to way too often not to be able to clean up after itself, resulting in orphaned files.</li>
+			<br/>
+			Benefits with Hyper-V in regards to VMWare:<br/>
+			<li>Licenses and costs</li>
+			<li>Hyper-V has a practical networking model(see 'System Center VMM Networking' below)</li><br/>
+		</div>
+		<b><a name="B12">12. More on Hyper-V and VMM:</a></b>
+		<div style="margin-left:12px;">	
+			<a href="http://windowsitpro.com/hyper-v/understanding-hyper-v-networking-system-center-vmm-2012-r2" style="margin-left:12px;" class="articleLink" target="_blank">System Center VMM Networking</a><br/>
+			<a href="http://blogs.technet.com/b/scvmm/archive/2012/08/30/how-to-create-and-configure-a-private-cloud-in-system-center-2012-virtual-machine-manager.aspx" style="margin-left:12px;" class="articleLink" target="_blank">Creating A Private Cloud</a><br/>
+			<a href="http://www.virtualizationsoftware.com/vsphere-hyper-v-phoney-war/" style="margin-left:12px;" class="articleLink" target="_blank">Hyper-V vs VMWare - www.virtualizationsoftware.com</a><br/>
+			<a href="http://mdnoga.wordpress.com/category/system-center-2012-r2-virtual-machine-manager/" style="margin-left:12px;" class="articleLink" target="_blank">Hyper-V vs VMWare - mdnoga.wordpress.com</a><br/>
+			<br/>
+		</div>
+      </td>
+    </tr>
+  </table>
+<p><br/>
+  <u>Source</u>: System Center Virtual Machine Manager 2012 R2
+</p>

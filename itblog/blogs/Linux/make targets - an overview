@@ -1,0 +1,85 @@
+<p>
+	<header>
+		<p class="blogheader"><A NAME="LIN_MTAO"><u>Make targets - an overview</u></A></p>
+		<p class="smaller">-15th of August 2014<br></p>
+		This short article aims to give a quick overview of several of the make targets in Linux that I have found useful to know, and what they do. Simple examples follow underneath the list of targets.
+		From the <a href="http://unixhelp.ed.ac.uk/CGI/man-cgi?make" target="_blank" class="articleLink">man pages</a> for the make command; "<i>The purpose of the make utility is to determine automatically which pieces of a large program need to be recompiled, and issue the commands to recompile them.</i>"<br/><br/>
+	</header>
+	<article>
+		<span style="margin-left:15px;">
+			<b>Note: These targets are setup in the Makefile. The usage of these as shown below is what is the normal standard, but can deviate if the Makefile deviates.</b><br/>
+			<table style="margin-left:15px;">
+				<tr>
+					<td style="background-color:rgb(240, 240, 240);">
+						<ul name="triangle">	
+							<li name="triangle"><b>binrpm-pkg</b> - Builds the kernel as compiled binary.</li>
+							<li name="triangle"><b>rpm-pkg</b> - Builds the kernel as rpm package.</li>
+							<li name="triangle"><b>deb-pkg</b> - Builds the kernel for Debian only.</li>							
+							<li name="triangle"><b>tar-pkg</b> - Builds the kernel as uncompressed tarball.</li>
+							<li name="triangle"><b>rargz-pkg</b> - Builds the kernel as gzip compressed tarball.</li>
+							<li name="triangle"><b>tarbz2-pkg</b> - Builds the kernel as bzip2 compressed tarball.</li>
+							<li name="triangle"><b>dep</b> - Make all dependencies. The command 'make dep' ensures all dependencies are in place.</li>
+							<li name="triangle"><b>modules</b> - Compiles kernel modules.</li>
+							<li name="triangle"><b>modules_install</b> - Installs modules for the kernel.</li>
+							<li name="triangle"><b>bzimage</b> - Compiles and makes kernel as bzImage.</li>
+							<li name="triangle"><b>&lt;none&gt;</b> - When compiling application sources, issuing make without a target will simply compile the sources. In kernel compilation, the make command without any target normally is the same as 'make bzimage' and 'make modules'.</li> 
+							<li name="triangle"><b>install</b> - Compiles and installs the application if we are compiling application sources. If compiling a kernel; creates a ramdisk, copies in kernel file to /boot and sets up System.map that keeps tracks of pointers to functions in the kernel.</li>
+							<li name="triangle"><b>all</b> - Is the same as 'make' without a make target (see description above) and then also make 'modules_install' if we are doing kernel compilation.</li>
+							<li name="triangle"><b>mrproper</b> - Cleans up old configuration, temporary files, modules and module dependencies. Removes everything make config creates.</li>
+							<li name="triangle"><b>clean</b> - Cleans up everything 'make all' created, but leaves the configuration if ./configure or 'make config' was run.</li>
+							<li name="triangle"><b>distclean</b> - Cleans anything ./configure created. </li>
+							<li name="triangle"><b>oldconfig</b> - Reads the existing .config file and prompts the user for options in the current kernel source that are not found in the file. This is useful when taking an existing configuration and moving it to a new kernel. </li>
+							<li name="triangle"><b>silentconfig</b> - Works exactly the same way as oldconfig does, but it does not print anything to the screen, unless it needs to ask a question about a new configuration option.</li>
+							<li name="triangle"><b>config</b> - Make configuration with text based user interaction. The options are prompted one after another. All options need to be answered, and out-of-order access to former options is not possible.</li>
+							<li name="triangle"><b>menuconfig</b> - Make configuration with graphical menu (only text input). You can navigate through the menu and change the options you want.</li>
+							<li name="triangle"><b>xconfig</b> - Make configuration with graphical menu using Qt4. Requires dev-qt/qtgui to be installed.</li>
+							<li name="triangle"><b>gconfig</b> - Make configuration with graphical menu using GTK+. Requires x11-libs/gtk+, dev-libs/glib and gnome-base/libglade to be installed.</li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+		</span>
+		<br/><br/>		
+		<table style="margin-left:15px;">
+			<tr>
+				<td style="background-color:rgb(240, 240, 240);padding-right:10px;width:250px;">
+					<b>Compilation of application sources:</b>
+				</td>
+				<td style="background-color:rgb(240, 240, 240);padding-right:10px;width:250px;">
+					<b>Kernel Compilation:</b>
+				</td>
+			</tr>
+			<tr>
+				<td style="background-color:rgb(240, 240, 240);padding-right:10px;width:250px;vertical-align: top;">
+					./configure<br/>
+					make<br/>
+					make install<br/>
+				</td>
+				<td style="background-color:rgb(240, 240, 240);padding-right:10px;width:250px">
+					make menuconfig<br/>
+					make<br/>
+					make modules<br/>					
+					make modules_install<br/>
+					make install
+				</td>
+			</tr>
+		</table
+	</article>
+	<br/>
+	
+	<br/>
+	<b>Various relevant informational links:</b><br/>
+	<div style="margin-left:15px; width:430px;column-width:205px;-moz-column-width:205px;-webkit-column-width:205px;-webkit-column-count: 2;-moz-column-count: 2;column-count: 2;">
+		<li><a href="http://www.cyberciti.biz/tips/build-linux-kernel-module-against-installed-kernel-source-tree.html" target="_blank" class="articleLink">Build kernel module against installed kernel</a></li>
+		<li><a href="http://www.codeproject.com/Articles/31488/Makefiles-in-Linux-An-Overview" target="_blank" class="articleLink">An overview of Makefiles</a></li>
+		<li><a href="http://www.berkes.ca/guides/linux_kernel.html" target="_blank" class="articleLink">Compile and install a Linux kernel</a></li>
+		<li><a href="http://linoxide.com/how-tos/linux-make-command-examples/" target="_blank" class="articleLink">Make command examples</a></li>
+		<li><a href="http://www.wikihow.com/Compile-the-Linux-Kernel" target="_blank" class="articleLink">Wikihow: Compile the Linux kernel</a></li>
+		<li><a href="http://www.computerhope.com/unix/umake.htm" target="_blank" class="articleLink">Make command examples</a></li>
+	</div>
+	<br/>
+	<p>
+		<u>Sources</u>: The whole of the World Wide Web
+	</p>	
+</p>
+

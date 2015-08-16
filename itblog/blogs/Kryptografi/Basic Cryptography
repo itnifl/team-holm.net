@@ -1,0 +1,82 @@
+<p class="blogheader"><A NAME="BCRYPT"><u>Basic Cryptography</u></A></p>
+	<p class="smaller">-9th of September 2009<br></p>
+	<p>
+	Cryptography is the science of providing integrity, confidentiality and authentication to messages sent over insecure channels. This text will provide basic information about cryptographic functions, signatures, distribution of keys and the purpose of certificates.
+	<br/><br/> 
+	<b>Symmetric Key Encryption:</b><br/>
+	<br/>
+	Also called the secret key cryptography. It is based on that the involved parties for communication agree on a shared secret for encrypting and decrypting the messages used in the communication. 
+	In the process of encryption and combining ciphertext(encrypted text), plaintext, the secret key, and making up a message of arbitrary length from this  - there are commonly used four methods that each create a output of message blocks with fixed length. 
+	These are named;<br/>
+	<ul>
+		<li><b>ECB</b>(Electronic CodeBook).</li> 
+		<li><b>CBC</b>(Cipher Block Chaining).</li>
+		<li><b>CFB</b>(Cifer FeedBack).</li> 
+		<li><b>OFB</b>(Output FeedBack).</li>
+	</ul>
+	These methods are described as <a href="http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation" target="_blank" id="link" class="articleLink">Block cipher modes of operation</a>. 
+	It is argued that these methods provide only confidentiality or message integrity, not both. For other methods with more options, see the last link.
+
+Additionally, for encrypting data when using symmetric key encryption, the following definitions are used by the previous four methods to do theyr work: <br/>
+	<ul>
+	<li><a href="http://en.wikipedia.org/wiki/Data_Encryption_Algorithm" id="link" target="_blank" class="articleLink"><b>DES</b></a>(Data Encryption Standard).</li>
+	<li><b>3DES</b>(Triple DES).</li>
+	<li><b>RC-4</b>(Rivest Cipher 4).</li>
+	<li><b>IDEA</b>(International Data Encryption Algorithm).</li>
+	<li><b>AES</b>(Advanced Encryption Standard).</li>
+	</ul>
+	<b>Asymmetric Key Encryption:</b><br/>
+	<br/>
+ 	Also called <a href="http://en.wikipedia.org/wiki/Asymmetric_encryption" id="link" target="_blank" class="articleLink">Public Key Encryption</a>, uses a system of a private and a public keys to decrypt and encrypt messages in communication between two parts. The private key should always be kept private, and thus never sent or distributed anywhere. The keys are used for either decrypting or encrypting messages in a communication between two parts, where one key in the pair is the only one that can decrypt messages encrypted by the other. 
+<br/><br/>
+The public and private key pair is generated at each end of the communication, then the public keys are exchanged. If I then want to send a message, I will encrypt it with my private key. Anyone that has gotten a hold of my public key, can then decrypt it. But since only I have my private key that encrypted the message in the beginning, the receiver can be sure that the message originated from me. With this method, the receiver can be sure of who is the sender, but anyone can read the message with my public key. To remedy this problem I could in addition to encrypting the message with my private key, also encrypt it with the receivers public key. This way, my private key encryption assures the receiver where the message is coming from, and assures that only the receiver can decrypt the message with his private key. 
+<br/><br/>
+When the message is originating at the other end of the communication, the receiver of my public key can encrypt the message with my public key and be assured that only I can read the message. Since I am the only one that has my private key, that is the only key that can decrypt an encryption done by my public key. 
+	<br/>
+	<br/>
+	<table style="border:0px;">
+		<tr style="border:0px;">
+			<td style="border:0px;">
+				<b>Hash Functions:</b><br/>
+				<br/>
+				<a href="http://en.wikipedia.org/wiki/Cryptographic_hash_function" id="link" target="_blank" class="articleLink">Hash Functions</a> take data of a given length and outputs a code of fixed length(the message digest), as a kind of a fingerprint for identifiying the sender of the message. For this to work, four aspects of the hash function must be true: <br/>
+				<ul>
+					<li>The function must always create the same output given the same input.</li>
+					<li>The function must only be able to work one way.</li>
+					<li>The result of the function must appear to be random, to prevent guessing.</li>
+					<li>The output should be unique, two different inputs should not create the same result or message digest.</li>
+				</ul>
+				The receiver of the message can there by verify the sender by inputing the message into the same hash function as the sender. Assuming that only the receiver and the sender of the message have the hash function, the receiver will know that the message is from the correct sender if the message digest matches with the message digest attached with the message from the sender. 
+				<br/><br/>
+				This technique can be a victim for a man-in-the-middle-attack, where the attacker tampers with the message digest attached to the message. A solution to this problem is to provide keyed hash functions, or <a href="http://en.wikipedia.org/wiki/Digital_signatures" target="_blank" class="articleLink">Digital Signatures</a>.
+				<br/><br/>
+				<br/>
+
+				<b>Digital Signatures:</b><br/>
+				<br/>
+				When encrypting the message digest of a hash function, we create a <a href="http://en.wikipedia.org/wiki/Digital_signature" id="link" target="_blank" class="articleLink">digital signature</a>. When this is done we give proof of who the sender of the message is via the message digest, and we manage to encrypt it and thus protect it from tampering thanks to a asymmetric public key encryption.
+				<br/>
+				<br/><br/>
+				<b>Distribution of Keys:</b><br/>
+				<br/>
+				When distributing secret keys to multiple clients over a network infrastructure, we often refer to a <a href="http://en.wikipedia.org/wiki/KDC" id="link" target="_blank" class="articleLink">Key Distribution Center</a>(KDC) as the source distributer and central manager of keys. KDC's are mostly used with symmetric encryptions. A common method of distributing secret keys in a secure manner over a open network is the <a href="http://en.wikipedia.org/wiki/Diffie_hellman" id="link" target="_blank" class="articleLink">Diffie-Hellman</a> algorithm.
+				<br/>
+				<br/><br/>
+				<b>Digital Certificates:</b><br/>
+				<br/>
+				A <a href="http://en.wikipedia.org/wiki/Public_key_certificate" id="link" target="_blank" class="articleLink">digital certificate</a> contains a public key for asymmetric encryption, often distributed from a Public Key Infrastructure(PKI). The digital certificates are distributed to users that are intended for the certificate, and thus verifying that the public key in the certificate belongs to the receiver. A part of such a infrastructure can for instance be a Certificate Authority(CA), to distribute, enroll and revoke certificates. 
+			</td>
+			<td style="border:0px;">
+				<table class="boxedInfoborder"><tr><td><img src="/images/crypto.jpg" /></td></tr></table>
+				<br/><br/>
+				<br/><br/><br/>
+				<br/><br/><br/>
+				<br/>
+			</td>
+		</tr>
+	</table>
+	<br/>
+	<br/>
+	<u>Source</u>: Designing Network Security, 2nd Edition. ISBN: 1-58705-117-6
+	<br/><br/>	
+	</p>

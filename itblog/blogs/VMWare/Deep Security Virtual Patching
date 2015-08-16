@@ -1,0 +1,33 @@
+<p class="blogheader"><A NAME="ESXi_CVPIDS"><u>Configuring Virtual Patching in Deep Security 9</u></A></p>
+	<p class="smaller">-29th of June 2013<br><br></p>
+	<table><tr><td>
+		<b>Virtual Patching</b>
+		<br><br>		
+		In Deep Security IPS is what makes up Virtual Patching. <br>
+		See page 74 in the Deep Security Administration guide. DPI will inspect the traffic to the guest system and use IPS to block any 
+		traffic that might be exploiting known vulnerabilities that are fixed in patches not yet applied to the guest system.<br>
+		<br>
+		<hr/>
+		<b class="blogstep">1.	In the Deep Security Console, go to computers.<br></b>
+		<b class="blogstep">2.	Choose a test machine and double click it.<br></b>
+		<b class="blogstep">3.	Choose 'Intrusion prevention' and choose ON, then decide if you want 'Detect' or 'Prevent'.<br></b>
+		<b class="blogstep">4.	Choose to add rules manually (Assign/Unassign button) or choose to get recommendations (then press the button 'Scan for Recommendataions').<br></b>
+		<b class="blogstep">5.	If you choose the manual method, then just check off the rules you want and right click so that you can choose 'Assign rules -> to all interfaces'<br></b>
+		<b class="blogstep">6.	If you choose 'Scan for Recommendations' you can either choose to let the rules automatically be added or see what is recommended.<br></b>
+		<b class="blogstep">7.  Usually it is adviceable to choose under Assign/Unassign  -> 'Recommended for assignment.'<br></b>
+		<b class="blogstep">8.  Then right click 'select all' - right click and 'Assign rules -> to all interfaces.'<br></b>
+		<br><br>
+		<hr>
+		Please see the illustration on the right.<br>
+		<br>
+		<br>
+		<br><br>
+		For further information, please see the administration manual.
+	</td><td>
+			<table class="boxedInfoborder"><tr><td><img src="/images/VMWare/DSIPSforVP.png" width="461" height="375"/></td></tr></table>
+	</td></tr>
+	</table>
+<p><br>
+	<u>Source</u>: Deep Security 9 Administration Manual
+</p>
+	

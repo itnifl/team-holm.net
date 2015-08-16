@@ -1,0 +1,30 @@
+<p class="blogheader"><A NAME="WIN_SPNs"><u>Service Principal Names</u></A></p>
+	<p class="smaller">-29th of June 2013<br><br></p>
+	<table><tr><td>
+		<b>SPN -Service Principal Name</b>
+		<br><br>		
+			Innleder med generell forklaring i første avsnitt av : http://msdn.microsoft.com/en-us/library/windows/desktop/ms677949(v=vs.85).aspx
+			Denne linker videre for å vise SPN syntaksen: http://msdn.microsoft.com/en-us/library/windows/desktop/ms677601(v=vs.85).aspx
+			
+			Andre avsnitt forklarer at SPN må registreres på en konto for å brukes, og at om kontonavnet endres må det registreres på nytt: http://msdn.microsoft.com/en-us/library/windows/desktop/ms677949(v=vs.85).aspx
+			Deretter forklares hvordan en tjeneste registrerer sin SPN: http://msdn.microsoft.com/en-us/library/windows/desktop/ms676922(v=vs.85).aspx
+			
+			When using Kerberos to authenticate itself to a server, the client requests a session ticket for the service principal name; when using certificate-based authentication, the SPN is validated against the contents of the "SubjectName" field of the certificate of the server: http://technet.microsoft.com/en-us/library/cc961723.aspx
+			
+			Her forklares bruk av SETSPN: http://social.technet.microsoft.com/wiki/contents/articles/717.service-principal-names-spns-setspn-syntax-setspn-exe.aspx
+			With SetSPN, you can, view, edit, and delete SPN registrations. The command syntax follows:
+			Setspn serviceclass/host:portnumber servicename
+			
+			Her er det noen praktiske eksempler på problem og løsning: http://blogs.technet.com/b/askds/archive/2008/06/11/kerberos-authentication-problems-service-principal-name-spn-issues-part-3.aspx
+			Les hele serien godt, og følgende også: http://blogs.technet.com/b/askds/archive/2008/05/14/troubleshooting-kerberos-authentication-problems-name-resolution-issues.aspx
+					
+	</td><td>
+			<table class="boxedInfoborder"><tr><td></td></tr></table>
+	</td></tr>
+	</table>
+<p><br>
+	<u>Source</u>: 
+</p>
+
+<b class="blogstep"></b>
+	

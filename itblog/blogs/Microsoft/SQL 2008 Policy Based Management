@@ -1,0 +1,20 @@
+<p class="blogheader"><A NAME="SQL_PBM"><u>SQL 2008 Policy Based Management</u></A></p>
+	<p class="smaller">-13th of August 2011<br><br></p>
+	<p>
+	<b>Overview of Policy Based Management:</b><br>
+	By using PBM in SQL 2008 you can enforce automatic evaluation, automatic enforcement, surface area configuration and centralize the management of these aspects. There by increasing effecticity and administration.
+    <a href="http://msdn.microsoft.com/en-us/library/bb510667.aspx" class="articleLink">Policy based Management</a> in SQL 2008 server is based on three components:<br>
+	|TableStart
+	<font size="2"><b>Facet</b></font>|<font size="1">- What technical area will the policy apply to?</font>
+	<font size="2"><b>Condition</b></font>|<font size="1">- What condition of the facet do we test for?</font>
+	<font size="2"><b>Policy</b></font>|<font size="1">- The policy that evaluates the condition of the facet and enforces what it is configured for.</font>
+	|TableEnd
+	<br>
+	The policy is then applied to a target wich has to be specifically defined.
+	<br><br><br>
+	
+	<p>
+	More about SQL Server 2008 <a href="http://technet.microsoft.com/en-us/library/bb510667.aspx" class="articleLink">Policy based management</a>.<br>
+	<u>Source</u>: SQL 2008 Administration. ISBN: 978&#45;0&#45;470&#45;55420&#45;3
+	</p>	
+</p>

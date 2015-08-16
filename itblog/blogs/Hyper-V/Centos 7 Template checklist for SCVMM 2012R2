@@ -1,0 +1,130 @@
+<p class="blogheader"><A NAME="HYPER_GCRFBTS"><u>Getting Centos 7 template ready in SCVMM 2012 R2</u></A></p>
+  <p class="smaller">-2nd of April 2015<br/></p>
+	In this blog article, we will list the steps needed to be done inside a Centos 7 OS to make it a VM ready to be a template in SCVMM 2012R2.
+	The article describes a VM template setup intended for a environment using SpaceWalk for patching as a centralized solution.
+	If your enviroment does not use SpaceWalk, you might consider using it or take whatever ideas from this article to use in your system. In case that is not preferred, feel free to not include the steps that 
+	you are not in need of including. 
+	<br/><br/>
+	<b>Naming:</b><br/>
+	First off, the Template host name will be CENTOS64, this is due to the scripts that we will use later for initializing the new virtual machine when it boots.  The scripts check among other things that the hostname has been changed from the initial template hostname before they proceed.
+	This hostname will change to the VM name when the VM is deployed from the template.
+	<br/><br/>
+	<b>Getting started:</b><br/>
+	This guide assumes you are logged in as root or that you have sudo rights to act as root. After installing a minimal install of Centos 7, make sure the necessary packages needed for basic management and interaction with Hyper-V are set up. You might also need other tools for basic system management. Below is an example.
+	<pre class="brush: bash">
+		yum install hyperv-daemons
+		yum install python-pyasn1
+		yum install wget telnet net-tools bind-utils curl lsof</pre>
+	<br/>
+	<i>Don't forget to update the system with the newest release patch releases:</i>
+	<pre class="brush: bash">
+		yum update</pre>
+	<br/>
+	<b>Installing virtualization specifics:</b><br/>
+	Also remember that the SCVMM agent needs to be installed on the virtual machine. It is needed for a successful deploy of a vm from the template.
+	Make sure LIS works / is installed. This should be included in Centos 7 as a part of initial setup (perhaps not if you choose a minimal install of the OS?). See the links below on how to do this.
+	<ul>
+		<li><a href="https://technet.microsoft.com/en-us/library/jj860429.aspx?f=255&MSPPError=-2147217396" style="margin-left:12px;" class="articleLink" target="_blank">How to Install the VMM Agent for Linux</a></li>
+		<li><a href="https://technet.microsoft.com/en-us/library/jj860438.aspx?f=255&MSPPError=-2147217396" style="margin-left:12px;" class="articleLink" target="_blank">Requirements for Linux-Based Virtual Machines</a></li>
+	</ul>
+	<br/>
+	<b>Set up the OS:</b><br/>
+	1. Set up the preferred colors for the shell:
+	<pre class="brush: bash">
+		echo "export PS1=$'\\[\E[1m\E[31m\\]\\h:\\w # \\[\E(B\E[m\\]'" >> /root/.bashrc
+		echo "export PS1=$'\\[\E[1m\E[32m\\]\\h:\\w # \\[\E(B\E[m\\]'" >> /etc/profile.d/colorprompt.sh</pre>
+	2. Make sure that root login is not permitted in /etc/ssh/sshd_config and that we are using Protocol 2.	<br/>
+	3. Put the SpaceWalk Server name and IP into /etc/hosts:
+	<pre class="brush: bash">
+		12.34.56.78   the-spacewalkserverhostname</pre>
+	4. Install the SpaceWalk client, but don't register it to a SpaceWalk server:
+	<ul>
+		<li><a href="https://fedorahosted.org/spacewalk/wiki/RegisteringClients" style="margin-left:12px;" class="articleLink" target="_blank">https://fedorahosted.org/spacewalk/wiki/RegisteringClients</a></li>
+		<li><a href="http://jensd.be/?p=232" style="margin-left:12px;" class="articleLink" target="_blank">http://jensd.be/?p=232</a></li>
+	</ul>
+	5. Create /etc/init.d/registerSpacewalk.sh as shown in the following link(can be linked to from /etc/rc.local to start at startup): <br/>
+	<ul>
+		<li><a href="http://scripts.team-holm.net/index.php?scriptName=BASH&subSection=false#registerWithSpaceWalk.sh" style="margin-left:12px;" class="articleLink" target="_blank">http://scripts.team-holm.net/index.php?scriptName=BASH&subSection=false#registerWithSpaceWalk.sh</a></li>	
+	</ul>
+	Change the text "the-spacewalkserver" in the script with the name you used in /etc/hosts for your SpaceWalk server.
+	If you are using a deployment subnet, remember to enter it into the script. You don't want the SpaceWalk client to register with the SpaceWalk server in the wrong subnet. See below.
+	<pre class="brush: bash">
+		$NETADDR =~ ^192\.168\.100\.[0-9] </pre>
+	Will become the following if 10.12.228.0/24 is your deployment subnet:<br/>
+	<pre class="brush: bash">
+		$NETADDR =~ ^10\.12\.228\.[0-9]</pre>
+	As explained, if the subnet used in the deployment VLAN is 10.12.228.0/24. This will ensure that the VM being deployed from the template won't register to the SpaceWalk server on boot if the VM is still in the deployment subnet.
+	In this case of deployment setup, it is thought that the VM is set into a temporary deployment subnet automatically while scripts are running to talk to and customize the VM. If you have no such setup
+	in your environment, you can remove the if structure regarding this check from the script.
+	<br/><br/>
+	When the script is created, make it runable and add it as a startup service:
+	<pre class="brush: bash">
+		chmod +x /etc/init.d/registerSpacewalk.sh
+		chkconfig --add registerSpacewalk.sh</pre>
+	Preferably you could create the script somewhere else, and add it to /etc/rc.local. This will make sure it will run after all other startup scripts have run, and you won't need to add it as a service as done above.
+	<br/><br/>
+	The script and this setup will make sure that the deployed VM from this template will register itself automatically to the given SpaceWalk server you specify. 
+	For this to happen, the VM must be able to talk to the SpaceWalk server over the network and resolve whatever name you use in the script via /etc/hosts.
+	<br/>
+	<br/>
+	<b>Set up the yum repository config files:</b><br/>
+	Make sure all configuration files under /etc/yum.repos.d except the SpaceWalk configuration files have enabled=0 under every section within these. We don't want to use other repo's then our SpaceWalk repo.
+	<br/>
+	<br/>
+	<b>Create a template cleanup script:</b><br/>
+	You will ned a script to clean up the OS and ready it for template deployment. For example place it under /root/make-template.sh. See below for the script code.
+	<pre class="brush: bash">
+	#!/bin/bash
+
+	rm -rf /etc/ssh/ssh_host*
+	rm -rf /etc/udev/rules.d/70-persistent-net.rules
+	rm -rf /etc/touchme
+	#/root/compileProgressbar.sh
+
+	#rm -rf /etc/sysconfig/network-scripts/ifcfg-eth0
+	#TODO: Generate this file on boot with correct mac.
+
+	chmod -x /root/make-template.sh
+
+	/sbin/service rsyslog stop
+	/sbin/service auditd stop
+
+	/bin/package-cleanup --oldkernels --count=1
+
+	/usr/bin/yum clean all
+
+	/usr/sbin/logrotate -f /etc/logrotate.conf
+	/bin/rm -f /var/log/*-???????? /var/log/*.gz
+	/bin/rm -f /var/log/dmesg.old
+	/bin/rm -rf /var/log/anaconda
+
+	/bin/cat /dev/null > /var/log/audit/audit.log
+	/bin/cat /dev/null > /var/log/wtmp
+	/bin/cat /dev/null > /var/log/lastlog
+	/bin/cat /dev/null > /var/log/grubby
+
+	/bin/rm -f /etc/udev/rules.d/70*
+
+	/bin/sed -i '/^(HWADDR|UUID)=/d' /etc/sysconfig/network-scripts/ifcfg-eth0
+
+	/bin/rm -rf /tmp/*
+	/bin/rm -rf /var/tmp/*
+
+	/bin/rm -f /etc/ssh/*key*
+
+	/bin/rm -f ~root/.bash_history
+	unset HISTFILE
+
+	/bin/rm -rf ~root/.ssh/
+	/bin/rm -f ~root/anaconda-ks.cfg
+
+	echo "Shutdown this virtual machine and convert it to template in Hyper-V."</pre>
+	Remember to make the script executable to be able to run it:
+	<pre class="brush: bash">
+		chmod +x make-template.sh</pre>
+	This script should be run right before you turn off your VM to convert it to a template. Make sure that you clone your VM before you convert it, so that you have a working copy you can use.
+	When all this is done, you convert the cloned VM to a template and import it into a VMM Library where it will be ready for deployment. The process on how to do this will not be described here, but can be found in
+	various Microsoft technet documentation.
+<p><br/>
+  <u>Source</u>: SCVMM 2012 R2 and Linux experience
+</p>

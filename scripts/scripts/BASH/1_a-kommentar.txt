@@ -1,0 +1,12 @@
+﻿Legger ved her noen sv&aelig;rt enkle script her.<br/><br/>
+<table align="center">
+<tr><td width="500"><span style="font-size:11px;"><li><a href="#mount_DVD.sh" class="articleLink">mount_DVD.sh</a> - et av mine f&oslash;rste script i BASH.</span></td></tr>
+<tr><td width="500"><span style="font-size:11px;"><li><a href="#removeService.sh" class="articleLink">removeService.sh</a> - egentlig  litt overfl&oslash;dig og Det er egentlig ogs&aring; feil &aring; fjerne tjenester p&aring; denne m&aring;ten.</span></td></tr>
+<tr><td width="500"><span style="font-size:11px;"><li><a href="#start-stop-rTorrent.sh" class="articleLink">start-stop-rTorrent.sh</a> - kan settes opp som en cron-jobb til å stoppe og starte rtorrent som en tjeneste.</span></td></tr>
+<tr><td width="500"><span style="font-size:11px;"><li><a href="http://libtorrent.rakshasa.no/attachment/wiki/RTorrentCommonTasks/rtorrentInit.sh" target="_blank" class="articleLink">rTorrent som tjeneste</a> - ikke mitt script, men linker til her til info.</span></td></tr>
+<tr><td width="500"><span style="font-size:11px;"><li><a href="#Valve-HLDS" class="articleLink">Valve-HLDS</a> - er for å starte en Half-Life Dedicated Server installert i Linux som en tjeneste.</span></td></tr>
+<tr><td width="500"><span style="font-size:11px;"><li><a href="#start-node.sh" class="articleLink">start-node.sh</a> - starter en node server som en tjeneste. Se kommentarer for installasjon.</span></td></tr>
+<tr><td width="500"><span style="font-size:11px;"><li><a href="#registerWithSpaceWalk.sh" class="articleLink">registerWithSpaceWalk.sh</a> - for automatisk registrering mot SpaceWalk.</span></td></tr>
+</table>
+<br/>
+Det meste som er delt her er delt for artighets skyld, og kanskje ogs&aring; som enkle eksempler p&aring; syntaks.

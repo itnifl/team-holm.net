@@ -1,0 +1,23 @@
+Her er det listet en del vmware relaterte scripts...<br/>
+<table>
+	<tr>
+		<td>
+			<ul>
+				<li><a href="#Add-Disk.ps1" class="articleLink">Add-Disk.ps1</a></li>
+				<li><a href="#Create_VM.ps1" class="articleLink">Create VM.ps1</a></li>
+				<li><a href="#Delete_VM.ps1" class="articleLink">Delete VM.ps1</a></li>
+				<li><a href="#DisconnectIdleSessions.ps1" class="articleLink">DisconnectIdleSessions.ps1</a></li>
+				<li><a href="#Find_Windows_Guests.ps1" class="articleLink">Find Windows Guests.ps1</a></li>
+			</ul>
+		</td>
+		<td>
+			<ul>
+				<li><a href="#GetvCenterServiceRuntime.ps1" class="articleLink">GetvCenterServiceRuntime.ps1</a></li>
+				<li><a href="#GetUsersVDIMachine.ps1" class="articleLink">GetUsersVDIMachine.ps1</a></li>
+				<li><a href="#ListVMInfo.ps1" class="articleLink">ListVMInfo.ps1</a></li>
+				<li><a href="#Remove_Unity_From_VMWare_Tools.ps1" class="articleLink">Remove Unity From VMWare Tools.ps1</a></li>
+				<li><a href="#Set-VLAN.ps1" class="articleLink">Set-VLAN.ps1</a></li>
+			</ul>
+		</td>
+	</tr>
+</table>

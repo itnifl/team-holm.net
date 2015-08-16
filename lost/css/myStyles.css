@@ -1,0 +1,119 @@
+@font-face {
+ font-family: Nasalization;
+ src: url("../fonts/nasaliza.eot") /* EOT file for IE */
+ }
+@font-face {
+ font-family: Nasalization;
+ src: url("../fonts/nasaliza.ttf") /* TTF file for CSS3 browsers */
+}
+body {
+	background: url(../images/11550496_l.jpg) no-repeat;
+	background-size: 100%;
+} 
+.panelLinks:link {text-decoration: none; text-align: center; color: black; font-family: Nasalization; font-size:15px;}
+.panelLinks:visited {text-decoration: none; text-align: center; color: black; font-family: Nasalization; font-size:15px;}
+.panelLinks:active {text-decoration: none; text-align: center; color: black; font-family: Nasalization; font-size:15px;}
+.panelLinks:hover {text-decoration: none; text-align: center; color: Grey; font-family: Nasalization; font-size:15px;}
+
+.panelLinksSmaller:link {text-decoration: none; text-align: center; color: #8A0000; font-family: Nasalization; font-size:12px;}
+.panelLinksSmaller:visited {text-decoration: none; text-align: center; color: #8A0000; font-family: Nasalization; font-size:12px;}
+.panelLinksSmaller:active {text-decoration: none; text-align: center; color: #8A0000; font-family: Nasalization; font-size:12px;}
+.panelLinksSmaller:hover {text-decoration: none; text-align: center; color: Grey; font-family: Nasalization; font-size:12px;}
+
+.panelHeaders {text-decoration: none; text-align: center; color: Black; font-family: Nasalization; font-size:20px; font-weight:bold; text-decoration:underline;}
+.panelText {text-decoration: none; color: Grey; font-size:14px;}
+
+.boxLinks:link {text-decoration: none; color: Grey; font-size:14px;}
+.boxLinks:visited {text-decoration: none; color: Grey; font-size:14px;}
+.boxLinks:active {text-decoration: none; color: Grey; font-size:14px;}
+.boxLinks:hover {text-decoration: none; color: Gainsboro; font-size:14px;}
+
+table.menuTable {
+	background: SeaShell; 
+	border:0px solid; border-radius:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;
+	border-color: #999999; 
+	overflow:hidden; 
+	font-family: verdana,arial,sans-serif;
+}
+.boxGeneral {
+	display:none;
+	background: SeaShell; 
+	border:1px solid; border-radius:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;
+	border-color: #999999; 
+	width:325px;overflow:hidden; 
+	position:relative; /*left:600px; top:200px;*/
+	margin-top:10px;
+	/*float: left;*/
+}
+.boxgasDeath101Pictures {
+	display:none;
+	background: SeaShell; 
+	border:1px solid; border-radius:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;
+	border-color: #999999; 
+	width:475px; overflow:hidden; 
+	position:absolute; left:40px; top:20px;
+	margin: 0 auto;
+}
+.boxMalosPatosPictures {
+	display:none;
+	background: SeaShell; 
+	border:1px solid; border-radius:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;
+	border-color: #999999; 
+	width:475px; overflow:hidden; 
+	position:absolute; left:40px; top:20px;
+	margin: 0 auto;
+}
+.boxHometripPictures {
+	display:none;
+	background: SeaShell; 
+	border:1px solid; border-radius:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;
+	border-color: #999999; 
+	width:475px; overflow:hidden; 
+	position:absolute; left:40px; top:20px;
+	margin: 0 auto;
+}
+.boxPnFortPictures {
+	display:none;
+	background: SeaShell; 
+	border:1px solid; border-radius:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;
+	border-color: #999999; 
+	width:475px; overflow:hidden; 
+	position:absolute; left:40px; top:20px;
+	margin: 0 auto;
+}
+.boxHeadOnPictures {
+	display:none;
+	background: SeaShell; 
+	border:1px solid; border-radius:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;
+	border-color: #999999; 
+	width:475px; overflow:hidden; 
+	position:absolute; left:40px; top:20px;
+	margin: 0 auto;
+}
+.boxSandMissionPictures {
+	display:none;
+	background: SeaShell; 
+	border:1px solid; border-radius:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;
+	border-color: #999999; 
+	width:475px; overflow:hidden; 
+	position:absolute; left:40px; top:20px;
+	margin: 0 auto;
+}
+.boxUprisingPictures {
+	display:none;
+	background: SeaShell; 
+	border:1px solid; border-radius:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;
+	border-color: #999999; 
+	width:475px; overflow:hidden; 
+	position:absolute; left:40px; top:20px;
+	margin: 0 auto;
+}
+.boxTorturePictures {
+	display:none;
+	background: SeaShell; 
+	border:1px solid; border-radius:10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;
+	border-color: #999999; 
+	width:475px; overflow:hidden; 
+	position:absolute; left:40px; top:20px;
+	margin: 0 auto;
+}

@@ -1,0 +1,7 @@
+Her lister jeg scripts som ble brukt til &aring; leke med VMWares VIX API og VMWares VIM API. <br/>
+Det er greit &aring; nevne at API'et som ble brukt i 2009 ikke trenger &aring; v&aelig;re det samme som ble brukt i dag. Dette m&aring; du eventuelt sjekke selv. Se dato p&aring; scriptene.
+
+<ul>
+	<li><a href="#ReadPortGroupNames.pl" class="articleLink">ReadPortGroupNames.pl</a></li>
+	<li><a href="#ShutdownList.pl" class="articleLink">ShutdownList.pl</a></li>
+</ul>

@@ -1,0 +1,6 @@
+<span style="margin-left:95px;">Noen praktiske scripts i st&oslash;rre milj&oslash;er. Scriptene som finnes her er:</span><br/>
+<table align="center">
+<tr><td width="500"><span style="font-size:11px;"><li><a href="#getDesktopServers.vbs" class="articleLink">getDesktopServers.vbs</a> - lister ut alle servere tilh&oslash;rende en publisert desktop</span></td></tr>
+<tr><td width="500"><span style="font-size:11px;"><li><a href="#checkForHotfix.vbs" class="articleLink">checkForHotfix.vbs</a> - leter etter en hotfix p&aring; alle servere i en farm og lister ut status</span></td></tr>
+<tr><td width="500"><span style="font-size:11px;"><li><a href="#logon2Loadx32.vbs" class="articleLink">logon2Loadx32.vbs</a> - logger en bruker automatisk p&aring; alle servere i en publisert desktop</span></td></tr>
+</table>

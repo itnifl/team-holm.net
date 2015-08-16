@@ -1,0 +1,19 @@
+Dette er en egen seksjon for script som h&aring;ndterer grupper og brukeres gruppemedlemskaper.
+<br/>Se kommentarene i scriptene for mer informasjon.
+<table>
+	<tr>
+		<td>
+			<ul>
+				<li><a href="#AddMember2Groups.ps1" class="articleLink">AddMember2Groups.ps1</a></li>
+				<li><a href="#DumpGroupMembers.ps1" class="articleLink">DumpGroupMembers.ps1</a></li>
+				<li><a href="#DumpGroupMemberships.ps1" class="articleLink">DumpGroupMemberships.ps1</a></li>
+			</ul>
+		</td>
+		<td>
+			<ul>
+				<li><a href="#MassSetUsersAsMember.ps1" class="articleLink">MassSetUsersAsMember.ps1</a></li>
+				<li><a href="#SjekkBrukerForGruppe.ps1" class="articleLink">SjekkBrukerForGruppe.ps1</a></li>
+			</ul>
+		</td>
+	</tr>
+</table>

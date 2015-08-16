@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<translations>
+	<translation id="wxIntro">
+    	<no><![CDATA[ 
+    		Dette &oslashyeblikk i Drammen:
+    	]]></no>
+        <en><![CDATA[ 
+    		Currently in Drammen, Norway:
+        ]]></en>
+        <is><![CDATA[ 
+        	Á þessari stund í Drammen, Noregi:
+        ]]></is>
+    </translation>
+    <translation id="movieLikesHeader">
+        <no><![CDATA[ 
+            <br/><center><div class="banner" style="height:26px; width:275px;">Nylig likte favoritter</div></center>
+        ]]></no>
+        <en><![CDATA[ 
+            <br/><center><div class="banner" style="height:26px; width:275px;">Recently liked favorites</div></center>
+        ]]></en>
+        <is><![CDATA[ 
+            <br/><center><div class="banner" style="height:26px; width:275px;">Nýlega líkaðar myndir</div></center>
+        ]]></is>
+    </translation>
+    <translation id="personaliaHeader">
+    	<no><![CDATA[ 
+    		<br/><center><div class="banner">Personalia</div></center>
+    	]]></no>
+        <en><![CDATA[ 
+        	<br/><center><div class="banner">Personalia</div></center>
+        ]]></en>
+        <is><![CDATA[ 
+        	<br/><center><div class="banner">Ferilskrá</div></center>
+        ]]></is>
+    </translation>
+    <translation id="personaliaField">
+    	<no><![CDATA[ 
+    		<table align="center" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td align="left">Navn:</td><td align="left">Atle Holm</td></tr><tr><td align="left">F&oslash;dselsdato: </td><td align="left">16.05.1982</td></tr><tr><td align="left">F&oslash;dested:</td><td align="left">Selfoss, Island</td></tr><tr><td align="left">Nasjonalitet:</td><td align="left">Norsk</tr></td><tr><td align="left">E-mail:</td><td align="left">atle@team-holm.net</tr></td></table><br /><img src="images/me0.jpg" height=300 width=300 style="border-width: 3px; border-style: solid; border-color: black;"><p>&nbsp;</p><p><br /></p>
+    	]]></no>
+        <en><![CDATA[ 
+        	<table align="center" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td align="left">Name:</td><td align="left">Atle Holm</td></tr><tr><td align="left">Birthdate: </td><td align="left">16.05.1982</td></tr><tr><td align="left">Birthplace:</td><td align="left">Selfoss, Iceland</td></tr><tr><td align="left">Nationality:</td><td align="left">Norwegian</tr></td><tr><td align="left">E-mail:</td><td align="left">atle@team-holm.net</tr></td></table><br /><img src="images/me0.jpg" height=300 width=300 style="border-width: 3px; border-style: solid; border-color: black;"><p>&nbsp;</p><p><br /></p>
+        ]]></en>
+        <is><![CDATA[ 
+        	<table align="center" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td align="left">Nafn:</td><td align="left">Atle Holm</td></tr><tr><td align="left">Fæðingardagur: </td><td align="left">16.05.1982</td></tr><tr><td align="left">Fæðingarstaður:</td><td align="left">Selfoss, Ísland</td></tr><tr><td align="left">þjóðerni:</td><td align="left">Norskur</tr></td><tr><td align="left">Tölvupóstur:</td><td align="left">atle@team-holm.net</tr></td></table><br /><img src="images/me0.jpg" height=300 width=300 style="border-width: 3px; border-style: solid; border-color: black;"><p>&nbsp;</p><p><br /></p>
+        ]]></is>
+    </translation>
+    <translation id="intHeader">
+    	<no><![CDATA[ 
+    		<br /><center><div class="banner">Interesser</div></center>
+    	]]></no>
+        <en><![CDATA[ 
+        	<br /><center><div class="banner">Interests</div></center>
+        ]]></en>
+        <is><![CDATA[ 
+        	<br /><center><div class="banner">Áhugamál</div></center>
+        ]]></is>
+    </translation>
+    <translation id="intField">
+    	<no><![CDATA[ 
+    		<b>Dagens fremtidige fokus, ambisjoner og interesser vies til:</b><br /><br />
+			<table align="center" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td style="text-align:left;">
+			<ul style="margin-top:4px; margin-right:15px; margin-left:5px; margin-bottom:4px;"><li>Sm&aring; kode prosjekter.</li>
+			<li>Lesing av interessem&aring;l.</li>
+			<li><a href="http://resultater.styrkeloft.no/lofter_vis.php?id=5633" class="articleLink" target="_blank">Styrketrening som hobby.</a></li>
+			<li><a href="http://hwarang.no/" class="articleLink" target="_blank">Tae Kwon Do og annen kampsport</a></li>
+			</ul>
+			</tr></td></table><p>&nbsp;</p><p><br /></p>
+    	]]></no>
+        <en><![CDATA[ 
+    		<b>Focus, ambitions and interests are dedicated as of now to:</b><br /><br />
+			<table align="center" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td style="text-align:left;">
+			<ul style="margin-top:4px; margin-right:15px; margin-left:5px; margin-bottom:4px;"><li>Small code projects.</li>
+			<li>Reading of interest.</li>
+			<li><a href="http://resultater.styrkeloft.no/lofter_vis.php?id=5633" class="articleLink" target="_blank">Strength training as an hobby</a></li>
+			<li><a href="http://hwarang.no/" class="articleLink" target="_blank">Tae Kwon Do and other martial arts</a></li>
+			</ul>
+			</tr></td></table><p>&nbsp;</p><p><br /></p>
+        ]]></en>
+        <is><![CDATA[ 
+        	<b>Áhersla fyrir framtíðina, áhugamál og metnaður eru:</b><br /><br />
+			<table align="center" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td style="text-align:left;">
+			<ul style="margin-top:4px; margin-right:15px; margin-left:5px; margin-bottom:4px;"><li>Lítil prósjekt í tölvuforritun.</li>
+			<li>Lesa áhugamál.</li>
+			<li><a href="http://resultater.styrkeloft.no/lofter_vis.php?id=5633" class="articleLink" target="_blank">Líkamsrækt til að halda mig í formi.</a></li>
+			<li><a href="http://hwarang.no/" class="articleLink" target="_blank">Tae Kwon Do og aðrar bardagaíðróttir</a></li>
+			</ul>
+			</tr></td></table><p>&nbsp;</p><p><br /></p>
+        ]]></is>
+    </translation>
+    <translation id="linkHeader">
+    	<no><![CDATA[ 
+    		<br /><center><div class="banner">Lenker</div></center>
+    	]]></no>
+        <en><![CDATA[ 
+        	<br /><center><div class="banner">Links</div></center>
+        ]]></en>
+        <is><![CDATA[ 
+        	<br /><center><div class="banner">Tenglar</div></center>
+        ]]></is>
+    </translation>
+    <translation id="linkField">
+    	<no><![CDATA[ 
+    		En kort liste med lenker til ett og annet: <table align="center" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td align="left"><a href="http://midgard.team-holm.net" class="normalLink" target="_blank">http://midgard.team-holm.net - AD&D Rollespill</a></td></tr><tr><td align="left"><a href="http://itblog.team-holm.net" class="normalLink" target="_blank">http://itblog.team-holm.net - IT ting</a></td></tr><tr><td align="left"><a href="http://scripts.team-holm.net" class="normalLink" target="_blank">http://scripts.team-holm.net - diverse scripts</a></td></tr>
+			<tr>
+				<td align="left">
+					<a href="http://libtorrent.rakshasa.no/" class="normalLink" target="_blank">http://libtorrent.rakshasa.no - rTorrent</a>
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<a href="http://www.microhowto.info/howto/configure_an_ethernet_interface_as_a_vlan_trunk_on_debian.html" class="normalLink" target="_blank">http://www.microhowto.info - VLAN trunking i Debian</a>			
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<a href="https://help.ubuntu.com/community/OpenVPN#Generating_Client_Certificate_and_Key" class="normalLink" target="_blank">https://help.ubuntu.com - Generating Client Certificate and Key</a>
+				</td>
+			</tr>			
+			<tr>
+				<td align="left">
+					<a href="https://kiwiirc.com/client/" class="normalLink" target="_blank">https://kiwiirc.com/client - IRC web klient</a>
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators" class="normalLink" target="_blank">https://developer.mozilla.org - Bitvise Operatører</a>
+				</td>
+			</tr>
+			</table><br /><br /><br /><p>&nbsp;</p><p><br /></p>
+    	]]></no>
+        <en><![CDATA[ 
+    		A short list of links to this and that: <table align="center" style="border-width: 1px; border-style: solid; border-color: #999999;">
+			<tr>
+				<td align="left">
+					<a href="http://midgard.team-holm.net" class="normalLink" target="_blank">http://midgard.team-holm.net - AD&D Role Playing Game</a>
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<a href="http://itblog.team-holm.net" class="normalLink" target="_blank">http://itblog.team-holm.net - IT stuff</a>
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<a href="http://scripts.team-holm.net" class="normalLink" target="_blank">http://scripts.team-holm.net - diverse scripts</a>
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<a href="http://libtorrent.rakshasa.no/" class="normalLink" target="_blank">http://libtorrent.rakshasa.no - rTorrent</a>
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<a href="http://www.microhowto.info/howto/configure_an_ethernet_interface_as_a_vlan_trunk_on_debian.html" class="normalLink" target="_blank">http://www.microhowto.info - VLAN trunking in Debian</a>			
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<a href="https://help.ubuntu.com/community/OpenVPN#Generating_Client_Certificate_and_Key" class="normalLink" target="_blank">https://help.ubuntu.com - Generating Client Certificate and Key</a>
+				</td>
+			</tr>			
+			<tr>
+				<td align="left">
+					<a href="https://kiwiirc.com/client/" class="normalLink" target="_blank">https://kiwiirc.com/client - IRC web client</a>
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators" class="normalLink" target="_blank">https://developer.mozilla.org - Bitwise Operators</a>
+				</td>
+			</tr>
+			</table><br /><br /><br /><p>&nbsp;</p><p><br /></p>
+        ]]></en>
+        <is><![CDATA[ 
+        	Stuttur listi með tenglum til eitt og annað: 
+			<table align="center" style="border-width: 1px; border-style: solid; border-color: #999999;">
+				<tr>
+					<td align="left">
+						<a href="http://midgard.team-holm.net" class="normalLink" target="_blank">http://midgard.team-holm.net - AD&D RPG</a>
+					</td>
+				</tr>
+				<tr>
+					<td align="left">
+						<a href="http://itblog.team-holm.net" class="normalLink" target="_blank">http://itblog.team-holm.net - tölvu hlutir</a>
+					</td>
+				</tr>
+				<tr>
+					<td align="left">
+						<a href="http://scripts.team-holm.net" class="normalLink" target="_blank">http://scripts.team-holm.net - sum forrit eða scripts</a>
+					</td>
+				</tr>
+				<tr>
+					<td align="left">
+						<a href="http://libtorrent.rakshasa.no/" class="normalLink" target="_blank">http://libtorrent.rakshasa.no - rTorrent</a>
+					</td>
+				</tr>
+				<tr>
+					<td align="left">
+						<a href="http://www.microhowto.info/howto/configure_an_ethernet_interface_as_a_vlan_trunk_on_debian.html" class="normalLink" target="_blank">http://www.microhowto.info - VLAN trunking í Debian</a>			
+					</td>
+				</tr>
+				<tr>
+					<td align="left">
+						<a href="https://help.ubuntu.com/community/OpenVPN#Generating_Client_Certificate_and_Key" class="normalLink" target="_blank">https://help.ubuntu.com - Generating Client Certificate and Key</a>
+					</td>
+				</tr>				
+				<tr>
+					<td align="left">
+						<a href="https://kiwiirc.com/client/" class="normalLink" target="_blank">https://kiwiirc.com/client - IRC web client</a>
+					</td>
+				</tr>
+				<tr>
+				<td align="left">
+					<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators" class="normalLink" target="_blank">https://developer.mozilla.org - Bitwise Operators</a>
+				</td>
+			</tr>
+			</table>
+			<br /><br /><br /><p>&nbsp;</p><p><br /></p>
+        ]]></is>
+    </translation>
+    <translation id="codeHeader">
+    	<no><![CDATA[ 
+    		<br /><center><div class="banner">Små prosjekter</div></center>
+    	]]></no>
+        <en><![CDATA[ 
+        	<br /><center><div class="banner">Small projects</div></center>
+        ]]></en>
+        <is><![CDATA[ 
+        	<br /><center><div class="banner">Smá verkefni</div></center>
+        ]]></is>
+    </translation>
+    <translation id="eduHeader">
+    	<no><![CDATA[ 
+    		<br /><center><div class="banner">Utdanning/Sertifisering</div></center>
+    	]]></no>
+        <en><![CDATA[ 
+        	<br /><center><div class="banner">Education/Certifications</div></center>
+        ]]></en>
+        <is><![CDATA[ 
+        	<br /><center><div class="banner">Mentun og vottun</div></center>
+        ]]></is>
+    </translation>
+    <translation id="eduField">
+    	<no><![CDATA[ 
+    		 	<hr width="700"><table align="center" width="620" style="border-width: 1px; border-style: solid; border-color: #999999;">
+				<tr><td align="left">Bachelor i drift av datasystemer ved HIST - 2010 - <a href="docs/020E.zip" class="normalLink">Hovedoppgave</a></td></tr>
+				<tr><td align="left">Allmenfag Tranberg Vgs - 2003</td></tr>
+				<tr><td align="left"><a href="https://cs.lpi.org/caf/Xamman/certification/process_verify?lpi_id=LPI000191649&ver_code=92nyja8nd9" class="normalLink" target="_blank">Linux Professional Institute Certification 1</a> - [2010-2020]</td></tr> 
+				<tr><td align="left"><a href="https://cs.lpi.org/caf/Xamman/certification/process_verify?lpi_id=LPI000191649&ver_code=92nyja8nd9" class="normalLink" target="_blank">Linux Professional Institute Certification 2</a> - [2015-2020]</td></tr> 
+				<tr><td align="left"><a href="/docs/Suse_Certified_Linux_Administrator_SCLA_ECR.pdf" class="normalLink" target="_blank">Suse Certified Linux Administrator</a></td></tr>
+				<tr><td align="left"><a href="/docs/Microsoft_Certified_IT_Professional_Enterprise_Administrator_on_Windows_Server_2008.pdf" class="normalLink" target="_blank">MCITP Enterprise Administrator</a> - 2011</td></tr>	
+				<tr><td align="left"><a href="/docs/Microsoft_Specialist_Server_Virtualization_with_Windows_Server_Hyper-V_and_System_Center.pdf" class="normalLink" target="_blank">74-409 - Server Virtualization with Windows Server Hyper-V and System Center</a> - 2015</td></tr>	
+				<tr><td align="left"><a href="/docs/Microsoft_Certified_Technology_Specialist_SQL_Server_2008_Implementatio_and_Maintenance.pdf" class="normalLink" target="_blank">70-432 - MS SQL Server 2008, Implementation and Maintenance</a> - 2011</td></tr>
+				<tr><td align="left"><a href="/docs/Microsoft_Specialist_Programming_in_HTML5_with_JavaScript_and_CSS3.pdf" class="normalLink" target="_blank">70-480 - Programming in HTML5 with JavaScript and CSS3</a> - 2014</td></tr>
+				<tr><td align="left">1Z0-051 - Oracle Database 11g: SQL Fundamentals I - 2012</td></tr>
+				<tr><td align="left"><a href="http://mylearn.vmware.com/eCert.cfm?id_reg=9942817&rGUID=5e389aae-2123-4240-8b77-318e84527d9b&ccid=VMW-01025768L-00138435" class="normalLink" target="_blank">VMware Certified Professional 5 - Data Center Virtualization</a> - 2013</td></tr>
+				<tr><td align="left"><a href="/docs/DeepSecurity.zip" class="normalLink" target="_blank" title="Trend Micro Certified Security Professional">Trend Micro Certified Security Professional: Deep Security 8.0</a> - 2014</td></tr>				
+				</table><hr width="700"><table align="center" width="620" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td align="left">Engelsk</td><td align="left">Flytende</td></tr><tr><td align="left">Norsk</td><td align="left">Flytende</td></tr>
+				<tr><td align="left">Islandsk</td><td align="left">Flytende</td></tr></table><hr width="700"><p>&nbsp;</p><p><br /></p>
+    	]]></no>
+        <en><![CDATA[ 
+    		 	<hr width="700"><table align="center" width="620" style="border-width: 1px; border-style: solid; border-color: #999999;">
+				<tr><td align="left">Bachelor in Computer Systems Administration at HIST - 2010 - <a href="docs/020E.zip" class="normalLink">Thesis</a></td></tr>
+				<tr><td align="left">General studies Tranberg Vgs - 2003</td></tr>
+				<tr><td align="left"><a href="https://cs.lpi.org/caf/Xamman/certification/process_verify?lpi_id=LPI000191649&ver_code=92nyja8nd9" class="normalLink" target="_blank">Linux Professional Institute Certification 1</a> - [2010-2020]</td></tr> 
+				<tr><td align="left"><a href="https://cs.lpi.org/caf/Xamman/certification/process_verify?lpi_id=LPI000191649&ver_code=92nyja8nd9" class="normalLink" target="_blank">Linux Professional Institute Certification 2</a> - [2015-2020]</td></tr> 
+				<tr><td align="left"><a href="/docs/Suse_Certified_Linux_Administrator_SCLA_ECR.pdf" class="normalLink" target="_blank">Suse Certified Linux Administrator</a></td></tr>
+				<tr><td align="left"><a href="/docs/Microsoft_Certified_IT_Professional_Enterprise_Administrator_on_Windows_Server_2008.pdf" class="normalLink" target="_blank">MCITP Enterprise Administrator</a> - 2011</td></tr>	
+				<tr><td align="left"><a href="/docs/Microsoft_Specialist_Server_Virtualization_with_Windows_Server_Hyper-V_and_System_Center.pdf" class="normalLink" target="_blank">74-409 - Server Virtualization with Windows Server Hyper-V and System Center</a> - 2015</td></tr>	
+				<tr><td align="left"><a href="/docs/Microsoft_Certified_Technology_Specialist_SQL_Server_2008_Implementatio_and_Maintenance.pdf" class="normalLink" target="_blank">70-432 - MS SQL Server 2008, Implementation and Maintenance</a> - 2011</td></tr>
+				<tr><td align="left"><a href="/docs/Microsoft_Specialist_Programming_in_HTML5_with_JavaScript_and_CSS3.pdf" class="normalLink" target="_blank">70-480 - Programming in HTML5 with JavaScript and CSS3</a> - 2014</td></tr>
+				<tr><td align="left">1Z0-051 - Oracle Database 11g: SQL Fundamentals I - 2012</td></tr>
+				<tr><td align="left"><a href="http://mylearn.vmware.com/eCert.cfm?id_reg=9942817&rGUID=5e389aae-2123-4240-8b77-318e84527d9b&ccid=VMW-01025768L-00138435" class="normalLink" target="_blank">VMware Certified Professional 5 - Data Center Virtualization</a> - 2013</td></tr>
+				<tr><td align="left"><a href="/docs/DeepSecurity.zip" class="normalLink" target="_blank" title="Trend Micro Certified Security Professional">Trend Micro Certified Security Professional: Deep Security 8.0</a> - 2014</td></tr>				
+				</table><hr width="700"><table align="center" width="620" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td align="left">English</td><td align="left">Fluently</td></tr><tr><td align="left">Norwegian</td><td align="left">Fluently</td></tr>
+				<tr><td align="left">Icelandic</td><td align="left">Fluently</td></tr></table><hr width="700"><p>&nbsp;</p><p><br /></p>
+    	]]></en>
+        <is><![CDATA[ 
+    		 	<hr width="700"><table align="center" width="620" style="border-width: 1px; border-style: solid; border-color: #999999;">
+				<tr><td align="left">Bachelor í rekstur tölvukerfa frá HIST - 2010 - <a href="docs/020E.zip" class="normalLink">ritgerð</a></td></tr>
+				<tr><td align="left">Allmenfag Tranberg Vgs - 2003</td></tr>
+				<tr><td align="left"><a href="https://cs.lpi.org/caf/Xamman/certification/process_verify?lpi_id=LPI000191649&ver_code=92nyja8nd9" class="normalLink" target="_blank">Linux Professional Institute Certification 1</a> - [2010-2020]</td></tr> 
+				<tr><td align="left"><a href="https://cs.lpi.org/caf/Xamman/certification/process_verify?lpi_id=LPI000191649&ver_code=92nyja8nd9" class="normalLink" target="_blank">Linux Professional Institute Certification 2</a> - [2015-2020]</td></tr> 
+				<tr><td align="left"><a href="/docs/Suse_Certified_Linux_Administrator_SCLA_ECR.pdf" class="normalLink" target="_blank">Suse Certified Linux Administrator</a></td></tr>
+				<tr><td align="left"><a href="/docs/Microsoft_Certified_IT_Professional_Enterprise_Administrator_on_Windows_Server_2008.pdf" class="normalLink" target="_blank">MCITP Enterprise Administrator</a> - 2011</td></tr>	
+				<tr><td align="left"><a href="/docs/Microsoft_Specialist_Server_Virtualization_with_Windows_Server_Hyper-V_and_System_Center.pdf" class="normalLink" target="_blank">74-409 - Server Virtualization with Windows Server Hyper-V and System Center</a> - 2015</td></tr>	
+				<tr><td align="left"><a href="/docs/Microsoft_Certified_Technology_Specialist_SQL_Server_2008_Implementatio_and_Maintenance.pdf" class="normalLink" target="_blank">70-432 - MS SQL Server 2008, Implementation and Maintenance</a> - 2011</td></tr>
+				<tr><td align="left"><a href="/docs/Microsoft_Specialist_Programming_in_HTML5_with_JavaScript_and_CSS3.pdf" class="normalLink" target="_blank">70-480 - Programming in HTML5 with JavaScript and CSS3</a> - 2014</td></tr>
+				<tr><td align="left">1Z0-051 - Oracle Database 11g: SQL Fundamentals I - 2012</td></tr>
+				<tr><td align="left"><a href="http://mylearn.vmware.com/eCert.cfm?id_reg=9942817&rGUID=5e389aae-2123-4240-8b77-318e84527d9b&ccid=VMW-01025768L-00138435" class="normalLink" target="_blank">VMware Certified Professional 5 - Data Center Virtualization</a> - 2013</td></tr>
+				<tr><td align="left"><a href="/docs/DeepSecurity.zip" class="normalLink" target="_blank" title="Trend Micro Certified Security Professional">Trend Micro Certified Security Professional: Deep Security 8.0</a> - 2014</td></tr>				
+				</table><hr width="700"><table align="center" width="620" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td align="left">Enska</td><td align="left">Reiprennandi</td></tr><tr><td align="left">Norska</td><td align="left">Reiprennandi</td></tr>
+				<tr><td align="left">Íslenska</td><td align="left">Reiprennandi</td></tr></table><hr width="700"><p>&nbsp;</p><p><br /></p>
+    	]]></is>
+    </translation>
+</translations>

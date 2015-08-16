@@ -1,0 +1,41 @@
+<p class="blogheader"><A NAME="WIN_Cleanup"><u>How to Clean up a Windows System Drive</u></A></p>
+	<p class="smaller">-23rd February 2013<br><br></p>
+	<p>
+	This is a list of steps that can be taken to clean up a system drive and thus save space. Make sure you have set up your folder view to show all hidden files and not hide system files. In addition to this list you might want to try <a href="http://www.piriform.com/ccleaner" class="articleLink" target="_blank">ccleaner</a> from Piriform. Ccleaner can be <a href="http://www.piriform.com/docs/ccleaner/advanced-usage/command-line-parameters" class="articleLink" target="_top">scripted</a> as well.
+	</p>
+	<table>
+	<tr><td style="background-color:rgb(240, 240, 240);">
+		<b>1.</b> Do you use <a href="http://en.wikipedia.org/wiki/Shadow_Copy" class="articleLink" target="_blank">shadow copies</a> on the system drive? Do you need them? If not you can delete them with the following <a href="http://technet.microsoft.com/en-us/library/cc788026(v=ws.10).aspx" class="articleLink" target="_blank">command</a>: <i>vssadmin delete shadows /for=%SystemDrive% /all /quiet</i><br>
+		<b>2.</b> How much space is the shadow storage taking on your system drive? You can resize it here with the following command: <i>vssadmin Resize ShadowStorage /For=%SystemDrive% /On=%SystemDrive% /MaxSize=4GB</i><br>
+		<b>3.</b> Are there memory dumps stored on your system? You can safely delete them. If not specifically specified otherwise, you will find them at:<br>
+		&nbsp;&nbsp;&nbsp;<i>%SystemRoot%\MEMORY.DMP</i><br>
+		&nbsp;&nbsp;&nbsp;<i>%SystemRoot%\Minidump\*.*</i><br>
+		<b>4.</b> Do you run IIS on your server or computer? You can compress the log files at <i>%SystemDrive%\inetpub\logs\LogFiles</i> using NTFS compression.<br>
+		<b>5.</b> You can safely delete the following:<br>
+		&nbsp;&nbsp;&nbsp;<i>%SystemRoot%\installer\$PatchCache$</i><br>
+		&nbsp;&nbsp;&nbsp;<i>%SystemRoot%\$blabla$</i><br>
+		&nbsp;&nbsp;&nbsp;<i>%SystemDrive%\$Recycle.Bin</i><br>
+		<!--&nbsp;&nbsp;&nbsp;<i>%SystemRoot%\SoftwareDistribution\Download</i> - requires you to stop the Windows Update Service first(net stop wuauserv).<br>-->
+		<b>6.</b> The following can be compressed with NTFS compression:<br>
+		&nbsp;&nbsp;&nbsp;<i>%SystemDrive%\PerfLogs</i><br>
+		&nbsp;&nbsp;&nbsp;<i>%SystemDrive%\MSOCache</i><br>
+		<b>7.</b> If you are using Windows 7 or Windows Server 2008R2 you might want to try the command <i>dism.exe /online /cleanup-image /spsuperseded</i> to clean up the winsxs folder.<br>
+		&nbsp;&nbsp;&nbsp;On Windows Vista or Windows Server 2008 Service Pack 2 the tool that does the same job is Compcln.exe.<br>
+		&nbsp;&nbsp;&nbsp;On Windows Vista or Windows Server 2008 Service Pack 1 the tool that does the same job is VSP1CLN.EXE.<br>
+		<b>8.</b> Finally - you can use cleanmgr.exe to clean up a whole lot more. If you want to script it, you can set it up first with the command <i>cleanmgr.exe /sageset:101</i><br>
+		&nbsp;&nbsp;&nbsp;After choosing what you want to clean up in the dialog box that appears, you cun run the same cleanupjob any time you want with the command <i>cleanmgr.exe /sagerun:101</i><br>
+		&nbsp;&nbsp;&nbsp;The setup for the cleaning job is stored in the registry in several keys under the following path:<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches</i>.<br>
+		&nbsp;&nbsp;&nbsp;In our example, if we chose to clean up Active Setup Temp Folders, the key "StateFlags0101"=dword:00000002 will be created under<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>..\VolumeCaches\Active Setup Temp Folders</i> indicating this as a part of the 101 cleanup job.<br>
+		&nbsp;&nbsp;&nbsp;Thus if you wanted, you could set up a clean up job and export the keys from the registry that you want to constitute the same cleanup job on other computers without you having to go through the graphical user interface every time you want to create that same job. This makes a great opportunity for automating with scripts in large server environments.<br>
+	</td></tr>
+	</table>
+	<p class="smaller">
+	<b>This is not an attempt of a complete list.</b><br/>
+	&nbsp;&nbsp;&nbsp;<i>Feel free to <a href="mailto:atle@team-holm.net" class="articleLink">inform</a> me if you have further suggestions.</i><br>
+	</p>
+	<p>
+	<u>Source</u>: Information gathered over time.
+	</p>
+	
