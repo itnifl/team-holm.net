@@ -1,0 +1,135 @@
+<p class="blogheader"><A NAME="UCSCode"><u>ESXi Scripted USB Install</u></A></p>
+	<p class="smaller">-15th of December 2015<br/><br/></p>
+<p>
+This article will contain a technical description of creating, and auto-creating scripted ESXi installs from USB. The USB drive we will be using for the install will be partitioned into three partitions labeled INSTALL, CONFIG and SETUP. 
+
+The first partition (INSTALL) will be a FAT32 partition and contain the ESXi installer files, the scripts to automate the installer, syslinux bootloader and a tftp client to download configuration we need to automatically set up our ESXi host.
+The second parttion (CONFIG) will be a FAT16 partition that contains patches that we will use to patch our installation automatically, log files from the installation will be stored here, and a configuration file downloaded from our TFTP server will be placed here.
+The third and last partition (SETUP) will be a NTFS partition that will contain any script files or setup installers that we might need for later usage.
+<br/><br/>
+The setup procdure will be described as performed in Linux, by using BASH scripts. This can also be done in Windows, but will require technical expertise to acquire.
+<br/>
+<h2>1. Downloading the TFTP client source code and compiling it for use </h2>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+				To make our TFTP client work in an ESXi environment, we need to compile it statically in an OS environment that is as similar to an ESXi as we can get it. 
+				Even though ESXi is not Linux, the closest we will get is with Centos 6.x. In this example we will use Centos 6.7 for i386 architecture as we compile the code. Compiling the code statically makes linked libraries included
+				in the compiled result, which makes us able to run the compiled code on the ESXi even if a needed code library might be missing there. This is true to a certain degree. Some TFTP clients depend heavily on 
+				code frameworks and other libraries, that don't get included in the compiled code even when we compile the code statitcally. This is why we want to find a light-weight TFTP client that depends on its own code
+				and uses only standard C-libraries as much as possible. In the search of such an client, I have picked a <a href="https://github.com/lanrat/tftp" class="articleLink" target="_blank">TFTP client</a> writte by Ian Foster. 
+				To improve the client as I wanted, I rewrote it as shown <a href="https://github.com/itnifl/TFTP-client" class="articleLink" target="_blank">here.</a> The improvements made to the client are described in the readme and the comments in the code.
+				Clone the code from Ian Foster, and replace tftpclient.c with the <a href="https://github.com/itnifl/TFTP-client" class="articleLink" target="_blank">my altered code.</a><br/>
+				<br/>
+				After installing and setting up Cento 6.x and downloading the TFTP client code, you will need to install the builder tools needed to compile the TFTP client:<br/>
+				<pre>
+					yum install build-essential gcc make
+				</pre>
+				Then head on over to the folder where you have placed the TFTP code and compile it:<br/>
+				<pre>
+					make CFLAGS="-static" EXEEXT="-static"
+				</pre>
+				No you will have the compiled tftpclient (without filename extension) in the same folder as the compiled code. We no need to create a copressed tar ball and convert that into a t00 file that we will include in the
+				ESXi installer to be installed with the rest of the system.<br/>
+				<pre>
+					mkdir -p /tmp/ovf/files
+					mkdir -p /tmp/ovf/tools
+					mkdir -p /tmp/ovf/bin
+					mkdir -p /tmp/ovf/bin/tftp
+					
+					cp /mnt/usb-compilation/esxi/n16643-servers.txt /tmp/ovf/test-config.txt
+					if [ ! -z "$TFTP" ]; then
+						rm -rf /tmp/tftp
+						mkdir -p /tmp/tftp
+						cd /tmp/tftp
+						cp /mnt/usb-compilation/tftp-custom/tftp-compiled.tar.gz .
+						tar xzvf tftp-compiled.tar.gz
+						rsync -au /tmp/tftp/* /tmp/ovf/bin/tftp/
+					fi
+
+					if  [ !  -z "$OVF" ]; then
+						rsync -au /usr/lib/vmware-ovftool/* /tmp/ovf/tools/
+						sed -i 's/bash/sh/' /tmp/ovf/tools/ovftool
+					fi
+
+					#Make sure we have the key files for automatic login to the router with ssh, this setup supersedes the snmpset command that is commented below:
+					cp /mnt/usb-compilation/esxi/deployment_rsa /tmp/ovf/files/deployment_rsa
+					cp /mnt/usb-compilation/esxi/deployment_rsa.pub /tmp/ovf/files/deployment_rsa.pub
+
+					#if  [ !  -z "$SNMP" ]; then
+					#	rm -rf /tmp/snmpset
+					#	mkdir -p /tmp/snmpset
+					#	cp /mnt/usb-compilation/snmpset/snmpset* ./snmpset
+					#	mkdir -p /tmp/snmpset/mibs
+					#	cp /mnt/usb-compilation/snmpset/snmpset/mibs/* /tmp/snmpset/mibs/
+					#	rsync -au /tmp/snmpset/* /tmp/ovf/bin/snmpset/
+					#fi
+					cd /tmp
+					tar cf ovf.tar ovf
+					gzip -9 ovf.tar
+
+					mv ovf.tar.gz /mnt/usb/ovf-00.t00
+					chmod 777 /mnt/usb/ovf-00.t00
+					if [ ! -z "$TFTP" ] &&  [ ! -z "$OVF" ]; then
+						cp /mnt/usb/ovf-00.t00 /mnt/usb-compilation/esxi/ovf-00.t00
+					fi
+				</pre>
+				
+				
+				
+			</td>
+			<td>
+				<a href="images/UCS/UCS-Illustration-1.jpg" data-lightbox="UCS-Illustrations" title="UCS Illustration"><img src="images/UCS/UCS-Illustration-1.jpg" height="134" width="121" border="0" style="margin:0px;"/></a>
+			</td>
+		</tr>
+	</table>
+<h2>2. Partitioning the disk and installing syslinux </h2>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+				
+				
+			</td>
+			<td>
+				<a href="images/UCS/UCS-Illustration-1.jpg" data-lightbox="UCS-Illustrations" title="UCS Illustration"><img src="images/UCS/UCS-Illustration-1.jpg" height="134" width="121" border="0" style="margin:0px;"/></a>
+			</td>
+		</tr>
+	</table>
+<h2>3. Copy in ESXi files and set up scripts and configuration files</h2>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+				
+				
+			</td>
+			<td>
+				<a href="images/UCS/FiddlerHttpsSetup.png" data-lightbox="Using_Fiddler" title="Figure 1"><img src="images/UCS/tn_FiddlerHttpsSetup.png" height="122" width="121" border="0" style="margin:0px;"/></a>
+			</td><td>
+				<a href="images/UCS/FiddlerExample1.png" data-lightbox="Using_Fiddler" title="Figure 2"><img src="images/UCS/tn_FiddlerExample1.png" height="122" width="121" border="0" style="margin:0px;"/></a>
+			</td>
+		</tr>
+	</table>
+<h2>4. </h2>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+				
+			</td>
+		</tr>
+	</table>
+
+<h2>5. Copy in any tools needed</h2>
+	<table width="100%">
+		<tr>
+			<td style="background-color:white;">
+			
+			</td>
+		</tr>
+	</table>
+	<br/>
+	Afterword
+	<br/>
+	<br/>
+	<i><b><u>Source</u>: Fiddler and the imagination.</b></i>
+	</p>
+</p>
