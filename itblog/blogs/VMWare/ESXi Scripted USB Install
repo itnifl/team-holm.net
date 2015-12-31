@@ -98,6 +98,8 @@ The setup procdure will be described as performed in Linux, by using BASH script
 	<br/>
 	All these sections will sum up a automativ USB based deployment. Please comment your experiences below.
 	<br/>
-	<i><b><u>Source</u>: VMware and the internet abroad.</b></i>
+	<br/>
+	<i><b><u>Source</u>: VMware and <a href="https://github.com/lanrat/tftp" class="articleLink" target="_blank">github</a>.
+	</b></i>
 	</p>
 </p>
