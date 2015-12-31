@@ -14,6 +14,9 @@
 			oppgitt, om de finnes - <a href="mailto:atle@team-holm.net" border="0" class="articleLink">atle@team-holm.net</a>
 			</div><div class="roundedcornr_bottom_525768"><div></div></div></div>
 			<center><h1>Nyheter</h1></center>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>31.12.2015 - Auto utrulling av ESXi via USB:</b></div>
+				 &nbsp;&nbsp;&nbsp;Legger til en artikkel som viser hvordan auto utrulle ESXi fra USB disk; <a href="index.php?scriptName=VMWare&subSection=false#VMWareUSBInst" class="articleLink">ESXi Scripted USB Install</a>. <br/>Det vises i tillegg hvordan man laster ned IP konfigurasjon med TFTP for slik sette denne automatisk til ESXi hosten ved utrulling.
+			</div>
 			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>02.04.2015 - Hyper-V og Linux update:</b></div>
 				&nbsp;&nbsp;&nbsp;Har v&aelig;rt lite med oppdateringer hittil i &aring;r. Legger en artikkel i denne oversikten som ikke har v&aelig;rt lagt til, men som har v&aelig;rt tilgjengelig fra for en stund side; Creating a template and auto <a href="index.php?scriptName=Hyper-V&subSection=false#HYPER_GCRFBTS" class="articleLink">deploying Centos</a> i SCVMM 2012R2/Hyper-V.
 			</div>
@@ -128,6 +131,10 @@
 			- <a href="mailto:atle@team-holm.net" border="0" class="articleLink">atle@team-holm.net</a>
 			</div><div class="roundedcornr_bottom_525768"><div></div></div></div>
 			<center><h1>News</h1></center>
+			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>31.12.2015 - Auto deploying ESXi via USB:</b></div>
+				 &nbsp;&nbsp;&nbsp;Adding one article that shows how to auto deploy ESXi from a USB disk; <a href="index.php?scriptName=VMWare&subSection=false#VMWareUSBInst" class="articleLink">ESXi Scripted USB Install</a>. <br/>It also downloads IP configuration via TFTP for automatically setting IP-address on the host.
+			</div>
+			<br/>
 			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>02.04.2015 - Hyper-V and Linux update:</b></div>
 				 &nbsp;&nbsp;&nbsp;Updates this far have been few. Adding a missing update to the list of blog articles that can be found here;<br/>Creating a template and auto <a href="index.php?scriptName=Hyper-V&subSection=false#HYPER_GCRFBTS" class="articleLink">deploying Centos</a> in Hyper-V.
 			</div>

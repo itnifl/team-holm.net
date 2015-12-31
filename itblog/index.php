@@ -47,7 +47,7 @@
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/pace.min.js"></script>
 	<script type="text/javascript" src="js/LinuxjQueryFunctions.js?v=0002"></script>
-	<script type="text/javascript" src="js/VMWarejQueryFunctions.js?v=0001"></script>
+	<script type="text/javascript" src="js/VMWarejQueryFunctions.js?v=0002"></script>
 	<script type="text/javascript" src="js/ScriptsjQueryFunctions.js?v=0003"></script>
 	<script type="text/javascript" src="js/MicrosoftjQueryFunctions.js?v=0002"></script>
 	<script type="text/javascript" src="js/KryptografijQueryFunctions.js"></script>
@@ -148,7 +148,7 @@
 				</div>
 				<!--<iframe src="http://nodenet.homelinux.net:3700/" width="1000">-->
 				<!--New blogs since last update;
-					Getting Centos 7 template ready in SCVMM 2012 R2
+
 				-->
 			<?php
 			}

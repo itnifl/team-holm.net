@@ -53,4 +53,13 @@ $(document).ready(function() {
 			$('#VDIReporting1').animate({ opacity: 'hide', height: 'hide'}, 'slow');
 		}
 	});
+	/*The VMWareUSBInst Box*/
+	$('#btnVMWareUSBInst').click(function() {
+		$('#VMWareUSBInst').animate({ opacity: 'show', height: 'show'}, 'slow');
+	});
+	$('#closeESXi_PerfMon').click(function() {
+		if ($('#VMWareUSBInst').is(':visible')) {
+			$('#VMWareUSBInst').animate({ opacity: 'hide', height: 'hide'}, 'slow');
+		}
+	});
 });
