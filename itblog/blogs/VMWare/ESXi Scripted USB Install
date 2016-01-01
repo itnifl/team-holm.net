@@ -1,16 +1,19 @@
 <p class="blogheader" style="margin-bottom:2px;"><A NAME="VMWareUSBInst"><u>ESXi Scripted USB Install</u></A></p>
 <p class="smaller">-31st of December 2015</p>
-<hr/>
-<br/>
-This article will contain a technical description of creating, and auto-creating scripted ESXi installs from USB. The USB drive we will be using for the install will be partitioned into three partitions labeled <b>INSTALL</b>, <b>CONFIG</b> and <b>SETUP</b>. 
-<h4>Getting started</h4>
-
-The first partition (<b>INSTALL</b>) will be a FAT32 partition and contain the ESXi installer files, the scripts to automate the installer, syslinux bootloader and a tftp client to download configuration we need to automatically set up our ESXi host.
-The second parttion (<b>CONFIG</b>) will be a FAT16 partition that contains patches that we will use to patch our installation automatically, log files from the installation will be stored here, and a configuration file downloaded from our TFTP server will be placed here.
-The third and last partition (<b>SETUP</b>) will be a NTFS partition that will contain any script files or setup installers that we might need for later usage when working with our ESXi server that we have auto-installed.
-<br/><br/>
-The setup procdure will be described as performed in Linux, by using BASH scripts. This can also be done in Windows, but will require other technical expertise to acquire this, and is not described here.
-<br/>
+<h2>Getting started</h2>
+<table width="100%">
+	<tr>
+		<td style="background-color:#fafafa;">
+			This article will contain a technical description of creating, and auto-creating scripted ESXi installs from USB. The USB drive we will be using for the install will be partitioned into three partitions labeled <b>INSTALL</b>, <b>CONFIG</b> and <b>SETUP</b>. 
+			<br/><br/>
+			The first partition (<b>INSTALL</b>) will be a FAT32 partition and contain the ESXi installer files, the scripts to automate the installer, syslinux bootloader and a tftp client to download configuration we need to automatically set up our ESXi host.
+			The second parttion (<b>CONFIG</b>) will be a FAT16 partition that contains patches that we will use to patch our installation automatically, log files from the installation will be stored here, and a configuration file downloaded from our TFTP server will be placed here.
+			The third and last partition (<b>SETUP</b>) will be a NTFS partition that will contain any script files or setup installers that we might need for later usage when working with our ESXi server that we have auto-installed.
+			<br/><br/>
+			The setup procdure will be described as performed in Linux, by using BASH scripts. This can also be done in Windows, but will require other technical expertise to acquire this, and is not described here. The whole automation is performed for VMware ESXi 5.5.
+		</td>
+	</tr>
+</table>
 <h2>1. Downloading the TFTP client source code and compiling it for use </h2>
 	<table width="100%">
 		<tr>
@@ -56,7 +59,7 @@ The setup procdure will be described as performed in Linux, by using BASH script
 					cp /usr/arbitrarylocation/deployment_rsa /tmp/ovf/files/deployment_rsa
 					cp /usr/arbitrarylocation/esxi/deployment_rsa.pub /tmp/ovf/files/deployment_rsa.pub
 
-					#Now create the t00 file:
+					#Now create the t00 file and place it on the usb disk where it will be used:
 					cd /tmp
 					tar cf ovf.tar ovf
 					gzip -9 ovf.tar
@@ -68,12 +71,55 @@ The setup procdure will be described as performed in Linux, by using BASH script
 			</td>
 		</tr>
 	</table>
-<h2>2. Partitioning the disk and installing syslinux on the INSTALL(boot) partition</h2>
+<h2>2. Partitioning the disk and installing Syslinux on the INSTALL(boot) partition</h2>
 	<table width="100%">
 		<tr>
 			<td style="background-color:white;">
-				This section will be written later.	<br/>
-				Check by later on.			
+				The following BASH script will partition your USB disk for you. Be aware that will will wipe everythig on it. To run it, paste the code in a textfile and make it executeable:<br/>
+				<pre class="brush: bash;">chmod 755 nameOfScript.sh</pre>
+				The script to do th partitioning is as follows:
+				<pre class="brush: bash;">
+					#!/bin/bash
+					DISKPARTITION=$1
+
+					if [ -z "$DISKPARTITION" ]; then
+						echo -e "\e[31mError: Invalid arguments $0 \e[0m"
+						echo -e "Example usage: $0 sdc"
+						echo -e "First argument is disk to partition."
+						exit 1
+					fi
+					if mount | grep -E '(^| )/mnt/usb( |$)' > /dev/null; then
+						umount /mnt/usb
+					fi
+
+					echo -e "\e[35m **Wiping out all partitions on /dev/$DISKPARTITION .. \e[0m"
+					dd if=/dev/zero of=/dev/$DISKPARTITION  bs=512  count=1
+					echo -e "\e[35m **Creating three new partitions on $DISKPARTITION \e[0m"
+					echo -e "d\nn\np\n1\n2048\n+1GB\nn\np\n2\n\n+1GB\nn\np\n3\n\n\nt\n1\nb\nt\n2\n6\nt\n3\n7\nw\n" | fdisk /dev/$DISKPARTITION > /dev/null
+
+					echo -e "\e[35m **Formatting partitions .. \e[0m"
+					/sbin/mkfs.vfat -F 32 -n INSTALL /dev/${DISKPARTITION}1
+					/sbin/mkfs.vfat -F 16 -n CONFIG /dev/${DISKPARTITION}2
+					mkfs.ntfs -L SETUP -f /dev/${DISKPARTITION}3
+				</pre>
+				Next we need to install our bootloader, Syslinux to our USB disk. This will make it bootable. Please note that the version of VMware ESXi you are using might only support certain versions of Syslinux. In this example, Syslinux 4.05 was used for usage with ESXi 5.5. 
+				<pre class="brush: bash;">
+					#!/bin/bash
+					DISKPARTITION=$1
+					if [ -z "$DISKPARTITION" ]; then
+						echo -e "\e[31mError: Did not receive argument for disk partition in $0 \e[0m"
+						echo -e "Example usage: $0 sdc"
+						exit 1
+					fi
+					echo -e "\e[35m **Removing any possible GPT data on /dev/$DISKPARTITION.. \e[0m"
+					sgdisk --zap /dev/$DISKPARTITION
+					echo -e "\e[35m **Installing syslinux to /dev/${DISKPARTITION}1.. \e[0m"
+					syslinux -i /dev/${DISKPARTITION}1
+					echo -e "\e[35m **Copying in mbr to /dev/$DISKPARTITION.. \e[0m"
+					dd conv=notrunc bs=440 if=/usr/lib/syslinux/mbr.bin of=/dev/$DISKPARTITION
+					echo -e "\e[35m **Setting bootflag on parted /dev/$DISKPARTITION.. \e[0m"
+					parted /dev/$DISKPARTITION set 1 boot on
+				</pre>
 			</td>
 		</tr>
 	</table>
@@ -81,8 +127,66 @@ The setup procdure will be described as performed in Linux, by using BASH script
 	<table width="100%">
 		<tr>
 			<td style="background-color:white;">
-				This section will be written later.	<br/>
-				Will update the site index when done.
+				The following script will copy in all files from the VMware ESXi ISO, provided that it is available under /dev/cdrom (mounted iso in a virtual machine for instance). When this is done, we create syslinux.cfg to tell syslinux how to and what to boot.
+				<pre class="brush: bash;">
+					#!/bin/bash
+					echo -e "\e[35m **Starting section where we copy in from ESXi ISO to ESXI USB.. \e[0m"
+					DISKPARTITION=$1
+					if [ -z "$DISKPARTITION" ]; then
+						echo -e "\e[31mError: Did not receive argument for disk partition in $0 \e[0m"
+						echo -e "Example usage: $0 sdc"
+						exit 1
+					fi
+
+					if [ ! -z "$DISKPARTITION" ]; then
+						if [ ! -d "/mnt/usb" ]; then 
+							mkdir -p /mnt/usb
+						fi
+						if mount | grep -E '(^| )/mnt/usb( |$)' > /dev/null; then
+							umount /mnt/usb
+						fi
+						mount -t vfat /dev/${DISKPARTITION}1 /mnt/usb
+						if mount | grep -E '(^| )/mnt/usb( |$)' > /dev/null; then
+							echo -e "\e[35m **Usb successfully mounted, starting copy..\e[0m" 
+							if mount | grep /mnt/cdrom > /dev/null; then
+								umount /mnt/cdrom
+							fi
+							mount /dev/cdrom /mnt/cdrom
+							rsync -au /mnt/cdrom/ /mnt/usb/
+							echo -e "\e[35m **Copy done, setting up syslinux.cfg..\e[0m" 
+							cp /mnt/cdrom/isolinux.cfg /mnt/usb/syslinux.cfg
+							sed -i 's|menu.c32|mboot.c32|' /mnt/usb/syslinux.cfg
+						fi
+						if mount | grep -E '(^| )/mnt/usb( |$)' > /dev/null; then
+							umount /mnt/usb
+						fi
+						if mount | grep /mnt/cdrom > /dev/null; then
+							umount /mnt/cdrom
+						fi
+					fi
+				</pre>
+				Here below is a script that places our custom BOOT.CFG and KS.CFG at the usb installation media. BOOT.CFG is pointed to by syslinux.cfg and contains information about the installer we are going to use, what files it will load and with what settings. It is in BOOT.CFG we will plae the nme of the t00 package we created with our TFTP client after copying the file to the USB disk. BOOT.CFG also points to KS.CFG which is the script that performs the ESXi installation, uses the TFTP client we compiled and sets up the ESXi server.
+				<pre class="brush: bash;">
+					#!/bin/bash
+					echo -e "\e[35m **Copying ESXi kickstart files.. \e[0m"
+					DISKPARTITION=$1
+
+					if [ -z "$DISKPARTITION" ]; then
+						echo -e "\e[31mError: invalid arguments in $0 \e[0m"
+						echo -e "Example usage: $0 sdc"
+						exit 1
+					fi
+					if mount | grep -E '(^| )/mnt/usb( |$)' > /dev/null; then
+						umount /mnt/usb
+					fi
+					mount -t vfat /dev/${DISKPARTITION}1 /mnt/usb
+
+					echo -e "\e[35m       HP setup files are being copied..\e[0m"
+					cp /usr/arbitraryLocation/BOOT.CFG /mnt/usb/BOOT.CFG
+					cp /usr/arbitraryLocation/KS.CFG /mnt/usb/KS.CFG					
+				</pre>
+				This section will be updated later with BOOT.CFG an KS.CFG.	<br/>
+				Check by.
 			</td>
 		</tr>
 	</table>
