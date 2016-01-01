@@ -10,7 +10,7 @@
 			The second parttion (<b>CONFIG</b>) will be a FAT16 partition that contains patches that we will use to patch our installation automatically, log files from the installation will be stored here, and a configuration file downloaded from our TFTP server will be placed here.
 			The third and last partition (<b>SETUP</b>) will be a NTFS partition that will contain any script files or setup installers that we might need for later usage when working with our ESXi server that we have auto-installed.
 			<br/><br/>
-			The setup procdure will be described as performed in Linux, by using BASH scripts. This can also be done in Windows, but will require other technical expertise to acquire this, and is not described here. The whole automation is performed for VMware ESXi 5.5.
+			The setup procdure will be described as performed in Linux, by using BASH scripts. This can also be done in Windows, but will require other technical expertise to acquire this, and is not described here. The whole automation is performed for VMware ESXi 5.5. Be aware that usage of the scripts shown here and the information given here, is at own risk. The writer assumes that the reader has the necessary skills to perform this safely, without the loss of data.
 		</td>
 	</tr>
 </table>
@@ -185,8 +185,167 @@
 					cp /usr/arbitraryLocation/BOOT.CFG /mnt/usb/BOOT.CFG
 					cp /usr/arbitraryLocation/KS.CFG /mnt/usb/KS.CFG					
 				</pre>
-				This section will be updated later with BOOT.CFG an KS.CFG.	<br/>
-				Check by.
+				The following example of BOOT.CFG is from the HP custom ESXi 5.5 ISO. We have added our t00 file to the modules list, specified our kickstart script, and added initial IP-address configuration to the host. This configuration is then repeated in KS.CFG, and is the configuration first needed to talk to the TFTP server on our network to fetch a text file with information regarding the final IP-address configuration of the host. You should not copy the BOOT.CFG file below, but use it as an example on how to configure your own BOOT.CFG from the ISO you are automating your installation. The modules list might be different for different versions of ESXi, or different vendor builds.
+				<pre class="brush: bash;">
+					bootstate=0
+					title=Automated ESXi Installer
+					kernel=/tboot.b00
+					kernelopt=runweasel ks=usb:/KS.CFG bootProto=static addvmportgroup=0 netdevice=vmnic0 ip=172.10.12.12 netmask=255.255.0.0 
+						gateway=172.10.15.20 hostname=ESXiHost1 vlanid=100 nameserver=8.8.8.8
+					modules=/b.b00 --- /jumpstrt.gz --- /useropts.gz --- /k.b00 --- /chardevs.b00 --- /a.b00 --- /user.b00 --- /sb.v00 --- /s.v00  
+						--- /misc_cni.v00 --- /net_bnx2.v00 --- /net_bnx2.v01 --- /net_cnic.v00 --- /net_tg3.v00 --- /scsi_bnx.v00 --- /scsi_bnx.v01 
+						--- /scsi_bfa.v00 --- /elxnet.v00 --- /ima_be2i.v00 --- /lpfc.v00 --- /scsi_be2.v00 --- /char_hpc.v00 --- /char_hpi.v00 
+						--- /hp_ams.v00 --- /hp_build.v00 --- /hp_conre.v00 --- /hp_esxi_.v00 --- /hp_smx_p.v00 --- /hpbootcf.v00 --- /hpnmi.v00 
+						--- /hponcfg.v00 
+						--- /hpssacli.v00 --- /hptestev.v00 --- /scsi_hpd.v00 --- /scsi_hps.v00 --- /scsi_hpv.v00 --- /net_igb.v00 --- /net_ixgb.v00 
+						--- /scsi_mpt.v00 --- /net_mlx4.v00 --- /net_mlx4.v01 --- /net_mst.v00 --- /ima_qla4.v00 --- /net_nx_n.v00 --- /net_qlcn.v00 
+						--- /qlnative.v00 --- /scsi_qla.v00 --- /ata_pata.v00 --- /ata_pata.v01 --- /ata_pata.v02 --- /ata_pata.v03 --- /ata_pata.v04 
+						--- /ata_pata.v05 --- /ata_pata.v06 --- /ata_pata.v07 --- /block_cc.v00 --- /ehci_ehc.v00 --- /weaselin.t00 --- /esx_dvfi.v00 
+						--- /xlibs.v00 --- /ipmi_ipm.v00 --- /ipmi_ipm.v01 --- /ipmi_ipm.v02 --- /lsi_mr3.v00 --- /lsi_msgp.v00 --- /misc_dri.v00 
+						--- /mtip32xx.v00 
+						--- /net_be2n.v00 --- /net_e100.v00 --- /net_e100.v01 --- /net_enic.v00 --- /net_forc.v00 --- /net_vmxn.v00 --- /ohci_usb.v00
+						--- /rste.v00 --- /sata_ahc.v00 --- /sata_ata.v00 --- /sata_sat.v00 --- /sata_sat.v01 --- /sata_sat.v02 --- /sata_sat.v03 
+						--- /sata_sat.v04 --- /scsi_aac.v00 --- /scsi_adp.v00 --- /scsi_aic.v00 --- /scsi_fni.v00 --- /scsi_ips.v00 --- /scsi_lpf.v00 
+						--- /scsi_meg.v00 --- /scsi_meg.v01 --- /scsi_meg.v02 --- /scsi_mpt.v01 --- /scsi_mpt.v02 --- /scsi_qla.v01 --- /uhci_usb.v00 
+						--- /tools.t00 --- /xorg.v00 --- /ovf-00.t00 --- /imgdb.tgz --- /imgpayld.tgz
+					build=
+					updated=0
+				</pre>
+				Below is the lst script for the automation. It partitions the disks ff a HP GEN 8 server (different commands might be correct for a different server), sets the password, the initial IP configuration, decides what path our CONFIG partition has received, copies over patches and logs, performs the patching, downloads IP configuration from TFTP, sets the final IP configuration, and also assigns a license to the ESXi host. As you may imagine, a lot more can be done with these scripts. For instance creating standard switches and port groups with esxcli commands, amongst other things. Localcli is used instead of esxcli when the ESXi server is not fully started yet. 
+				<pre class="brush: bash;">
+					###############PRE INSTALL SECTION##############################################################
+					accepteula
+					clearpart --firstdisk='HP iLO' --overwritevmfs
+					clearpart --firstdisk=HP --overwritevmfs
+					partition datastore1 --onfirstdisk=HP
+					install --firstdisk='HP iLO' --novmfsondisk --overwritevmfs
+					rootpw passord1
+					network --bootproto=static --addvmportgroup=0 --device=vmnic0 --ip=172.10.12.12 --netmask=255.255.0.0 
+						--gateway=172.10.15.20 --hostname=ESXiHost1 --vlanid=100 --nameserver=8.8.8.8
+
+					###############POST INSTALL SECTION#############################################################
+					%post --interpreter=busybox --ignorefailure=true
+					POSTLOG="/vmfs/volumes/datastore1/postInstallKickStartLog.log"
+					PATCHFILE="ESXI550-201505002.ZIP"
+					
+					echo "# Copying the ovf tool and custom tftp client to the correct location.." >> $POSTLOG 2>> $POSTLOG
+					cp -R /ovf /vmfs/volumes/datastore1/ >> $POSTLOG 2>> $POSTLOG
+					
+					echo "#Stopping usbarbitrator and rescaning for storage.." >> $POSTLOG 2>> $POSTLOG
+					/etc/init.d/usbarbitrator stop >> $POSTLOG 2>> $POSTLOG
+
+					echo "#Disabling the firewall, neeed for TFTP client to work.." >> $POSTLOG 2>> $POSTLOG
+					localcli network firewall set --enabled false  >> $POSTLOG 2>> $POSTLOG
+
+					if [ -d "/vmfs/volumes/NO NAME/" ]; then
+						USBDIRECTORY="/vmfs/volumes/NO NAME"
+					else
+						USBDIRECTORY="/vmfs/volumes/CONFIG"
+					fi
+
+					echo "Decided to use $USBDIRECTORY as path to the USB Device" >> $POSTLOG 2>> $POSTLOG
+					
+					echo "#Getting the config file from the TFTP server to datastore.." >> $POSTLOG 2>> $POSTLOG
+					cd /vmfs/volumes/datastore1/ovf
+					/vmfs/volumes/datastore1/ovf/bin/tftp/tftpclient -h 172.10.15.20 -p 69 -r servers.txt >> $POSTLOG 2>> $POSTLOG
+
+					echo "#Getting the config file from the tftp server to FAT16 storage.." >> $POSTLOG 2>> $POSTLOG
+					cd "$USBDIRECTORY/"
+					/vmfs/volumes/datastore1/ovf/bin/tftp/tftpclient -h 172.10.15.20 -p 69 -r servers.txt >> $POSTLOG 2>> $POSTLOG
+
+					echo "#Copying in servers.txt from USB to datastore, to make the version saved on USB disk the one with presedence.." >> $POSTLOG 2>> $POSTLOG
+					echo "#If this fails, we hope that the previous download from the TFTP server to datastore will have done the trick.." >> $POSTLOG 2>> $POSTLOG
+					cp "$USBDIRECTORY/SERVERS.TXT" /vmfs/volumes/datastore1/ovf/SERVERS.TXT >> $POSTLOG 2>> $POSTLOG
+					
+					echo "#Copying in patch to datastore.." >> $POSTLOG 2>> $POSTLOG
+					cp "$USBDIRECTORY/PATCHES/$PATCHFILE" /vmfs/volumes/datastore1/ovf/files/$PATCHFILE >> $POSTLOG 2>> $POSTLOG
+					
+					echo "#Copying in weasel.log to USB disk and datastore1.." >> $POSTLOG 2>> $POSTLOG
+					cp /var/log/weasel.log "$USBDIRECTORY/LOGS/weasel.log" >> $POSTLOG 2>> $POSTLOG
+					cp /var/log/weasel.log /vmfs/volumes/datastore1/weasel.log >> $POSTLOG 2>> $POSTLOG
+
+					echo "#Copying in POSTLOG to USB disk.." >> $POSTLOG 2>> $POSTLOG
+					cp $POSTLOG "$USBDIRECTORY/LOGS/postInstallKickStartLog.log" >> $POSTLOG 2>> $POSTLOG
+					cp /tmp/*.txt "$USBDIRECTORY/LOGS/" >> $POSTLOG 2>> $POSTLOG
+					cp /var/log/*.log "$USBDIRECTORY/LOGS/" >> $POSTLOG 2>> $POSTLOG
+
+					echo "#Rebooting the host..." >> $POSTLOG 2>> $POSTLOG
+					reboot
+					
+					###############FIRSTBOOT SECTION##############################################################
+					%firstboot --interpreter=busybox
+					sleep 30
+					echo "# Ensure hostd is ready" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					while ! vim-cmd hostsvc/runtimeinfo; do
+					sleep 10
+					done
+
+					echo "#Stopping usbarbitrator and rescaning for storage.." >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					/etc/init.d/usbarbitrator stop >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+
+					FIRSTBOOTLOG="/vmfs/volumes/datastore1/firstBootKickStartLog.log"
+					PATCHFILE="ESXI550-201505002.ZIP"
+
+					echo "#Enabling & starting the ESXi Shell.." >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					vim-cmd hostsvc/enable_esx_shell >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					vim-cmd hostsvc/start_esx_shell  >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+
+					if [ -d "/vmfs/volumes/NO NAME/" ]; then
+						USBDIRECTORY="/vmfs/volumes/NO NAME"
+					else
+						USBDIRECTORY="/vmfs/volumes/CONFIG"
+					fi
+
+					echo "Decided to use $USBDIRECTORY as path to the USB Device" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+
+					echo "#Assigning license.." >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					vim-cmd vimsvc/license --set 00000-520EQ-00000-01DR0-00000  >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+
+					echo "#Gathering information from configuration file.." >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					ESXiHostname=`more /vmfs/volumes/datastore1/ovf/servers.txt | grep esx1 | cut -d';' -f1`
+					ESXiIpAddress=`more /vmfs/volumes/datastore1/ovf/servers.txt | grep esx1 | cut -d';' -f2`
+					ESXiSubnet=`more /vmfs/volumes/datastore1/ovf/servers.txt | grep esx1 | cut -d';' -f3`
+					ESXiGateway=`more /vmfs/volumes/datastore1/ovf/servers.txt | grep esx1 | cut -d';' -f4`
+					ESXiSubnetID=`more /vmfs/volumes/datastore1/ovf/servers.txt | grep esx1 | cut -d';' -f5`
+					ESXiVLAN=`more /vmfs/volumes/datastore1/ovf/servers.txt | grep esx1 | cut -d';' -f6`
+
+					echo "Acquired ESXiHostname: $ESXiHostname" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					echo "Acquired ESXiIpAddress: $ESXiIpAddress" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					echo "Acquired ESXiSubnet: $ESXiSubnet" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					echo "Acquired ESXiGateway: $ESXiGateway" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					echo "Acquired ESXiSubnetID: $ESXiSubnetID" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					echo "Acquired ESXiVLAN: $ESXiVLAN" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+
+					echo "#Setting the IP address configuration on the host.." >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					esxcli system hostname set --host=$ESXiHostname  >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					esxcli network ip interface ipv4 set --interface-name vmk0 --type static --ipv4 $ESXiIpAddress --netmask $ESXiSubnet  >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					esxcli network vswitch standard portgroup set -p "Management Network" --vlan-id $ESXiVLAN  >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					esxcli network ip set --ipv6-enabled false >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					
+					echo "#Patching the host.."  >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					esxcli software vib install -d "/vmfs/volumes/datastore1/ovf/files/$PATCHFILE" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+
+					echo "#Cleaning up the patch source when we are done.."
+					rm -f /vmfs/volumes/datastore1/ovf/files/$PATCHFILE
+
+					echo "#Backup ESXi configuration to persist changes" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					/sbin/auto-backup.sh >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					
+					echo "#Copy %first boot script logs to persisted datastore" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					cp /var/log/hostd.log "/vmfs/volumes/datastore1/firstboot-hostd.log" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					cp /var/log/esxi_install.log "/vmfs/volumes/datastore1/firstboot-esxi_install.log" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+
+					echo "#Attempting to copy %first boot script logs to USB if the USB disk is available.." >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					cp /var/log/hostd.log "$USBDIRECTORY/LOGS/firstboot-hostd.log" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					cp /var/log/esxi_install.log "$USBDIRECTORY/LOGS/firstboot-esxi_install.log" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+
+					echo "#Attempting to copy FIRSTBOOTLOG to USB if the USB disk is available.." >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					cp $FIRSTBOOTLOG "$USBDIRECTORY/LOGS/firstBootKickStartLog.log" >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+
+					echo "#Host configuration done! Rebooting.." >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+					sleep 180
+					reboot -n -f  >> $FIRSTBOOTLOG 2>> $FIRSTBOOTLOG
+				</pre>
 			</td>
 		</tr>
 	</table>
@@ -200,7 +359,7 @@
 		</tr>
 	</table>
 	<br/>
-	All these sections will sum up a automativ USB based deployment. Please comment your experiences below.
+	All these sections will sum up an automated USB based deployment. Please comment your experiences with this setup below.
 	<br/>
 	<br/>
 	<i><b><u>Source</u>: VMware and <a href="https://github.com/lanrat/tftp" class="articleLink" target="_blank">github</a>.

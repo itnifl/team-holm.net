@@ -37,7 +37,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">-->
 <head>
 	<title>itblog.team-holm.net</title>
-	<meta name="description" content="Et utl&oslash;p for faglig interesse" />
+	<meta name="description" content="All IT-stuff related, scripts, how-to's, code and info.." />
 	<meta name="keywords" content="IT, IT-blogg, IT blog, Windows, Kryptografi, Cryptography, Dos, Scripts, Skript, Sikkerhet, Security, SQL, SQL Server, MS SQL, VMWare, vSphere, Slots, Deadlocking, Performance, Half-Life, Half-Life Dedicated Linux Server" />
 	<meta name="author" content="Atle Holm" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
