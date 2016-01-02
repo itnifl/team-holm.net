@@ -7,7 +7,7 @@
 			This article will contain a technical description of creating, and auto-creating scripted ESXi installs from USB. The USB drive we will be using for the install will be partitioned into three partitions labeled <b>INSTALL</b>, <b>CONFIG</b> and <b>SETUP</b>. 
 			<br/><br/>
 			The first partition (<b>INSTALL</b>) will be a FAT32 partition and contain the ESXi installer files, the scripts to automate the installer, syslinux bootloader and a tftp client to download configuration we need to automatically set up our ESXi host.
-			The second parttion (<b>CONFIG</b>) will be a FAT16 partition that contains patches that we will use to patch our installation automatically, log files from the installation will be stored here, and a configuration file downloaded from our TFTP server will be placed here.
+			The second parttion (<b>CONFIG</b>) will be a FAT16 partition that contains patches that we will use to patch our installation automatically (ESXi only mounts FAT16 partitions locally), log files from the installation will be stored here, and a configuration file downloaded from our TFTP server will be placed here.
 			The third and last partition (<b>SETUP</b>) will be a NTFS partition that will contain any script files or setup installers that we might need for later usage when working with our ESXi server that we have auto-installed.
 			<br/><br/>
 			The setup procdure will be described as performed in Linux, by using BASH scripts. This can also be done in Windows, but will require other technical expertise to acquire this, and is not described here. The whole automation is performed for VMware ESXi 5.5. Be aware that usage of the scripts shown here and the information given here, is at own risk. The writer assumes that the reader has the necessary skills to perform this safely, without the loss of data.
@@ -34,7 +34,7 @@
 				<pre class="brush: bash;">
 					make CFLAGS="-static" EXEEXT="-static"
 				</pre>
-				Now you will have the compiled tftpclient (a file without a filename extension) in the same folder as where you  compiled the code. We now need to create a compressed tar ball and convert that into a t00 file that we will include in the ESXi installer to be installed with the rest of the system. Please see a example script below. read through it, it contains more actions then you possibly might need. I keep these here  for inspiration of possible technical solutions.<br/>
+				Now you will have the compiled tftp client (a file without a filename extension) in the same folder as where you compiled the code. We now need to create a compressed tar ball and convert that into a t00 file that we will include in the ESXi installer to be installed with the rest of the system. Please see the example script below. Read through it, it does contain more actions then you need. I kept these there for inspiration of possible technical solutions. Edit the scrpt for your own needs.<br/>
 				<pre class="brush: bash;">
 					#! /bin/bash
 
@@ -59,15 +59,12 @@
 					cp /usr/arbitrarylocation/deployment_rsa /tmp/ovf/files/deployment_rsa
 					cp /usr/arbitrarylocation/esxi/deployment_rsa.pub /tmp/ovf/files/deployment_rsa.pub
 
-					#Now create the t00 file and place it on the usb disk where it will be used:
+					#Now create the t00 file:
 					cd /tmp
 					tar cf ovf.tar ovf
-					gzip -9 ovf.tar
-					mv ovf.tar.gz /mnt/usb/ovf-00.t00
-					chmod 777 /mnt/usb/ovf-00.t00
+					gzip -9 ovf.tar					
 				</pre>
-				Here /mnt/usb/ovf-00.t00 is the file we are going to include in our VMware ESXi installer. We will copy that file to the <b>INSTALL</b> partition that we will make, and refer to it via boot.cfg. This same file lso refers to ks.cfg, which will be our kickstart installer script to setup the ESXi.
-
+				Here /mnt/usb/ovf-00.t00 is the file we are going to include in our VMware ESXi installer. We will later copy that file to the <b>INSTALL</b> partition that we have made, and later we will refer to it via boot.cfg. This same file also refers to ks.cfg, which will be our kickstart installer script to setup the ESXi.
 			</td>
 		</tr>
 	</table>
@@ -127,7 +124,7 @@
 	<table width="100%">
 		<tr>
 			<td style="background-color:white;">
-				The following script will copy in all files from the VMware ESXi ISO, provided that it is available under /dev/cdrom (mounted iso in a virtual machine for instance). When this is done, we create syslinux.cfg to tell syslinux how to and what to boot.
+				The following script will copy in all files from the VMware ESXi ISO, provided that it is available under /dev/cdrom (a mounted iso in a virtual machine, for instance). When this is done, we create syslinux.cfg to tell Syslinux how to and what to boot.
 				<pre class="brush: bash;">
 					#!/bin/bash
 					echo -e "\e[35m **Starting section where we copy in from ESXi ISO to ESXI USB.. \e[0m"
@@ -156,6 +153,9 @@
 							echo -e "\e[35m **Copy done, setting up syslinux.cfg..\e[0m" 
 							cp /mnt/cdrom/isolinux.cfg /mnt/usb/syslinux.cfg
 							sed -i 's|menu.c32|mboot.c32|' /mnt/usb/syslinux.cfg
+							#Place the t00 file we created earlier, on the INSTALL partition:
+							mv /tmp/ovf.tar.gz /mnt/usb/ovf-00.t00
+							chmod 777 /mnt/usb/ovf-00.t00
 						fi
 						if mount | grep -E '(^| )/mnt/usb( |$)' > /dev/null; then
 							umount /mnt/usb
@@ -165,7 +165,7 @@
 						fi
 					fi
 				</pre>
-				Here below is a script that places our custom BOOT.CFG and KS.CFG at the usb installation media. BOOT.CFG is pointed to by syslinux.cfg and contains information about the installer we are going to use, what files it will load and with what settings. It is in BOOT.CFG we will plae the nme of the t00 package we created with our TFTP client after copying the file to the USB disk. BOOT.CFG also points to KS.CFG which is the script that performs the ESXi installation, uses the TFTP client we compiled and sets up the ESXi server.
+				Here below is a script that places our custom BOOT.CFG and KS.CFG at the usb installation media. BOOT.CFG is pointed to by syslinux.cfg and contains information about the installer we are going to use, what files it will load and with what settings. It is in BOOT.CFG we will place the name of the t00 package we created with our TFTP client after copying the file to the USB disk. BOOT.CFG also points to KS.CFG which is the script that performs the ESXi installation, uses the TFTP client we compiled and sets up the ESXi server.
 				<pre class="brush: bash;">
 					#!/bin/bash
 					echo -e "\e[35m **Copying ESXi kickstart files.. \e[0m"
@@ -211,7 +211,7 @@
 					build=
 					updated=0
 				</pre>
-				Below is the lst script for the automation. It partitions the disks ff a HP GEN 8 server (different commands might be correct for a different server), sets the password, the initial IP configuration, decides what path our CONFIG partition has received, copies over patches and logs, performs the patching, downloads IP configuration from TFTP, sets the final IP configuration, and also assigns a license to the ESXi host. As you may imagine, a lot more can be done with these scripts. For instance creating standard switches and port groups with esxcli commands, amongst other things. Localcli is used instead of esxcli when the ESXi server is not fully started yet. 
+				Below is the last script for the automation. It partitions the disks of a HP GEN 8 server (different commands might be correct for a different server, test your own setup for the setup you need), sets the password, the initial IP configuration, decides what path our CONFIG partition is using, copies over patches and logs, performs the patching, downloads IP configuration from TFTP, sets the final IP configuration, and also assigns a license to the ESXi host. As you may imagine, a lot more can be done with these scripts. For instance creating standard switches and port groups with esxcli commands, amongst other things. The localcli command is used instead of esxcli when the ESXi server is not fully started yet. 
 				<pre class="brush: bash;">
 					###############PRE INSTALL SECTION##############################################################
 					accepteula
@@ -353,8 +353,7 @@
 	<table width="100%">
 		<tr>
 			<td style="background-color:white;">
-				This section will be written later.	<br/>
-				Check by.
+				The setup patition may contain any ovf images you would need to deploy on your host, ovf-tools, PowerCli, Powershell scripts or other tools needed for the last touch of the host that you just deployed automatcally. This partition is a NTFS partition that fills up the rest of the USB disk. Populating this partition with content would be up to the administrator that is going to use it.
 			</td>
 		</tr>
 	</table>
