@@ -74,7 +74,7 @@
 			<td style="background-color:white;">
 				The following BASH script will partition your USB disk for you. Be aware that will will wipe everythig on it. To run it, paste the code in a textfile and make it executeable:<br/>
 				<pre class="brush: bash;">chmod 755 nameOfScript.sh</pre>
-				The script to do th partitioning is as follows:
+				The script to do the partitioning is as follows:
 				<pre class="brush: bash;">
 					#!/bin/bash
 					DISKPARTITION=$1
@@ -353,7 +353,9 @@
 	<table width="100%">
 		<tr>
 			<td style="background-color:white;">
-				The setup patition may contain any ovf images you would need to deploy on your host, ovf-tools, PowerCli, Powershell scripts or other tools needed for the last touch of the host that you just deployed automatcally. This partition is a NTFS partition that fills up the rest of the USB disk. Populating this partition with content would be up to the administrator that is going to use it.
+				The setup patition may contain any ovf images you would need to deploy on your host.<br/> 
+				These may be ovf-tools, PowerCli, Powershell scripts or other tools needed for the last touch of the host that you just deployed automatcally. <br/> 
+				This partition is a NTFS partition that fills up the rest of the USB disk. Populating this partition with content would be up to the administrator that is going to use it.<br/> 
 			</td>
 		</tr>
 	</table>

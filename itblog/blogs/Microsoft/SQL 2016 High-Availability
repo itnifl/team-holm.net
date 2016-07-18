@@ -1,0 +1,114 @@
+<p class="blogheader"><A NAME="SQL_HA"><u>SQL 2016 Database High Availability and related solutions</u></A></p>
+<p class="smaller">-18th July 2016<br><br></p>
+<p>
+	<b>The Case:</b><br/>
+	<b class="blogstep">The solution that was wished for</b> was a database solution mirroring with automatic failover at the database backend (transparent to the IIS servers and the clients) where two IIS servers serve the frontend to the clients. IIS availability and failover is handled by round robin names in the clients hosts file. The client internet browsers will automatically select the IIS server that responds if one of the addresses in the hosts file is not responding. There is no need f or a reverse proxy in this situation, so no reverse proxy considerations are made. Application Request Routing with IIS could be such a reverse proxy solution that would handle availablity for IIS and the browser clients, but round robin names in the clients hosts files were chosen instead. <br/>
+	<br/>Furthermore, Windows Server cannot be used in this scenarion since license costs have to be held down and there are already Windows 7 machines in place that can be used in stead.
+	The depicted case would look like something similar to this, where the client has chosen one available IIS server and the IIS servers address the database mirroring solution as a single point regardless of what database server is active or what database server is the warm standby;	
+	<br/>
+	<br/>
+	<img src="/images/SQLHA/case.png" style="float:left;height:auto;width:300px;margin-right:20px;" />
+	<b>The available technologies that</b> SQL server ships with for the replication of data between two databases or servers are as follows;<br/>
+	<ul>
+		<li>Database mirroring</li>
+		<li>Log shipping</li>
+		<li>Always On Failover Cluster</li>
+		<li>Always On Availability Group</li>
+		<li>Merge replication</li>
+		<li>Transactional replication</li>
+		<li>Snapshot replication</li>
+	</ul>
+	<br/>
+	None of these technologies are available in SQL Server Express version.<br/>
+	For reference: <a href="https://msdn.microsoft.com/en-us/library/cc645993%28v=sql.120%29.aspx?f=255&MSPPError=-2147217396" class="articleLink">https://msdn.microsoft.com/en-us/library/cc645993%28v=sql.120%29.aspx?f=255&MSPPError=-2147217396</a><br/>
+	All of these technologies are available on SQL Server Standard, which is paid license software.<br/>
+	<br/>
+	SQL Server Standard is possible to install on Windows 7. In this case it was necessary, since server infrastructure was not available.<br/>
+	For reference: <a href="https://msdn.microsoft.com/en-us/library/ms143506(v=sql.120).aspx" class="articleLink">https://msdn.microsoft.com/en-us/library/ms143506(v=sql.120).aspx</a><br/>
+	<br/>
+	<b class="blogstep">In regards to what technology</b> is best suited for our case, a short list below will go through the technologies listed above;<br/>
+	<br/>
+	<b>Snapshot replication</b>
+	<ul style="margin-top:0px;">	
+		<li>Replicates snapshots of data from a publisher (database) via a distributor over to a subscriber (database).</li>
+		<li>Does not alone support automatic failover or HA solution</li>
+	</ul>
+	<b class="blogstep">Conclusion:</b> Has to be used together with WSFC (Windows Server Failover Clustering) in order to provide an automatic failover solution. This requires Windows Server.<br/>
+	<br/>
+	<b>Transactional replication</b>
+	<ul style="margin-top:0px;">		
+		<li>Replicates transaction from publisher (database) via a distributor over to a subscriber (database).</li>
+		<li>Can filter what is being replicated</li>
+		<li>Does not alone support automatic failover or HA solution</li>
+	</ul>
+	<b class="blogstep">Conclusion:</b> Has to be used together with WSFC (Windows Server Failover Clustering) in order to provide an automatic failover solution. This requires Windows Server.<br/>
+	<br/>
+	<b>Merge replication</b>
+	<ul style="margin-top:0px;">		
+		<li>Replicates changes from either subscriber or publisher via a merge agent where conflicts are handled by rules set up by the programmer or administrator.</li>
+		<li>Can filter what is being replicated</li>
+		<li>Does not alone support automatic failover or HA solution, but can receive updates at one server and merge them to the second server when the second server comes back up.</li>
+	</ul>
+	<b class="blogstep">Conclusion:</b> Handling rules for merging data from two different databases might be sufficient for correct data handling in our scenarion.<br/>
+	<br/>
+		<table class="boxedInfoborder" style="float:left;width:310px;margin-right:20px;">
+		<tr><td>
+			<b class="blogstep">Setup would be similar to this, not very different from the first illustration:</b>
+			<img src="/images/SQLHA/solution.png" style="float:left;height:auto;width:300px;"/>
+		</td></tr>
+	</table>
+	<b>Log shipping</b>
+	<ul style="margin-top:0px;">		
+		<li>Automatic transaction log transfer to replica database where the transactions are restored from the copied log and saved.</li>
+		<li>Does not support automatic failover, only manual failover.</li>
+	</ul>
+	<b class="blogstep">Conclusion:</b> Has to be used together with WSFC (Windows Server Failover Clustering) in order to provide an automatic failover solution. This requires Windows Server.<br/>
+	<br/>
+	<b>Always On Availability Group</b>
+	<ul style="margin-top:0px;">		
+		<li>Requires Windows Server Failover Clustering (requires Windows Server).</li>
+		<li>Supports automatic failover</li>
+		<li>Fails over databases</li>
+	</ul>
+	<b class="blogstep">Conclusion:</b> WSFC (Windows Server Failover Clustering) requires Windows Server.<br/>
+	<br/>
+	<b>Always On Failover Cluster</b>
+	<ul style="margin-top:0px;">		
+		<li>Requires Windows Server Failover Clustering (requires Windows Server).</li>
+		<li>Supports automatic failover</li>
+		<li>Fails over SQL Server Instances</li>
+	</ul>
+	<b class="blogstep">Conclusion:</b> WSFC (Windows Server Failover Clustering) requires Windows Server.<br/>
+	<br/>
+	<b>Database Mirroring</b>
+	<ul style="margin-top:0px;">		
+		<li>Will not be included in future releases of SQL server, and therefore it is recommended by Microsoft to not use Mirroring for compatibility with future SQL server releases. </li>
+		<li>Replicates data from a primary database (principal database) to a secondary database (mirror database).</li>
+		<li>Supports automatic failover if installed in high-safety mode with a witness SQL server instance (can be SQL Server Express).</li>
+	</ul>
+	<b class="blogstep">Conclusion:</b> This feature will be depreciated in future SQL server releases, but for the purpose of this project might fit right in.<br/>
+	<br/>
+	<b>Based on the information written</b> above, and aiming to use a configurable and not a coded solution, it seems we should use Database Mirroring with a witness server. 
+	<br/>
+	This requires the following;<br/>
+	<ul style="margin-top:0px;">	
+		<li>2 x SQL Server Standard installed on each their Windows 7 (DB1 and DB2).</li>
+		<li>1 x SQL Server Express installed on a undetermined place to act as a witness for automatic failover.</li>
+		<li>Configure Synchronous Database Mirroring in High-Safety mode with automatic failover by using the above software.</li>
+	</ul>
+	The backside of this is that this technology will be descontinued. Possibly, one could use SymmetricDS with SQL Express or MySQL instead.
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<div name="theEnd">
+		<b>Further references are:</b><br/>
+		<ul style="margin-top:0px;">
+			<li><a href="https://msdn.microsoft.com/en-us/library/ms175484.aspx" class="articleLink">Connect Clients to a Database Mirroring Session (SQL Server)</a>.</li>
+			<li><a href="https://msdn.microsoft.com/en-us/library/ms189852.aspx" class="articleLink">Database Mirroring (SQL Server) </a>.</li>
+		</ul>
+		<p>	
+			<u>Sources</u>: Microsoft<br>
+		</p>	
+	</div>
+</p>

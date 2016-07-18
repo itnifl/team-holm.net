@@ -1,4 +1,13 @@
 $(document).ready(function() {
+	/*The SQL_HA Box*/
+	$('#btnSQL_HA').click(function() {
+		$('#SQL_HA').animate({ opacity: 'show', height: 'show'}, 'slow');
+	});
+	$('#closeSQL_PBM').click(function() {
+		if ($('#SQL_HA').is(':visible')) {
+			$('#SQL_HA').animate({ opacity: 'hide', height: 'hide'}, 'slow');
+		}
+	});
 	/*The SQL_TDSF Box*/
 	$('#btnSQL_TDSF').click(function() {
 		$('#SQL_TDSF').animate({ opacity: 'show', height: 'show'}, 'slow');
