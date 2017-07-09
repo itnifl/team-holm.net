@@ -3,7 +3,7 @@
 function displayScriptCode($scriptName, $subSection) {
 	//Først henter vi kommentarer og forklaringer til scriptet som skal vises, og viser dette i egen seksjon før scriptet.
 	//Deretter henter vi selve scriptet og viser dette pent og ryddelig
-	
+
 	$countedLines = 0;
 	if($subSection == false) { //Hvis vi ikke skal lete etter subseksjoner, leter vi etter scriptene rett under scriptmappa og viser frem det
 		//Følgende henter altså frem scripts uten hensyn til scriptpakker/subseksjoner
@@ -44,7 +44,7 @@ function displayScriptCode($scriptName, $subSection) {
 								if(trim($line) == "|TableStart") {
 									$result .= "<table border=\"0\" align=\"center\" class=\"boxedInfoborder\">";
 									$tableReading = True;
-								} 
+								}
 								if($tableReading && trim($line) != "|TableStart" && trim($line) != "|TableEnd") {
 									$pieces = explode("|", $line);
 									if(count($pieces) == 1) $result .= "<tr><td><span class=\"smaller\">".$pieces[0]."</span></td></tr>";
@@ -61,7 +61,7 @@ function displayScriptCode($scriptName, $subSection) {
 								if(trim($line) == "|TableEnd") {
 									$result .= "</table>";
 									$tableReading = False;
-								} 
+								}
 								if (preg_match("*A\sNAME=*", $line)) {
 									for($forCounter = 0; $forCounter < strlen($line) - 6; $forCounter++) {
 										$stringExtract = $line[$forCounter] . $line[$forCounter + 1] . $line[$forCounter + 2] . $line[$forCounter + 3] . $line[$forCounter + 4] . $line[$forCounter + 5];
@@ -77,7 +77,7 @@ function displayScriptCode($scriptName, $subSection) {
 											$linkid[] = $linkTagName;
 											$newLink .= $linkTagName;
 											$newLink .= "\" class=\"packageTableLinks\" id=\"btn". $linkTagName ."\" style=\"margin-left:35px;\">";
-											
+
 											for($sForCounter = 6; (($line[$nextScanPosition + $sForCounter] != "<") || ($line[$nextScanPosition + $sForCounter + 1] != "/") || ($line[$nextScanPosition + $sForCounter + 2] != "u") || ($line[$nextScanPosition + $sForCounter + 3] != ">")); $sForCounter++) {
 												$newLink .= $line[$nextScanPosition + $sForCounter];
 											}
@@ -102,7 +102,7 @@ function displayScriptCode($scriptName, $subSection) {
 								$fileContents[$contentCounter] = "<div id=\"" . $linkid[$contentCounter-1] . "\"><table class=\"codeTable\">" . $tableHeader . $result;
 							}
 							$contentCounter++;
-						}	
+						}
 					}
 				}
 				$linkContents[] = "</nav>";
@@ -157,14 +157,14 @@ function displayFacebookCommentField($url) {
 	echo "}(document, 'script', 'facebook-jssdk'));</script>";
 	echo "<center><div class=\"fb-comments\" data-href=\"http://itblog.team-holm.net/$url\" data-numposts=\"5\" data-colorscheme=\"light\" data-width=\"1050\"></div></center>";
 }
-function displayBlogByTag($tagName) {	
+function displayBlogByTag($tagName) {
 	$countedLines = 0;
-	$db=mysql_connect($GLOBALS['mysqlHost'], $GLOBALS['mysqlUsername'], $GLOBALS['mysqlPassword']) or die("Unable to connect to MySQL Server: " . mysql_error());
-	mysql_select_db($GLOBALS['mysqlDatabase'], $db) or die("Could not select database");
+	$db=mysqli_connect($GLOBALS['mysqlHost'], $GLOBALS['mysqlUsername'], $GLOBALS['mysqlPassword']) or die("Unable to connect to MySQL Server: " . mysqli_error($db));
+	mysqli_select_db($db, $GLOBALS['mysqlDatabase']) or die("Could not select database " . $GLOBALS['mysqlDatabase']);
 	$sql = "SELECT b.name, b.blogpath FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID = b.tagType_1) WHERE t.name = '".$tagName."' UNION ALL " .
 			"SELECT b.name, b.blogpath FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID = b.tagType_2) WHERE t.name = '".$tagName."' UNION ALL " .
 			"SELECT b.name, b.blogpath FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID = b.tagType_3) WHERE t.name = '".$tagName."'";
-	$sqlresult = mysql_query($sql);
+	$sqlresult = mysqli_query($db, $sql);
 	$linkContents = array ();
 	$linkContents[] = "<nav>";
 	$fileContents = array ();
@@ -172,7 +172,7 @@ function displayBlogByTag($tagName) {
 	$fileContents[0] = "<div class=\"roundedcornr_box_525768\"><div class=\"roundedcornr_top_525768\"><div></div></div><div class=\"roundedcornr_content_525768\"><div style=\"font-size: 1.3em;\" align=\"center\">Index</div><hr/>";
 	$contentCounter = 1; //1_a-kommentar.txt skal alltid være på plass nummer 0, vi starter derfor på 1 for scriptene.
 	$filename = "";
-	while($row = mysql_fetch_array($sqlresult)) {
+	while($row = mysqli_fetch_array($sqlresult)) {
 		$result = "";
 		$number = 0;
 		$path = ".".$row{'blogpath'}.$row{'name'};
@@ -189,7 +189,7 @@ function displayBlogByTag($tagName) {
 					if(trim($line) == "|TableStart") {
 						$result .= "<table border=\"0\" align=\"center\" class=\"boxedInfoborder\">";
 						$tableReading = True;
-					} 
+					}
 					if($tableReading && trim($line) != "|TableStart" && trim($line) != "|TableEnd") {
 						$pieces = explode("|", $line);
 						if(count($pieces) == 1) $result .= "<tr><td><span class=\"smaller\">".$pieces[0]."</span></td></tr>";
@@ -206,7 +206,7 @@ function displayBlogByTag($tagName) {
 					if(trim($line) == "|TableEnd") {
 						$result .= "</table>";
 						$tableReading = False;
-					} 
+					}
 					if (preg_match("*A\sNAME=*", $line)) {
 						for($forCounter = 0; $forCounter < strlen($line) - 6; $forCounter++) {
 							$stringExtract = $line[$forCounter] . $line[$forCounter + 1] . $line[$forCounter + 2] . $line[$forCounter + 3] . $line[$forCounter + 4] . $line[$forCounter + 5];
@@ -222,7 +222,7 @@ function displayBlogByTag($tagName) {
 								$linkid[] = $linkTagName;
 								$newLink .= $linkTagName;
 								$newLink .= "\" class=\"packageTableLinks\" id=\"btn". $linkTagName ."\">";
-								
+
 								for($sForCounter = 6; (($line[$nextScanPosition + $sForCounter] != "<") || ($line[$nextScanPosition + $sForCounter + 1] != "/") || ($line[$nextScanPosition + $sForCounter + 2] != "u") || ($line[$nextScanPosition + $sForCounter + 3] != ">")); $sForCounter++) {
 									$newLink .= $line[$nextScanPosition + $sForCounter];
 								}
@@ -232,10 +232,10 @@ function displayBlogByTag($tagName) {
 						}
 					}
 				}
-				fclose($file);				
+				fclose($file);
 			} elseif (!file_exists($path)) {
 				echo "Error: File \"$path\" does not exist!<br/>";
-			}			
+			}
 			$result .= displayInlineBlogTags($filename);
 			$result .=  "</td></tr></table><br/></div>";
 			if ($filename != "." && $filename != "..") {
@@ -248,7 +248,7 @@ function displayBlogByTag($tagName) {
 				}
 				$contentCounter++;
 			}
-			
+
 		} else {
 			echo "Error: File \"$path\" does not exist!<br/>";
 		}
@@ -263,16 +263,16 @@ function displayBlogByTag($tagName) {
 	for($forCounter = 0; $forCounter < count($fileContents); $forCounter++) {
 		if(isset($fileContents[$forCounter]) && $fileContents[$forCounter] != "") echo $fileContents[$forCounter];
 	}
-	mysql_close($db);
+	mysqli_close($db);
 	displayFacebookCommentField("?tagName=$tagName");
 	return $countedLines;
 }
-function displayBlogBySearchString($searchString) {	
+function displayBlogBySearchString($searchString) {
 	$countedLines = 0;
-	$db=mysql_connect($GLOBALS['mysqlHost'], $GLOBALS['mysqlUsername'], $GLOBALS['mysqlPassword']) or die("Unable to connect to MySQL Server: " . mysql_error());
-	mysql_select_db($GLOBALS['mysqlDatabase'], $db) or die("Could not select database");
-	$sql = "select name, blogPath from blogTitles where name like '%". mysql_real_escape_string($searchString) ."%'";
-	$sqlresult = mysql_query($sql);
+	$db=mysqli_connect($GLOBALS['mysqlHost'], $GLOBALS['mysqlUsername'], $GLOBALS['mysqlPassword']) or die("Unable to connect to MySQL Server: " . mysqli_error());
+	mysqli_select_db($db, $GLOBALS['mysqlDatabase']) or die("Could not select database " . $GLOBALS['mysqlDatabase']);
+	$sql = "select name, blogPath from blogTitles where name like '%". mysqli_real_escape_string($searchString) ."%'";
+	$sqlresult = mysqli_query($db, $sql);
 	$linkContents = array ();
 	$linkContents[] = "<nav>";
 	$fileContents = array ();
@@ -280,7 +280,7 @@ function displayBlogBySearchString($searchString) {
 	$fileContents[0] = "<div class=\"roundedcornr_box_525768\"><div class=\"roundedcornr_top_525768\"><div></div></div><div class=\"roundedcornr_content_525768\"><div style=\"font-size: 1.3em;\" align=\"center\">Using keyword '". $searchString ."'</div><hr/>";
 	$contentCounter = 1; //1_a-kommentar.txt skal alltid være på plass nummer 0, vi starter derfor på 1 for scriptene.
 	$filename = "";
-	while($row = mysql_fetch_array($sqlresult)) {
+	while($row = mysqli_fetch_array($sqlresult)) {
 		$result = "";
 		$number = 0;
 		$path = ".".$row{'blogPath'}.$row{'name'};
@@ -297,7 +297,7 @@ function displayBlogBySearchString($searchString) {
 					if(trim($line) == "|TableStart") {
 						$result .= "<table border=\"0\" align=\"center\" class=\"boxedInfoborder\">";
 						$tableReading = True;
-					} 
+					}
 					if($tableReading && trim($line) != "|TableStart" && trim($line) != "|TableEnd") {
 						$pieces = explode("|", $line);
 						if(count($pieces) == 1) $result .= "<tr><td><span class=\"smaller\">".$pieces[0]."</span></td></tr>";
@@ -314,7 +314,7 @@ function displayBlogBySearchString($searchString) {
 					if(trim($line) == "|TableEnd") {
 						$result .= "</table>";
 						$tableReading = False;
-					} 
+					}
 					if (preg_match("*A\sNAME=*", $line)) {
 						for($forCounter = 0; $forCounter < strlen($line) - 6; $forCounter++) {
 							$stringExtract = $line[$forCounter] . $line[$forCounter + 1] . $line[$forCounter + 2] . $line[$forCounter + 3] . $line[$forCounter + 4] . $line[$forCounter + 5];
@@ -330,7 +330,7 @@ function displayBlogBySearchString($searchString) {
 								$linkid[] = $linkTagName;
 								$newLink .= $linkTagName;
 								$newLink .= "\" class=\"packageTableLinks\" id=\"btn". $linkTagName ."\">";
-								
+
 								for($sForCounter = 6; (($line[$nextScanPosition + $sForCounter] != "<") || ($line[$nextScanPosition + $sForCounter + 1] != "/") || ($line[$nextScanPosition + $sForCounter + 2] != "u") || ($line[$nextScanPosition + $sForCounter + 3] != ">")); $sForCounter++) {
 									$newLink .= $line[$nextScanPosition + $sForCounter];
 								}
@@ -340,7 +340,7 @@ function displayBlogBySearchString($searchString) {
 						}
 					}
 				}
-				
+
 				fclose($file);
 			} elseif (!file_exists($path)) {
 				echo "Error: File \"$path\" does not exist!<br/>";
@@ -356,7 +356,7 @@ function displayBlogBySearchString($searchString) {
 					$fileContents[$contentCounter] = "<div id=\"" . $linkid[$contentCounter-1] . "\"><table class=\"codeTable\">" . $tableHeader . $result;
 				}
 				$contentCounter++;
-			}			
+			}
 		} else {
 			echo "Error: File \"$path\" does not exist!<br/>";
 		}
@@ -373,24 +373,24 @@ function displayBlogBySearchString($searchString) {
 	} else {
 		$fileContents[0] .= "<br/><br/><div style=\"font-size: 2.0em;\" align=\"center\">did not yield any results ;(</div></div><div class=\"roundedcornr_bottom_525768\"><div></div></div></div><hr/>";
 	}
-	
+
 	for($forCounter = 0; $forCounter < count($fileContents); $forCounter++) {
 		if(isset($fileContents[$forCounter]) && $fileContents[$forCounter] != "") echo $fileContents[$forCounter];
 	}
-	mysql_close($db);
+	mysqli_close($db);
 	displayFacebookCommentField("index.php?searchString=$searchString");
 	return $countedLines;
 }
 function fetchTagbarContent() {
-	$db=mysql_connect($GLOBALS['mysqlHost'], $GLOBALS['mysqlUsername'], $GLOBALS['mysqlPassword']) or die("Unable to connect to MySQL Server: " . mysql_error());
-	mysql_select_db($GLOBALS['mysqlDatabase'], $db) or die("Could not select database");
-	$result1 = mysql_query("select t.name, count(t.tagTypeID) as count FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID=b.tagType_1) group by t.name");
+	$db=mysqli_connect($GLOBALS['mysqlHost'], $GLOBALS['mysqlUsername'], $GLOBALS['mysqlPassword']) or die("Unable to connect to MySQL Server: " . mysqli_error());
+	mysqli_select_db($db, $GLOBALS['mysqlDatabase']) or die("Could not select database" . $GLOBALS['mysqlDatabase']);
+	$result1 = mysqli_query($db, "select t.name, count(t.tagTypeID) as count FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID=b.tagType_1) group by t.name");
 	$resultArray = array();
 	/*Check if elements in result1 exist in result2 - if they do, add together and store in resultArray, if not store genuine result1 values in resultArray*/
-	while ($row1 = mysql_fetch_array($result1)) {
+	while ($row1 = mysqli_fetch_array($result1)) {
 		$matched = False;
-		$result2 = mysql_query("select t.name, count(t.tagTypeID) as count FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID=b.tagType_2) group by t.name");
-		while ($row2 = mysql_fetch_array($result2)) {
+		$result2 = mysqli_query($db, "select t.name, count(t.tagTypeID) as count FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID=b.tagType_2) group by t.name");
+		while ($row2 = mysqli_fetch_array($result2)) {
 			/*echo $row1{'name'} . "==" . $row2{'name'} . "<br/>";*/
 			if($row1{'name'} == $row2{'name'}) {
 				/*echo "First add " . $row1{'name'} . " - " . ($row1{'count'} . " + " . $row2{'count'}) . "<br/>"; */
@@ -404,11 +404,11 @@ function fetchTagbarContent() {
 		}
 	}
 	/*Check if elements in result2 exist in result1, if they don't - store genuine result2 values in resultArray*/
-	$result2 = mysql_query("select t.name, count(t.tagTypeID) as count FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID=b.tagType_2) group by t.name");
-	while ($row2 = mysql_fetch_array($result2)) {
+	$result2 = mysqli_query($db, "select t.name, count(t.tagTypeID) as count FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID=b.tagType_2) group by t.name");
+	while ($row2 = mysqli_fetch_array($result2)) {
 		$matched = False;
-		$result1 = mysql_query("select t.name, count(t.tagTypeID) as count FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID=b.tagType_1) group by t.name");
-		while ($row1 = mysql_fetch_array($result1)) {
+		$result1 = mysqli_query($db, "select t.name, count(t.tagTypeID) as count FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID=b.tagType_1) group by t.name");
+		while ($row1 = mysqli_fetch_array($result1)) {
 			if($row2{'name'} == $row1{'name'}) {
 				$matched = True;
 			}
@@ -419,22 +419,22 @@ function fetchTagbarContent() {
 		}
 	}
 	/*Check if elements in result3 exist in resultArray, if they don't - store genuine result3 values in resultArray, if they do - add together with values in reultArray */
-	$result3 = mysql_query("select t.name, count(t.tagTypeID) as count FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID=b.tagType_3) group by t.name");
-	while ($row3 = mysql_fetch_array($result3)) {
+	$result3 = mysqli_query($db, "select t.name, count(t.tagTypeID) as count FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID=b.tagType_3) group by t.name");
+	while ($row3 = mysqli_fetch_array($result3)) {
 		$matched = False;
 		foreach($resultArray as $key => $value) {
 			if($row3{'name'} == $key) {
-				/*echo "Third add " . $key . " - " . $row3{'count'} . "+" . $value . "<br/>";*/ 
+				/*echo "Third add " . $key . " - " . $row3{'count'} . "+" . $value . "<br/>";*/
 				$resultArray[$key] = $row3{'count'} + $value;
 				$matched = True;
 			}
 		}
 		if(!$matched) {
-			echo "Third genuine add " . $row3{'name'} . " - " . $row3{'count'} . "<br/>"; 
+			echo "Third genuine add " . $row3{'name'} . " - " . $row3{'count'} . "<br/>";
 			$resultArray[$row3{'name'}]=$row3{'count'};
 		}
 	}
-	mysql_close($db);
+	mysqli_close($db);
 	return $resultArray;
 }
 function displayTagbar() {
@@ -461,18 +461,18 @@ function displaySearchbar() {
 		echo "</span>";
 }
 function displayInlineBlogTags($blogName) {
-	$dbtags=mysql_connect($GLOBALS['mysqlHost'], $GLOBALS['mysqlUsername'], $GLOBALS['mysqlPassword']) or die("Unable to connect to MySQL Server: " . mysql_error());
-	mysql_select_db($GLOBALS['mysqlDatabase'], $dbtags) or die("Could not select database");
+	$dbtags=mysqli_connect($GLOBALS['mysqlHost'], $GLOBALS['mysqlUsername'], $GLOBALS['mysqlPassword']) or die("Unable to connect to MySQL Server: " . mysqli_error());
+	mysqli_select_db($dbtags, $GLOBALS['mysqlDatabase']) or die("Could not select database" . $GLOBALS['mysqlDatabase']);
 	$sql = "SELECT t.name FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID = b.tagType_1) WHERE b.name = '".$blogName."' UNION ALL " .
 			"SELECT t.name FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID = b.tagType_2) WHERE b.name = '".$blogName."' UNION ALL " .
 			"SELECT t.name FROM tagTypes t INNER JOIN blogTitles b ON (t.tagTypeID = b.tagType_3) WHERE b.name = '".$blogName."'";
-	$sqlresult = mysql_query($sql);
+	$sqlresult = mysqli_query($dbtags, $sql);
 	$result = "Tagged as: ";
-	while($row = mysql_fetch_array($sqlresult)) {
+	while($row = mysqli_fetch_array($sqlresult)) {
 		$result .= "<a href=\"index.php?tagName=".$row{'name'}."\" class=\"articleLink\">".$row{'name'}."</a>,&nbsp;";
 	}
 	$result = substr($result,0,-7);
-	/*mysql_close($dbtags);*/
+	/*mysqli_close($dbtags);*/
 	return $result;
 }
 ?>

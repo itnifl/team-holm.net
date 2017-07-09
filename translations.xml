@@ -56,33 +56,36 @@
         ]]></is>
     </translation>
     <translation id="intField">
-    	<no><![CDATA[ 
+    	<no>
+        <![CDATA[ 
     		<b>Dagens fremtidige fokus, ambisjoner og interesser vies til:</b><br /><br />
 			<table align="center" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td style="text-align:left;">
 			<ul style="margin-top:4px; margin-right:15px; margin-left:5px; margin-bottom:4px;"><li>Sm&aring; kode prosjekter.</li>
 			<li>Lesing av interessem&aring;l.</li>
 			<li><a href="http://resultater.styrkeloft.no/lofter_vis.php?id=5633" class="articleLink" target="_blank">Styrketrening som hobby.</a></li>
-			<li><a href="http://hwarang.no/" class="articleLink" target="_blank">Tae Kwon Do og annen kampsport</a></li>
+			<li><a href="https://www.muaythai-institute.com/" class="articleLink" target="_blank">Muay Thai og annen kampsport</a></li>
 			</ul>
 			</tr></td></table><p>&nbsp;</p><p><br /></p>
     	]]></no>
-        <en><![CDATA[ 
+        <en>
+        <![CDATA[ 
     		<b>Focus, ambitions and interests are dedicated as of now to:</b><br /><br />
 			<table align="center" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td style="text-align:left;">
 			<ul style="margin-top:4px; margin-right:15px; margin-left:5px; margin-bottom:4px;"><li>Small code projects.</li>
 			<li>Reading of interest.</li>
 			<li><a href="http://resultater.styrkeloft.no/lofter_vis.php?id=5633" class="articleLink" target="_blank">Strength training as an hobby</a></li>
-			<li><a href="http://hwarang.no/" class="articleLink" target="_blank">Tae Kwon Do and other martial arts</a></li>
+			<li><a href="https://www.muaythai-institute.com/" class="articleLink" target="_blank">Muay Thai and other martial arts</a></li>
 			</ul>
 			</tr></td></table><p>&nbsp;</p><p><br /></p>
         ]]></en>
-        <is><![CDATA[ 
+        <is>
+        <![CDATA[ 
         	<b>Áhersla fyrir framtíðina, áhugamál og metnaður eru:</b><br /><br />
 			<table align="center" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td style="text-align:left;">
 			<ul style="margin-top:4px; margin-right:15px; margin-left:5px; margin-bottom:4px;"><li>Lítil prósjekt í tölvuforritun.</li>
 			<li>Lesa áhugamál.</li>
 			<li><a href="http://resultater.styrkeloft.no/lofter_vis.php?id=5633" class="articleLink" target="_blank">Líkamsrækt til að halda mig í formi.</a></li>
-			<li><a href="http://hwarang.no/" class="articleLink" target="_blank">Tae Kwon Do og aðrar bardagaíðróttir</a></li>
+			<li><a href="https://www.muaythai-institute.com/" class="articleLink" target="_blank">Muay Thai og aðrar bardagaíðróttir</a></li>
 			</ul>
 			</tr></td></table><p>&nbsp;</p><p><br /></p>
         ]]></is>
@@ -242,7 +245,8 @@
         ]]></is>
     </translation>
     <translation id="eduField">
-    	<no><![CDATA[ 
+    	<no>
+          <![CDATA[ 
     		 	<hr width="700"><table align="center" width="620" style="border-width: 1px; border-style: solid; border-color: #999999;">
 				<tr><td align="left">Bachelor i drift av datasystemer ved HIST - 2010 - <a href="docs/020E.zip" class="normalLink">Hovedoppgave</a></td></tr>
 				<tr><td align="left">Allmenfag Tranberg Vgs - 2003</td></tr>
@@ -253,14 +257,20 @@
 				<tr><td align="left"><a href="/docs/Microsoft_Specialist_Server_Virtualization_with_Windows_Server_Hyper-V_and_System_Center.pdf" class="normalLink" target="_blank">74-409 - Server Virtualization with Windows Server Hyper-V and System Center</a> - 2015</td></tr>	
 				<tr><td align="left"><a href="/docs/Microsoft_Certified_Technology_Specialist_SQL_Server_2008_Implementatio_and_Maintenance.pdf" class="normalLink" target="_blank">70-432 - MS SQL Server 2008, Implementation and Maintenance</a> - 2011</td></tr>
 				<tr><td align="left"><a href="/docs/Microsoft_Specialist_Programming_in_HTML5_with_JavaScript_and_CSS3.pdf" class="normalLink" target="_blank">70-480 - Programming in HTML5 with JavaScript and CSS3</a> - 2014</td></tr>
-				<tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">70-483 - Microsoft Specialist Programming in C#</a> - 2016</td></tr>
-				<tr><td align="left">1Z0-051 - Oracle Database 11g: SQL Fundamentals I - 2012</td></tr>
+				<tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">70-483 - Microsoft Specialist Programming in C#</a> - 2016</td></tr>				        
+        <tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">70-486 - Developing ASP.NET MVC Web Applications</a> - 2017</td></tr>
+        <tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">70-487 - Developing Microsoft Azure and Web Services</a> - 2017</td></tr>
+        <tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">MCSA - Web Developer</a> - 2017</td></tr>
+        <tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">MCSD - App Builder</a> - 2017</td></tr>
+        <tr><td align="left"><a href="http://mylearn.vmware.com/eCert.cfm?id_reg=9942817&rGUID=5e389aae-2123-4240-8b77-318e84527d9b&ccid=VMW-01025768L-00138435" class="normalLink" target="_blank">VMware Certified Professional 6 - Data Center Virtualization</a> - 2016</td></tr>
+        <tr><td align="left">1Z0-051 - Oracle Database 11g: SQL Fundamentals I - 2012</td></tr>
 				<tr><td align="left"><a href="http://mylearn.vmware.com/eCert.cfm?id_reg=9942817&rGUID=5e389aae-2123-4240-8b77-318e84527d9b&ccid=VMW-01025768L-00138435" class="normalLink" target="_blank">VMware Certified Professional 5 - Data Center Virtualization</a> - 2013</td></tr>
 				<tr><td align="left"><a href="/docs/DeepSecurity.zip" class="normalLink" target="_blank" title="Trend Micro Certified Security Professional">Trend Micro Certified Security Professional: Deep Security 8.0</a> - 2014</td></tr>				
 				</table><hr width="700"><table align="center" width="620" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td align="left">Engelsk</td><td align="left">Flytende</td></tr><tr><td align="left">Norsk</td><td align="left">Flytende</td></tr>
 				<tr><td align="left">Islandsk</td><td align="left">Flytende</td></tr></table><hr width="700"><p>&nbsp;</p><p><br /></p>
     	]]></no>
-        <en><![CDATA[ 
+        <en>
+          <![CDATA[ 
     		 	<hr width="700"><table align="center" width="620" style="border-width: 1px; border-style: solid; border-color: #999999;">
 				<tr><td align="left">Bachelor in Computer Systems Administration at HIST - 2010 - <a href="docs/020E.zip" class="normalLink">Thesis</a></td></tr>
 				<tr><td align="left">General studies Tranberg Vgs - 2003</td></tr>
@@ -271,14 +281,20 @@
 				<tr><td align="left"><a href="/docs/Microsoft_Specialist_Server_Virtualization_with_Windows_Server_Hyper-V_and_System_Center.pdf" class="normalLink" target="_blank">74-409 - Server Virtualization with Windows Server Hyper-V and System Center</a> - 2015</td></tr>	
 				<tr><td align="left"><a href="/docs/Microsoft_Certified_Technology_Specialist_SQL_Server_2008_Implementatio_and_Maintenance.pdf" class="normalLink" target="_blank">70-432 - MS SQL Server 2008, Implementation and Maintenance</a> - 2011</td></tr>
 				<tr><td align="left"><a href="/docs/Microsoft_Specialist_Programming_in_HTML5_with_JavaScript_and_CSS3.pdf" class="normalLink" target="_blank">70-480 - Programming in HTML5 with JavaScript and CSS3</a> - 2014</td></tr>
-				<tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">70-483 - Microsoft Specialist Programming in C#</a> - 2016</td></tr>
+				<tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">70-483 - Microsoft Specialist Programming in C#</a> - 2016</td></tr>        
+        <tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">70-486 - Developing ASP.NET MVC Web Applications</a> - 2017</td></tr>
+        <tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">70-487 - Developing Microsoft Azure and Web Services</a> - 2017</td></tr>
+        <tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">MCSA - Web Developer</a> - 2017</td></tr>
+        <tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">MCSD - App Builder</a> - 2017</td></tr>
+        <tr><td align="left"><a href="http://mylearn.vmware.com/eCert.cfm?id_reg=9942817&rGUID=5e389aae-2123-4240-8b77-318e84527d9b&ccid=VMW-01025768L-00138435" class="normalLink" target="_blank">VMware Certified Professional 6 - Data Center Virtualization</a> - 2016</td></tr>        
 				<tr><td align="left">1Z0-051 - Oracle Database 11g: SQL Fundamentals I - 2012</td></tr>
 				<tr><td align="left"><a href="http://mylearn.vmware.com/eCert.cfm?id_reg=9942817&rGUID=5e389aae-2123-4240-8b77-318e84527d9b&ccid=VMW-01025768L-00138435" class="normalLink" target="_blank">VMware Certified Professional 5 - Data Center Virtualization</a> - 2013</td></tr>
 				<tr><td align="left"><a href="/docs/DeepSecurity.zip" class="normalLink" target="_blank" title="Trend Micro Certified Security Professional">Trend Micro Certified Security Professional: Deep Security 8.0</a> - 2014</td></tr>				
 				</table><hr width="700"><table align="center" width="620" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td align="left">English</td><td align="left">Fluently</td></tr><tr><td align="left">Norwegian</td><td align="left">Fluently</td></tr>
 				<tr><td align="left">Icelandic</td><td align="left">Fluently</td></tr></table><hr width="700"><p>&nbsp;</p><p><br /></p>
     	]]></en>
-        <is><![CDATA[ 
+        <is>
+          <![CDATA[ 
     		 	<hr width="700"><table align="center" width="620" style="border-width: 1px; border-style: solid; border-color: #999999;">
 				<tr><td align="left">Bachelor í rekstur tölvukerfa frá HIST - 2010 - <a href="docs/020E.zip" class="normalLink">ritgerð</a></td></tr>
 				<tr><td align="left">Allmenfag Tranberg Vgs - 2003</td></tr>
@@ -290,7 +306,13 @@
 				<tr><td align="left"><a href="/docs/Microsoft_Certified_Technology_Specialist_SQL_Server_2008_Implementatio_and_Maintenance.pdf" class="normalLink" target="_blank">70-432 - MS SQL Server 2008, Implementation and Maintenance</a> - 2011</td></tr>
 				<tr><td align="left"><a href="/docs/Microsoft_Specialist_Programming_in_HTML5_with_JavaScript_and_CSS3.pdf" class="normalLink" target="_blank">70-480 - Programming in HTML5 with JavaScript and CSS3</a> - 2014</td></tr>
 				<tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">70-483 - Microsoft Specialist Programming in C#</a> - 2016</td></tr>
-				<tr><td align="left">1Z0-051 - Oracle Database 11g: SQL Fundamentals I - 2012</td></tr>
+				        
+        <tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">70-486 - Developing ASP.NET MVC Web Applications</a> - 2017</td></tr>
+        <tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">70-487 - Developing Microsoft Azure and Web Services</a> - 2017</td></tr>
+        <tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">MCSA - Web Developer</a> - 2017</td></tr>
+        <tr><td align="left"><a href="https://mcp.microsoft.com/authenticate/validatemcp.aspx?userId=850488&accessCode=AA244bx773" class="normalLink" target="_blank">MCSD - App Builder</a> - 2017</td></tr>
+        <tr><td align="left"><a href="http://mylearn.vmware.com/eCert.cfm?id_reg=9942817&rGUID=5e389aae-2123-4240-8b77-318e84527d9b&ccid=VMW-01025768L-00138435" class="normalLink" target="_blank">VMware Certified Professional 6 - Data Center Virtualization</a> - 2016</td></tr>
+        <tr><td align="left">1Z0-051 - Oracle Database 11g: SQL Fundamentals I - 2012</td></tr>
 				<tr><td align="left"><a href="http://mylearn.vmware.com/eCert.cfm?id_reg=9942817&rGUID=5e389aae-2123-4240-8b77-318e84527d9b&ccid=VMW-01025768L-00138435" class="normalLink" target="_blank">VMware Certified Professional 5 - Data Center Virtualization</a> - 2013</td></tr>
 				<tr><td align="left"><a href="/docs/DeepSecurity.zip" class="normalLink" target="_blank" title="Trend Micro Certified Security Professional">Trend Micro Certified Security Professional: Deep Security 8.0</a> - 2014</td></tr>				
 				</table><hr width="700"><table align="center" width="620" style="border-width: 1px; border-style: solid; border-color: #999999;"><tr><td align="left">Enska</td><td align="left">Reiprennandi</td></tr><tr><td align="left">Norska</td><td align="left">Reiprennandi</td></tr>

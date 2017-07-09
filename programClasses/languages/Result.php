@@ -5,11 +5,11 @@ class Result implements Iterator, Countable {
     private $count;
 
     public function Result($result) {
-        if (!is_resource($result) || get_resource_type($result) !== 'mysql result')
-            throw new InvalidArgumentException('Not valid MySQL result passed.');
+       if ($result instanceof mysqli_result === false)
+          throw new InvalidArgumentException('Not valid MySQL result passed.');
 
         $this->result = $result;
-        $this->count = mysql_num_rows($this->result);
+        $this->count = mysqli_num_rows($this->result);
     }
 
     public function count() {
@@ -17,7 +17,7 @@ class Result implements Iterator, Countable {
     }
 
     public function current() {
-        return mysql_fetch_object($this->result);
+        return mysqli_fetch_object($this->result);
     }
 
     public function key() {
@@ -30,8 +30,8 @@ class Result implements Iterator, Countable {
 
     public function rewind() {
         if ($this->count() > 0)
-            mysql_data_seek($this->result, 0);
-        
+            mysqli_data_seek($this->result, 0);
+
         $this->key = 0;
     }
 

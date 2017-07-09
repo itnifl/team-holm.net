@@ -1,0 +1,5 @@
+[mysqlsettings]
+mysqlHost=localhost
+mysqlUsername=username
+mysqlPassword=password
+mysqlDatabase=databasename
