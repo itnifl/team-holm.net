@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /index-test.php
+Disallow: /blogFunctions.inc.test.php
+Disallow: /websiteConfig.ini

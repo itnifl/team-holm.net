@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <shareContent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="shareContent.xsd">
+  <shareResource>
+    <title>GitHub Account</title>
+    <description>This is my GitHub account</description>
+    <source>https://github.com/itnifl</source>
+    <link>https://github.com/itnifl</link>
+  </shareResource>
+  <shareResource>
+    <title>GitLab Account</title>
+    <description>This is my GitLab account</description>
+    <source>https://gitlab.com/itnifl</source>
+    <link>https://gitlab.com/itnifl</link>
+  </shareResource>
 	<shareResource>
 		<title>myMovieApi</title>
 		<description>This API uses omdbapi.com to fetch information about movies, thank you omdbapi.com! The movie names that it uses to fetch information with are files and folder names in a given source directory set in configuration. The API will show favourite movies both as a list made in JSON and as html that can be used or embedded. See: https://github.com/itnifl/myMovieApi</description>

@@ -987,6 +987,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="itblog\websiteConfig.ini" />
+    <Content Include="robots.txt" />
     <Content Include="websiteConfig.ini.example" />
     <Content Include="websiteConfig.ini" />
   </ItemGroup>

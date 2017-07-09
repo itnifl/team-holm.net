@@ -2,11 +2,17 @@
 
 IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti*
 
+<Files "websiteConfig.ini">
+Order Allow,Deny
+Deny from all
+</Files>
+
 <Limit GET POST>
 order deny,allow
 deny from all
 allow from all
 </Limit>
+
 <Limit PUT DELETE>
 order deny,allow
 deny from all
