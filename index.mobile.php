@@ -26,7 +26,7 @@
    <link rel="Stylesheet" type="text/css" href="css/lightbox.css"  />
    <link rel="Stylesheet" type="text/css" href="css/myWeather.css"  />
    <link rel="Stylesheet" type="text/css" href="css/mobile-styles.css" />
-   <link rel="Stylesheet" type="text/css" href="css/myStyle.css" />
+   <link rel="Stylesheet" type="text/css" href="css/myStyle.css?v=0007" />
    <!-- Latest compiled and minified CSS -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
    <!-- Optional theme -->
@@ -122,10 +122,10 @@
                             <br/>
                             <br />
                            <!--<img src="images/10639735_s.jpg" height="285" width="401" />-->
-                            <p>
-                                This mobile content is fairly new, and is still strictly under construction.<br/>
+                            <h3 style="color: black;">
+                                This mobile content is fairly new, and is still under construction.<br/>
                                 For full website functionality, please browse this website with a regular computer..
-                            </p>
+                            </h3>
                            <br />
                            <br />
                         </div>
@@ -157,5 +157,19 @@
                $('div.banner').removeClass('banner');
       });
     </script>
+    <style type="text/css">
+        #footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 80px;
+            background-color: #222222;
+            border: 0 solid #080808;
+            border-top-width: 1px;
+            margin-top: 50px;
+            z-index: 100;
+        }
+    </style>
 </body>
 </html>

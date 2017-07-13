@@ -5,7 +5,7 @@
 	<meta name="keywords" content="Atle, Holm, Atle Holm, Informasjon, Information, person, IT, ranting, blogg, IT-blogg, Scripts, BASH, PERL, PowerShell, VBS, VisualBasic, Java, free code, code, rollespill, AD&ampD, software, free software, Linux" />
 	<meta name="author" content="Atle Holm" />
 	<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
-	<link rel="Stylesheet" type="text/css" href="css/myStyle.css?v=0006" />
+	<link rel="Stylesheet" type="text/css" href="css/myStyle.css?v=0007" />
 	<link rel="Stylesheet" type="text/css" href="css/pace.css" />
 	<link rel="Stylesheet" type="text/css" href="css/lightbox.css"  />
 	<link rel="Stylesheet" type="text/css" href="css/myWeather.css"  />
