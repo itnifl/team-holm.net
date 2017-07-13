@@ -122,14 +122,18 @@ function printPersonalia(){
 	//var randomnumber=Math.floor(Math.random()*3);
 	$('#divHeader').html(setText('personaliaHeader'));
   	$('#divField').html(setText('personaliaField'));
-  	addShigarNameAfterUrl('pers');
+        addShigarNameAfterUrl('pers');
+    $('#navbar > li').removeClass('active');
+    $('#itemPersonalia').addClass('active');
 }
 function printEdu(){
  	var div = document.getElementById('divField');
  	div.style.color="Black";
  	$('#divHeader').html(setText('eduHeader'));
  	$('#divField').html(setText('eduField'));
- 	addShigarNameAfterUrl('edu');
+      addShigarNameAfterUrl('edu');
+    $('#navbar > li').removeClass('active');
+    $('#itemEdu').addClass('active');
 
 }
 function printInt(){
@@ -137,21 +141,27 @@ function printInt(){
  	div.style.color="Black";
 	$('#divHeader').html(setText('intHeader'));
   	$('#divField').html(setText('intField'));
-  	addShigarNameAfterUrl('int');
+        addShigarNameAfterUrl('int');
+    $('#navbar > li').removeClass('active');
+    $('#itemInt').addClass('active');
 }
 function printLinks(){
   	var div = document.getElementById('divField');
   	div.style.color="Black";
 	$('#divHeader').html(setText('linkHeader'));
   	$('#divField').html(setText('linkField'));
-  	addShigarNameAfterUrl('links');
+        addShigarNameAfterUrl('links');
+    $('#navbar > li').removeClass('active');
+    $('#itemLinks').addClass('active');
 }
 function printSharing(){
   	var div = document.getElementById('divField');
   	div.style.color="Black";
 	$('#divHeader').html(setText('codeHeader'));
 	populateMenu("linkMenu2.xml", "divField", false); /* Bygger en scrollmeny til divField i stedet for å lage lenker, ved at vi spesifiserer false som siste argument. */
-	addShigarNameAfterUrl('share');
+    addShigarNameAfterUrl('share');
+    $('#navbar > li').removeClass('active');
+    $('#itemSharing').addClass('active');
 }
 function fillShareTable(theXML, thePanel) {
 /* Denne funksjonen skal fylle notater/deling tabellen med info ut fra hvilken tittel den kalles med  */

@@ -25,11 +25,6 @@
     <Compile Include="code\movieListerPackage-v.0.0.8.1.tar.gz" />
     <Compile Include="code\movieListerPackage-v.0.0.8.tar.gz" />
     <Compile Include="code\movieListerPackage-v.0.1.0b.tar.7z" />
-    <Compile Include="css\320andup-sass-compass.css" />
-    <Compile Include="css\320andup-sass.css" />
-    <Compile Include="css\320andup-scss-compass.css" />
-    <Compile Include="css\320andup-scss.css" />
-    <Compile Include="css\320andup.css" />
     <Compile Include="css\lightbox.css" />
     <Compile Include="css\myStyle.css" />
     <Compile Include="css\myWeather.css" />
@@ -150,6 +145,8 @@
     <Compile Include="img\placeholder-2.png" />
     <Compile Include="img\placeholder-3.png" />
     <Compile Include="img\placeholder.png" />
+    <Compile Include="index.mobile.php" />
+    <Compile Include="index.standard.php" />
     <Compile Include="itblog\blogs\Hyper-V\Centos 7 Template checklist for SCVMM 2012R2" />
     <Compile Include="itblog\blogs\Hyper-V\Getting started with Hyper-V for the VMWare Admin" />
     <Compile Include="itblog\blogs\Kryptografi\Basic Cryptography" />
@@ -709,6 +706,9 @@
     <Compile Include="programClasses\languages\Result.php" />
     <Compile Include="programClasses\languages\Translate.php" />
     <Compile Include="programClasses\languages\Translation.php" />
+    <Compile Include="programClasses\Mobile-Detect-2.8.25\export\exportToJSON.php" />
+    <Compile Include="programClasses\Mobile-Detect-2.8.25\Mobile_Detect.php" />
+    <Compile Include="programClasses\Mobile-Detect-2.8.25\namespaced\Detection\MobileDetect.php" />
     <Compile Include="programClasses\robots.txt" />
     <Compile Include="scripts\css\myStyle.css" />
     <Compile Include="scripts\css\shCore.css" />
@@ -849,8 +849,6 @@
     <Compile Include="index.php" />
     <Compile Include="linkMenu2.xml" />
     <Compile Include="Norske Tegn.txt" />
-    <Compile Include="responsive-type.php" />
-    <Compile Include="responsive.html" />
     <Compile Include="shareContent.xsd" />
     <Compile Include="team_holm_net_database.sql" />
     <Compile Include="translations.xml" />
@@ -958,6 +956,10 @@
     <Folder Include="natnaree" />
     <Folder Include="programClasses\languages" />
     <Folder Include="programClasses" />
+    <Folder Include="programClasses\Mobile-Detect-2.8.25\" />
+    <Folder Include="programClasses\Mobile-Detect-2.8.25\export\" />
+    <Folder Include="programClasses\Mobile-Detect-2.8.25\namespaced\" />
+    <Folder Include="programClasses\Mobile-Detect-2.8.25\namespaced\Detection\" />
     <Folder Include="scripts\css" />
     <Folder Include="scripts\fonts" />
     <Folder Include="scripts\images\logos" />
@@ -986,7 +988,13 @@
     <Folder Include="scripts" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\mobile-styles.css" />
     <Content Include="itblog\websiteConfig.ini" />
+    <Content Include="programClasses\Mobile-Detect-2.8.25\composer.json" />
+    <Content Include="programClasses\Mobile-Detect-2.8.25\LICENSE.txt" />
+    <Content Include="programClasses\Mobile-Detect-2.8.25\Mobile_Detect.json" />
+    <Content Include="programClasses\Mobile-Detect-2.8.25\README.md" />
+    <Content Include="programClasses\Mobile-Detect-2.8.25\ruleset.xml" />
     <Content Include="robots.txt" />
     <Content Include="websiteConfig.ini.example" />
     <Content Include="websiteConfig.ini" />
