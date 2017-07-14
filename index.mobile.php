@@ -110,7 +110,7 @@
                      <h2>Mobile version not ready..</h2>
                      <p class="small">Use your PC to browse this site if you want to see the contents..</p>
                   </div>-->
-                  <div>
+                  <div id="messageBox">
                      <h1 id="divHeader">
                          Welcome!
                         <br />
@@ -128,6 +128,32 @@
                             </h3>
                            <br />
                            <br />
+                           <h1 style="color: black;">
+                              The other family members
+                           </h1>
+                           <hr style="color: black;" />
+                           <div id="familySelections">
+                              <div class="container">
+                                 <div class="row">
+                                    <div class="col-xs-4 col-sm-4">
+                                       <a href="http://josef.team-holm.net" name="languageLink" title="Josef" data-toggle="tooltip" target="_blank">
+                                          <img src="images/josef_ikon.png" height="48" width="48" alt="" />
+                                       </a>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4">
+                                       <a href="http://natnaree.team-holm.net" name="languageLink" title="Natnaree" data-toggle="tooltip" target="_blank">
+                                          <img src="images/natnaree_ikon.png" height="48" width="48" alt="" />
+                                       </a>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4">
+                                       <a href="http://angsumarin.team-holm.net" name="languageLink" title="Angsumarin" data-toggle="tooltip" target="_blank">
+                                          <img src="images/angsumarin_ikon.png" height="48" width="48" alt="" />
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <hr style="color: black;" />
                         </div>
                      </a>
                   </div>                  
@@ -154,7 +180,8 @@
     </div><!--/footer-->
     <script type="text/javascript">
       $(document).ready(function () {
-               $('div.banner').removeClass('banner');
+         $('div.banner').removeClass('banner');
+         $('[data-toggle="tooltip"]').tooltip();
       });
     </script>
     <style type="text/css">
@@ -169,6 +196,10 @@
             border-top-width: 1px;
             margin-top: 50px;
             z-index: 100;
+        }
+        #messageBox {
+           background-color: white;
+           border: 3px solid black;
         }
     </style>
 </body>
