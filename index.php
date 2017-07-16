@@ -36,7 +36,7 @@
 <?php
 $res = "";
 // If this is a phone (tablets excluded) display mobile-specific content.
-if( $detect->isMobile() && !$detect->isTablet() ) {
+if( $detect->isMobile() || $detect->isTablet() ) {
    ob_start(); // turn on output buffering
    include('index.mobile.php');
    $res = ob_get_contents(); // get the contents of the output buffer
