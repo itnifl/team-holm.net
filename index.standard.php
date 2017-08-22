@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="js/jquery.animate-colors-min.js"></script>
 	<script type="text/javascript" src="js/myFunctions.js?v=0006"></script>
 	<script type="text/javascript" src="js/jQueryFunctions.js"></script>
-	<script type="text/javascript" src="js/lightbox.js"></script>
+	<script type="text/javascript" src="js/lightbox.js?v=0001"></script>
 	<script type="text/javascript" src="js/myWeather.js"></script>
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -25,6 +25,12 @@
   ga('create', 'UA-47427351-3', 'team-holm.net');
   ga('send', 'pageview');
 
+</script>
+<script>
+    lightbox.option({
+      'maxWidth': 800,
+      'maxHeight': 600
+    });
 </script>
 </head>
 <body style="background-color: #D7D6D6">

@@ -21,7 +21,7 @@
 	</shareResource>
 	<shareResource>
 		<title>MovieLister</title>
-		<description>Perl scripts to list your local movies on a web page with all relevant information and graphics, tested on Ubuntu. Caches information in a mysql database. Instructions for usage and installation are included. Newer versions (see below) are with more content and functions. Older version may contain bugs. Version 0.8.1 is as of now unuseable. Last release: 19.08.2013. See: https://github.com/itnifl/movieLister</description>
+		<description>Perl scripts to list your local movies on a web page, these are not maintained. Shows all relevant information and graphics, tested on Ubuntu. Caches information in a mysql database. Instructions for usage and installation are included. Newer versions (see below) are with more content and functions. Older version may contain bugs. Version 0.8.1 is as of now unuseable. Last release: 19.08.2013. See: https://github.com/itnifl/movieLister</description>
 		<source>Atle Holm - report bugs to atle@team-holm.net</source>
 		<link>/code/movieListerPackage-v.0.1.0b.tar.7z</link>
 		<link>/code/movieListerPackage-v.0.0.8.1.tar.gz</link>

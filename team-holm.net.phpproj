@@ -864,6 +864,7 @@
     <Folder Include="images\flags" />
     <Folder Include="images\logos" />
     <Folder Include="images" />
+    <Folder Include="images\certificates\" />
     <Folder Include="img\h" />
     <Folder Include="img\l" />
     <Folder Include="img\m" />
@@ -989,6 +990,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\mobile-styles.css" />
+    <Content Include="images\certificates\MT-Certificate-2.jpg" />
+    <Content Include="images\certificates\MT-Certificate-3.jpg" />
+    <Content Include="images\certificates\MT-Grades-2.jpg" />
+    <Content Include="images\certificates\MT-Grades-3.jpg" />
     <Content Include="itblog\websiteConfig.ini" />
     <Content Include="programClasses\Mobile-Detect-2.8.25\composer.json" />
     <Content Include="programClasses\Mobile-Detect-2.8.25\LICENSE.txt" />
