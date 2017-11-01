@@ -7,6 +7,9 @@
     </RootNamespace>
     <OutputType>Library</OutputType>
     <ProjectTypeGuids>{A0786B88-2ADB-4C21-ABE8-AA2D79766269}</ProjectTypeGuids>
+    <Runtime>PHP</Runtime>
+    <RuntimeVersion>7.0</RuntimeVersion>
+    <WebRoot>itblog</WebRoot>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <IncludeDebugInformation>true</IncludeDebugInformation>
@@ -996,7 +999,7 @@
     <Content Include="images\certificates\MT-Certificate-3_tn.jpg" />
     <Content Include="images\certificates\MT-Grades-2.jpg" />
     <Content Include="images\certificates\MT-Grades-3.jpg" />
-    <Content Include="itblog\blogs\Linux\OpenVPN server on RaspberryPI 1 vs RaspberryPI 2.html" />
+    <Content Include="itblog\blogs\Linux\OpenVPN server on RaspberryPI 1 vs RaspberryPI 3" />
     <Content Include="itblog\websiteConfig.ini" />
     <Content Include="programClasses\Mobile-Detect-2.8.25\composer.json" />
     <Content Include="programClasses\Mobile-Detect-2.8.25\LICENSE.txt" />

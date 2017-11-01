@@ -1,14 +1,14 @@
 <p>	
 	<p class="blogheader"><A NAME="LIN_NXSERVERNOTES"><u>Some Personal Notes on NXServer</u></A></p>
-	<p class="smaller">-22th of February 2013<br></p>
-	Some few notes on setting up NXServer. For those of you who do not know what NXServer is, it enables a Linux server to act as a graphical terminal server over SSH.<br><br>
+	<p class="smaller">-22th of February 2013<br/></p>
+	Some few notes on setting up NXServer. For those of you who do not know what NXServer is, it enables a Linux server to act as a graphical terminal server over SSH.<br/><br/>
 	<table width="80%" style="margin-left:auto; margin-right:auto;"><tr><td>
-	<b>1. The server</b> has to be able to communicate with 127.0.0.1:22. If port 22 is not used for the SSH daemon on the server, then the port in question is the port that the SSH daemon listens to. This is configured in the config files under /usr/NX/etc<br>
-	<b>2. The user that</b> connects to the NXServer has to be enabled for nx with the command <i>nxserver --adduser</i>, the setup is checked with the command <i>nxserver --checkuser</i>.<br> 
-	<b>3. The NX binaries</b> are placed under the path /usr/NX/bin<br>
+	<b>1. The server</b> has to be able to communicate with 127.0.0.1:22. If port 22 is not used for the SSH daemon on the server, then the port in question is the port that the SSH daemon listens to. This is configured in the config files under /usr/NX/etc<br/>
+	<b>2. The user that</b> connects to the NXServer has to be enabled for nx with the command <i>nxserver --adduser</i>, the setup is checked with the command <i>nxserver --checkuser</i>.<br/> 
+	<b>3. The NX binaries</b> are placed under the path /usr/NX/bin<br/>
 	</td><td>
 		<a href="http://www.nomachine.com/" target="_blank"><img src="/images/nomachine.jpg" height="69"/></a>
-	</td></tr></table><br>
+	</td></tr></table><br/>
 	<p>
 	<u>Sources</u>: <a href="http://www.nomachine.com/" class="articleLink" target="_blank">nomachine.com</a>
 	</p>	

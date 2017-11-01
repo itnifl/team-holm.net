@@ -1,12 +1,6 @@
 <p>
-  <p class="blogheader">
-    <A NAME="LIN_OpenVPNExp1">
-      <u>OpenVPN server on Raspberry PI 1 vs 3</u>
-    </A>
-  </p>
-  <p class="smaller">
-    -1st of November 2017<br/>
-  </p>
+  <p class="blogheader"><A NAME="LIN_OpenVPNExp1"><u>OpenVPN server on Raspberry PI 1 vs 3</u></A></p>
+  <p class="smaller">-1st of November 2017<br/></p>
   This article will briefly describe an experiment with performance on a Open VPN server running on Raspberry PI 1 vs running on Raspberry PI 3. Both hardware units are running Raspbian as the operating system.<br /><br />
   <b>Note: </b><i>D:\</i><b> represents the command prompt and is not actually a part of the commands shown below.</b><br/>
   <table>
