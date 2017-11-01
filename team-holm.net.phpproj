@@ -991,9 +991,12 @@
   <ItemGroup>
     <Content Include="css\mobile-styles.css" />
     <Content Include="images\certificates\MT-Certificate-2.jpg" />
+    <Content Include="images\certificates\MT-Certificate-2_tn.jpg" />
     <Content Include="images\certificates\MT-Certificate-3.jpg" />
+    <Content Include="images\certificates\MT-Certificate-3_tn.jpg" />
     <Content Include="images\certificates\MT-Grades-2.jpg" />
     <Content Include="images\certificates\MT-Grades-3.jpg" />
+    <Content Include="itblog\blogs\Linux\OpenVPN server on RaspberryPI 1 vs RaspberryPI 2.html" />
     <Content Include="itblog\websiteConfig.ini" />
     <Content Include="programClasses\Mobile-Detect-2.8.25\composer.json" />
     <Content Include="programClasses\Mobile-Detect-2.8.25\LICENSE.txt" />

@@ -1,0 +1,145 @@
+<p>
+  <p class="blogheader">
+    <A NAME="LIN_OpenVPNExp1">
+      <u>OpenVPN server on Raspberry PI 1 vs 3</u>
+    </A>
+  </p>
+  <p class="smaller">
+    -1st of November 2017<br/>
+  </p>
+  This article will briefly describe an experiment with performance on a Open VPN server running on Raspberry PI 1 vs running on Raspberry PI 3. Both hardware units are running Raspbian as the operating system.<br /><br />
+  <b>Note: </b><i>D:\</i><b> represents the command prompt and is not actually a part of the commands shown below.</b><br/>
+  <table>
+    <tr>
+      <td>
+        <b>Before we start the following needs to be summarized:</b><br />
+        <ul>
+          <li>The available download speed as seen from the OpenVPN router is 80 Mbps</li>
+          <li>The available upload speed as seen from the OpenVPN router is 30 Mbps</li>
+          <li>How to set up a OpenVPN server will not be described here. </li>
+          <li>The OpenVPN server / client is not set up to compress and decompress traffic as this will load the CPU on the OpenVPN server more than I trust it to.</li>
+          <li>There is only one client at a time in this scenario.</li>
+        </ul>
+        There are essentially two OpenVPN servers set up, one one RaspeberryPI 1 and one on RaspberryPI 3. They both route to the same network where the same
+        Windows 10 machine is running a server instance of iperf3. It can be started like so:
+        <pre class="brush: bash">
+          iperf3.exe -s
+        </pre>
+        <br/>
+        After the Iperf3 server process is startet at the Windows 10 machine, I will connect to the network remotely from a remote location in a neighboring city via OpenVPN, first using the Raspberry PI 1 based Open VPN router, then using the Raspberry PI 3 based Open VPN router.
+        Each time I run iperf3 as a client from my VPN klient, connecting to the iperf3 server through the given OpenVPN server at the time and measuring the network throughput I get.<br />
+        <br />
+        So, lets start by connecting through Raspberry PI 1 first, then Raspberry PI 3.
+        <br /><br />
+      </td>
+    </tr>
+    <tr>
+      <td width="100%">
+        <br />
+        <b>Speeds as seen through OpenVPN via Raspberry PI 1.</b>
+        <pre class="brush: bash">
+          Microsoft Windows [Version 6.1.7601]
+          Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+          D:\Users\User\Downloads\iperf-3.1.3-win64>iperf3.exe -c 192.168.100.51 -t 10
+          Connecting to host 192.168.100.51, port 5201
+          [  4] local 172.16.11.123 port 28041 connected to 192.168.100.51 port 5201
+          [ ID] Interval           Transfer     Bandwidth
+          [  4]   0.00-1.00   sec  1.00 MBytes  8.39 Mbits/sec
+          [  4]   1.00-2.00   sec   896 KBytes  7.34 Mbits/sec
+          [  4]   2.00-3.00   sec   896 KBytes  7.34 Mbits/sec
+          [  4]   3.00-4.00   sec   896 KBytes  7.34 Mbits/sec
+          [  4]   4.00-5.00   sec   896 KBytes  7.34 Mbits/sec
+          [  4]   5.00-6.00   sec   896 KBytes  7.34 Mbits/sec
+          [  4]   6.00-7.00   sec   768 KBytes  6.29 Mbits/sec
+          [  4]   7.00-8.00   sec   896 KBytes  7.34 Mbits/sec
+          [  4]   8.00-9.00   sec  1.00 MBytes  8.39 Mbits/sec
+          [  4]   9.00-10.00  sec   768 KBytes  6.29 Mbits/sec
+          - - - - - - - - - - - - - - - - - - - - - - - - -
+          [ ID] Interval           Transfer     Bandwidth
+          [  4]   0.00-10.00  sec  8.75 MBytes  7.34 Mbits/sec                  sender
+          [  4]   0.00-10.00  sec  8.66 MBytes  7.26 Mbits/sec                  receiver
+
+          iperf Done.
+
+          D:\Users\User\Downloads\iperf-3.1.3-win64>iperf3.exe -c 192.168.100.51 -t 10
+          Connecting to host 192.168.100.51, port 5201
+          [  4] local 172.16.11.123 port 1041 connected to 192.168.100.51 port 5201
+          [ ID] Interval           Transfer     Bandwidth
+          [  4]   0.00-1.00   sec  1.00 MBytes  8.39 Mbits/sec
+          [  4]   1.00-2.00   sec  1.00 MBytes  8.38 Mbits/sec
+          [  4]   2.00-3.00   sec   896 KBytes  7.35 Mbits/sec
+          [  4]   3.00-4.00   sec   896 KBytes  7.34 Mbits/sec
+          [  4]   4.00-5.00   sec  1.00 MBytes  8.39 Mbits/sec
+          [  4]   5.00-6.00   sec  1.00 MBytes  8.39 Mbits/sec
+          [  4]   6.00-7.00   sec   896 KBytes  7.34 Mbits/sec
+          [  4]   7.00-8.00   sec  1.00 MBytes  8.39 Mbits/sec
+          [  4]   8.00-9.00   sec  1.00 MBytes  8.39 Mbits/sec
+          [  4]   9.00-10.00  sec   896 KBytes  7.34 Mbits/sec
+          - - - - - - - - - - - - - - - - - - - - - - - - -
+          [ ID] Interval           Transfer     Bandwidth
+          [  4]   0.00-10.00  sec  9.50 MBytes  7.97 Mbits/sec                  sender
+          [  4]   0.00-10.00  sec  9.41 MBytes  7.89 Mbits/sec                  receiver
+
+          iperf Done.
+        </pre>
+      </td>
+    </tr>
+    <tr>
+      <td width="100%">
+        <br />
+        <b>Speeds as seen through OpenVPN via Raspberry PI 3.</b>
+        <pre class="brush: bash">
+          D:\Users\User\Downloads\iperf-3.1.3-win64>iperf3.exe -c 192.168.100.51 -t 10
+          Connecting to host 192.168.100.51, port 5201
+          [  4] local 172.16.11.123 port 1080 connected to 192.168.100.51 port 5201
+          [ ID] Interval           Transfer     Bandwidth
+          [  4]   0.00-1.00   sec  2.00 MBytes  16.8 Mbits/sec
+          [  4]   1.00-2.00   sec  3.75 MBytes  31.5 Mbits/sec
+          [  4]   2.00-3.00   sec  3.88 MBytes  32.5 Mbits/sec
+          [  4]   3.00-4.00   sec  3.75 MBytes  31.5 Mbits/sec
+          [  4]   4.00-5.00   sec  4.00 MBytes  33.6 Mbits/sec
+          [  4]   5.00-6.00   sec  2.75 MBytes  23.1 Mbits/sec
+          [  4]   6.00-7.00   sec  2.50 MBytes  21.0 Mbits/sec
+          [  4]   7.00-8.00   sec  3.38 MBytes  28.3 Mbits/sec
+          [  4]   8.00-9.00   sec  4.00 MBytes  33.6 Mbits/sec
+          [  4]   9.00-10.00  sec  3.88 MBytes  32.5 Mbits/sec
+          - - - - - - - - - - - - - - - - - - - - - - - - -
+          [ ID] Interval           Transfer     Bandwidth
+          [  4]   0.00-10.00  sec  33.9 MBytes  28.4 Mbits/sec                  sender
+          [  4]   0.00-10.00  sec  33.8 MBytes  28.3 Mbits/sec                  receiver
+
+          iperf Done.
+
+          D:\Users\User\Downloads\iperf-3.1.3-win64>iperf3.exe -c 192.168.100.51 -t 10
+          Connecting to host 192.168.100.51, port 5201
+          [  4] local 172.16.11.123 port 1099 connected to 192.168.100.51 port 5201
+          [ ID] Interval           Transfer     Bandwidth
+          [  4]   0.00-1.00   sec  4.00 MBytes  33.6 Mbits/sec
+          [  4]   1.00-2.00   sec  2.00 MBytes  16.8 Mbits/sec
+          [  4]   2.00-3.00   sec  4.00 MBytes  33.6 Mbits/sec
+          [  4]   3.00-4.00   sec  3.88 MBytes  32.5 Mbits/sec
+          [  4]   4.00-5.00   sec  3.88 MBytes  32.5 Mbits/sec
+          [  4]   5.00-6.00   sec  3.38 MBytes  28.3 Mbits/sec
+          [  4]   6.00-7.00   sec  3.00 MBytes  25.2 Mbits/sec
+          [  4]   7.00-8.00   sec  3.62 MBytes  30.4 Mbits/sec
+          [  4]   8.00-9.00   sec  4.12 MBytes  34.6 Mbits/sec
+          [  4]   9.00-10.00  sec  4.38 MBytes  36.7 Mbits/sec
+          - - - - - - - - - - - - - - - - - - - - - - - - -
+          [ ID] Interval           Transfer     Bandwidth
+          [  4]   0.00-10.00  sec  36.2 MBytes  30.4 Mbits/sec                  sender
+          [  4]   0.00-10.00  sec  36.2 MBytes  30.3 Mbits/sec                  receiver
+
+          iperf Done.
+        </pre>
+      </td>
+    </tr>
+  </table>
+  <br/>
+  <b>
+    <u>Summary</u>:<br/> we can see, the Raspberry PI 3 offers much better speeds for a OpenVPN server.
+  </b>
+  <p>
+    <u>Sources</u>: None
+  </p>
+</p>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <translations>
     <translation id="introContainer">
-    	<no><![CDATA[ 
+    	<no>
+        <![CDATA[ 
     		<br/><div align="center" style="font-size: 1.5em;"></div>
 			<br/><div class="roundedcornr_box_525768"><div class="roundedcornr_top_525768"><div></div></div><div class="roundedcornr_content_525768">
 			Bloggene p&aring; denne siden vil v&aelig;re skrevet p&aring; bare engelsk. Noen av innleggene ble skrevet opprinnelig p&aring; engelsk, og det har ikke v&aelig;rt n&aelig;rliggende &aring; utgi artiklene p&aring; flere spr&aring;k 
@@ -14,6 +15,10 @@
 			oppgitt, om de finnes - <a href="mailto:atle@team-holm.net" border="0" class="articleLink">atle@team-holm.net</a>
 			</div><div class="roundedcornr_bottom_525768"><div></div></div></div>
 			<center><h1>Nyheter</h1></center>
+      <div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>01.11.2017 - Raspberry PI and more:</b></div>
+				 &nbsp;&nbsp;&nbsp; Måling av hastigheter over OpenVPN med <a href="/index.php?scriptName=Linux&subSection=false#LIN_OpenVPNExp1" class="articleLink">Raspberry PI 1 vs 3 </a>. <br/>
+         Eller vurdering av forskjellige <a href="index.php?scriptName=Microsoft&subSection=false#SQL_HA" class="articleLink">database løsninger i forhold til High Availability</a>.<br/>
+			</div>
 			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>31.12.2015 - Auto utrulling av ESXi via USB:</b></div>
 				 &nbsp;&nbsp;&nbsp;Legger til en artikkel som viser hvordan auto utrulle ESXi fra USB disk; <a href="index.php?scriptName=VMWare&subSection=false#VMWareUSBInst" class="articleLink">ESXi Scripted USB Install</a>. <br/>Det vises i tillegg hvordan man laster ned IP konfigurasjon med TFTP for slik sette denne automatisk til ESXi hosten ved utrulling.
 			</div>
@@ -120,7 +125,8 @@
 				&nbsp;&nbsp;&nbsp;Det er lagt til fire blogginnslag. Disse omhandler grunnleggende kryptografi, Active Directory skoger og domener, DoS angrep og sikkerhetstiltak for sm&aring; lokale nettverk.
 			</div><br/>
     	]]></no>
-        <en><![CDATA[ 
+        <en>
+        <![CDATA[ 
     		<br/><div align="center" style="font-size: 1.5em;"></div>
 			<br/><div class="roundedcornr_box_525768"><div class="roundedcornr_top_525768"><div></div></div><div class="roundedcornr_content_525768">
 			The blog articles on this website will be written in english only. Some of the first articles were written in english, and I have seen no reason to write articles or translate these into other languages because of this.
@@ -131,6 +137,10 @@
 			- <a href="mailto:atle@team-holm.net" border="0" class="articleLink">atle@team-holm.net</a>
 			</div><div class="roundedcornr_bottom_525768"><div></div></div></div>
 			<center><h1>News</h1></center>
+      <div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>01.11.2017 - Raspberry PI and more:</b></div>
+				 &nbsp;&nbsp;&nbsp; Measuring speeds over OpenVPN with <a href="/index.php?scriptName=Linux&subSection=false#LIN_OpenVPNExp1" class="articleLink">Raspberry PI 1 vs 3 </a>. <br/>
+         Or evaluating different <a href="index.php?scriptName=Microsoft&subSection=false#SQL_HA" class="articleLink">database solutions in regards to High Availability</a>.<br/>
+			</div>
 			<div class="boxedNewsborder"><div style="font-family: Georgia, serif;"><b>31.12.2015 - Auto deploying ESXi via USB:</b></div>
 				 &nbsp;&nbsp;&nbsp;Adding one article that shows how to auto deploy ESXi from a USB disk; <a href="index.php?scriptName=VMWare&subSection=false#VMWareUSBInst" class="articleLink">ESXi Scripted USB Install</a>. <br/>It also downloads IP configuration via TFTP for automatically setting IP-address on the host.
 			</div>

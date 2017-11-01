@@ -1,4 +1,13 @@
-$(document).ready(function() {
+$(document).ready(function () {
+    /*The LIN_OpenVPNExp1 Box*/
+    $('#btnLIN_OpenVPNExp1').click(function () {
+        $('#LIN_OpenVPNExp1').animate({ opacity: 'show', height: 'show' }, 'slow');
+    });
+    $('#closeLIN_OpenVPNExp1').click(function () {
+        if ($('#LIN_OpenVPNExp1').is(':visible')) {
+            $('#LIN_OpenVPNExp1').animate({ opacity: 'hide', height: 'hide' }, 'slow');
+        }
+    });
 	/*The LIN_HLLINDED Box*/
 	$('#btnLIN_HLLINDED').click(function() {
 		$('#LIN_HLLINDED').animate({ opacity: 'show', height: 'show'}, 'slow');
