@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A0786B88-2ADB-4C21-ABE8-AA2D79766269}") = "itblog", "itblog.phpproj", "{4F8F3297-69EA-4C1B-8488-B0A1B3E825C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F8F3297-69EA-4C1B-8488-B0A1B3E825C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F8F3297-69EA-4C1B-8488-B0A1B3E825C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {014BE30A-C0A7-4943-A337-AE4002CD0D35}
+	EndGlobalSection
+EndGlobal
