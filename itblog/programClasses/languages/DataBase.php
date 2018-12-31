@@ -14,13 +14,17 @@ class DataBase {
    public function connect($host, $name, $pass, $db) {
       if (!is_null($this->conn))
          return ;
-      $this->conn = mysqli_connect($host, $name, $pass, $db);
-      if (mysqli_connect_errno())
-      {
-         echo "Failed to connect to MySQL: " . mysqli_connect_error();
-         throw new Exception('Unable to connect to database: ' +  mysqli_connect_error());
+      try {
+         $this->conn = mysqli_connect($host, $name, $pass, $db);
+         if (mysqli_connect_errno())
+         {
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+            throw new Exception('Unable to connect to database: ' +  mysqli_connect_error());
+         }
       }
-
+      catch (Exception $e) {
+         echo 'Caught exception: ',  $e->getMessage(), " at DataBase.connect \n";
+      }
       if (mysqli_select_db($this->conn, $db) === false)
          throw new Exception('Unable to select database');
    }
